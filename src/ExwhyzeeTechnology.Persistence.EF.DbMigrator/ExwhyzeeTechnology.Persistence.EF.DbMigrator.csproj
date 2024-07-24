@@ -1,0 +1,24 @@
+<Project Sdk="Microsoft.NET.Sdk.Worker">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UserSecretsId>dotnet-ExwhyzeeTechnology.Persistence.EF.DbMigrator-92BA12E9-5130-4C9D-8FD5-90F4B91BC73A</UserSecretsId>
+  </PropertyGroup>
+
+  <ItemGroup>    
+    <Content Include="..\ExwhyzeeTechnology.Website\appsettings*.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.Hosting" Version="6.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ExwhyzeeTechnology.Infrastructure\ExwhyzeeTechnology.Infrastructure.csproj" />
+    <ProjectReference Include="..\ExwhyzeeTechnology.Persistence.EF.SQL\ExwhyzeeTechnology.Persistence.EF.SQL.csproj" />
+  </ItemGroup>  
+</Project>

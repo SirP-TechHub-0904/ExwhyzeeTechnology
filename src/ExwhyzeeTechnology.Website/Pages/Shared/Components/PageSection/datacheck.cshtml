@@ -1,0 +1,53 @@
+﻿@model ICollection<ExwhyzeeTechnology.Domain.Models.PageSection>
+@using System.Text.RegularExpressions;
+
+@{
+    Regex regex = new Regex("[^a-zA-Z0-9]");
+    int listcountforhome = 500;
+    // Get the URL for the home page
+    string homeUrl = Url.Page("/Index");
+
+    // Get the current URL
+    string currentUrl = Context.Request.Path;
+
+    // Check if the current URL is the home page URL
+    bool isHomePage = currentUrl.Equals(homeUrl, StringComparison.OrdinalIgnoreCase);
+}
+@foreach (var item in Model)
+{
+ if (item.TemplateKey == "35")
+    {
+        <section class="@item.CustomClass">
+            
+            <div class="container">
+                <h2 class="title">@item.Title</h2>
+                <p class="lead text-black">@item.Description</p>
+
+                @foreach (var list in item.PageSectionLists)
+                {
+                    <div class="item">
+                        <i class="fab fa-download"></i>
+                        <div class="filename">
+                            <p>@list.Title</p>
+                            <div class="filedata">
+                                <span>@list.MiniTitle</span>
+                                <span>●</span>
+                                <span>@list.Description</span>
+                            </div>
+                        </div>
+                        <a href="@list.ImageUrl" download="@list.Title">
+                            @list.ButtonText
+                        </a>
+                         
+                    </div>
+                }
+                </div>
+        </section>
+    }
+
+    
+}
+@section Scripts {
+
+
+}

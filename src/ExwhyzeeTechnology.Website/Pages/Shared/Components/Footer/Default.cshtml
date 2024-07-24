@@ -1,0 +1,330 @@
+﻿@using System.Text.RegularExpressions;
+
+@{
+    Regex regex = new Regex("[^a-zA-Z0-9]");
+}
+@{
+    Domain.Models.Setting xsetting = ViewBag.setting;
+    Domain.Models.SuperSetting supersetting = ViewBag.supersetting;
+}
+
+@await Component.InvokeAsync("PageSection", new { position = "fixed" })
+
+
+
+@if (xsetting.EnableBreakingNewsRibon == true && xsetting.RibonPosition == Domain.Enum.Enum.RibonPosition.BeforeFooter)
+{
+    @await Component.InvokeAsync("NewsRibon")
+}
+
+@if (supersetting.TemplateLayoutKey == "Layout8888")
+{
+    if (supersetting.FooterTemplateKey == "Footer1111")
+    {
+        <footer class="footer footer-2 pt-5 mt-0 dark-bg position-relative" style="background-image: url(../../Layout/mistro/images/bg/09.png);">
+            <div class="primary-footer">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-4 col-md-6">
+                            <div class="footer-logo mb-3">
+                                <img id="footer-logo-img" class="img-fluid" src="@supersetting.CompanyWhiteLogoUrl" alt="@supersetting.CompanyName">
+                            </div>
+                            <p class="mb-3">
+                                @ViewBag.setting.Qoute
+                            </p>
+                            <ul class="list-unstyled working-hours clearfix">
+                                <li><span></span> </li>
+
+                            </ul>
+                        </div>
+                        <div class="col-lg-4 col-md-6 mt-5 mt-md-0 footer-list ps-md-5">
+                            <h5>Other <span class="text-theme"> Link</span></h5>
+                            <ul class="list-unstyled">
+
+                                @foreach (var item in ViewBag.pages)
+                                {
+                                    <li><a asp-page="/Source" asp-route-id="@item.Id" asp-route-title="@regex.Replace(item.Title, "-")">@item.Title <i class="fas fa-angle-right"></i></a></li>
+                                }
+
+                            </ul>
+                        </div>
+                        <div class="col-lg-4 col-md-6 mt-5 mt-lg-0 footer-list">
+                            <h5>Quick Link</h5>
+                            <ul class="list-unstyled">
+
+                                @if (ViewBag.setting.AddFaqToFooter == true)
+                                {
+                                    <li><a asp-page="/Fpg"><i class="fas fa-angle-right"></i> FAQs</a></li>
+                                }
+                                @if (ViewBag.setting.AddTestimonyToFooter == true)
+                                {
+                                    <li><a asp-page="/Tpg"><i class="fas fa-angle-right"></i> Testimony</a></li>
+                                }
+                                @if (ViewBag.setting.AddBlogToMenu == true)
+                                {
+                                    <li>
+                                        <a asp-page="/Bpg"><i class="fas fa-angle-right"></i> @ViewBag.setting.BlogDisplayTitle</a>
+
+                                    </li>
+                                }
+                                @if (ViewBag.setting.ShowProductsInFooter == true)
+                                {
+                                    <li>
+                                        <a asp-page="/UHSource"><i class="fas fa-angle-right"></i> @supersetting.ProductTitle</a>
+
+                                    </li>
+                                }
+                                @if (supersetting.ActivateProfilePortfolio == true && supersetting.ShowInFooterPortfolio == true)
+                                {
+                                    <li>
+                                        <a asp-page="/PortfolioAccount"><i class="fas fa-angle-right"></i> @supersetting.PortfolioTitle</a>
+
+                                    </li>
+                                }
+                                @if (xsetting.ShowContactUsFooter == true)
+                                {
+                                    <li>
+                                        <a asp-page="/Contact"><i class="fas fa-angle-right"></i> Contact Us</a>
+
+                                    </li>
+                                } @if (xsetting.AddCareerToFooter == true)
+                                {
+                                    <li>
+                                        <a asp-page="/Career"><i class="fas fa-angle-right"></i> @xsetting.CareerDisplayTitle</a>
+
+                                    </li>
+                                }
+                                @foreach (var item in ViewBag.linkExternal)
+                                {
+                                    <li>
+                                        <a target="_blank" href="@item.DirectUrl"><i class="fas fa-angle-right"></i> @item.Title</a>
+
+                                    </li>
+
+                                }
+                                @foreach (var item in ViewBag.SecPages)
+                                {
+                                    <li><a asp-page="/Source" asp-route-id="@item.Id" asp-route-title="@regex.Replace(item.Title, "-")"><i class="fas fa-angle-right"></i> @item.Title</a></li>
+                                }
+                                @if (supersetting.ActivateLogin == true)
+                                {
+                                    <li><a asp-page="/AuthV2/Account/Login" asp-area="V2"><i class="fas fa-angle-right"></i> Login</a></li>
+                                }
+                            </ul>
+                        </div>
+
+                    </div>
+                    <div class="row g-0 mt-5 box-shadow mistro-foot">
+                        <div class="col-md-4">
+                            <div class="p-5 text-center footer-media theme-bg border-0">
+                                <span>Address:</span>
+                                <p class="mb-0">@xsetting.AddressOne</p>
+                            </div>
+                        </div>
+                        @if (xsetting.PhoneOne != null)
+                        {
+                            <div class="col-md-4">
+                                <div class="p-5 text-center footer-media dark-bg border border-dark">
+                                    <span>Phone:</span>
+                                    <a href="tel:@xsetting.PhoneOne.Replace(" ", "").Replace(")", "").Replace("(", "").Replace("-", "")">@xsetting.PhoneOne</a>
+                                </div>
+                            </div>
+                        }
+                        <div class="col-md-4">
+                            <div class="p-5 text-center footer-media theme-bg border-0">
+                                <span>Email:</span>
+                                <a href="mailto:@xsetting.EmailOne">@xsetting.EmailOne</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="secondary-footer">
+                <div class="container">
+                    <div class="copyright">
+                        <div class="row text-center">
+                            <div class="col-md-12">
+                                <span class="primary-color">@supersetting.CompanyName</span> © @DateTime.UtcNow.Year. All Rights Reserved. @if (supersetting.ShowMadeByJuray == true)
+                                {
+                                    <span>
+                                        Developed by @if (supersetting.ShowMadeByXYZ == true)
+                                        {
+                                            <a href="https://www.exwhyzee.ng/" target="_blank" style="color:white;" class="devby">
+                                                Exwhyzee Technologies Limited.
+                                            </a>
+                                        }
+                                        else
+                                        {
+                                            <a href="https://www.juray.ng/" target="_blank" style="color:white;" class="devby">
+                                                Juray Smart Solutions Limited.
+                                            </a>
+                                        }
+
+                                    </span>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer> }
+    else if (supersetting.FooterTemplateKey == "Footer2222")
+    {
+        <footer class="footer dark-bg position-relative" style="background-size: contain; background-repeat: no-repeat; background-image: url(../../Layout/mistro/images/bg/09.png);">
+            <div class="footer-contact">
+                <div class="container">
+                    <div class="row">
+                        <div class="col">
+                            <div class="theme-bg">
+                                <div class="row g-0">
+                                    <div class="col-md-4 mb-5 mb-md-0">
+                                        <div class="px-5 pb-5 text-center footer-media">
+                                            <i class="flaticon-paper-plane"></i>
+                                            <span>Address:</span>
+                                            <p class="mb-0">@xsetting.AddressOne</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 mb-5 mb-md-0">
+                                        <div class="px-5 pb-5 text-center footer-media">
+                                            <i class="flaticon-phone-call"></i>
+                                            <span>Phone:</span>
+                                            <a href="tel:@xsetting.PhoneOne.Replace(" ", "").Replace(")", "").Replace("(", "").Replace("-", "")">@xsetting.PhoneOne</a>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="px-5 pb-5 text-center footer-media border-0">
+                                            <i class="flaticon-message"></i>
+                                            <span>Email:</span>
+                                            <a href="mailto:@xsetting.EmailOne">@xsetting.EmailOne</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="primary-footer">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-3 col-md-6">
+                            <h5>Company <span class="text-theme"> Quote</span></h5>
+
+                            <p class="mb-3">
+                                @ViewBag.setting.Qoute
+                            </p>
+                        </div>
+                        <div class="col-lg-3 col-md-6 mt-5 mt-lg-0 widget">
+                            <h5>Other <span class="text-theme"> Link</span></h5>
+                            <ul class="list-unstyled">
+
+                                @foreach (var item in ViewBag.pages)
+                                {
+                                    <li><a asp-page="/Source" asp-route-id="@item.Id" asp-route-title="@regex.Replace(item.Title, "-")">@item.Title <i class="fas fa-angle-right"></i></a></li>
+                                }
+
+                            </ul>
+                        </div>
+                        <div class="col-lg-3 col-md-6 mt-5 mt-md-0 footer-list">
+                            <h5>Quick <span class="text-theme"> Link</span></h5>
+                            <ul class="list-unstyled">
+                                @if (ViewBag.setting.AddFaqToFooter == true)
+                                {
+                                    <li><a asp-page="/Fpg"><i class="fas fa-angle-right"></i> FAQs</a></li>
+                                }
+                                @if (ViewBag.setting.AddTestimonyToFooter == true)
+                                {
+                                    <li><a asp-page="/Tpg"><i class="fas fa-angle-right"></i> Testimony</a></li>
+                                }
+                                @if (ViewBag.setting.AddBlogToMenu == true)
+                                {
+                                    <li>
+                                        <a asp-page="/Bpg"><i class="fas fa-angle-right"></i> @ViewBag.setting.BlogDisplayTitle</a>
+
+                                    </li>
+                                }
+                                @if (ViewBag.setting.ShowProductsInFooter == true)
+                                {
+                                    <li>
+                                        <a asp-page="/UHSource"><i class="fas fa-angle-right"></i> @supersetting.ProductTitle</a>
+
+                                    </li>
+                                }
+                                @if (supersetting.ActivateProfilePortfolio == true && supersetting.ShowInFooterPortfolio == true)
+                                {
+                                    <li>
+                                        <a asp-page="/PortfolioAccount"><i class="fas fa-angle-right"></i> @supersetting.PortfolioTitle</a>
+
+                                    </li>
+                                }
+                                @if (xsetting.ShowContactUsFooter == true)
+                                {
+                                    <li>
+                                        <a asp-page="/Contact"><i class="fas fa-angle-right"></i> Contact Us</a>
+
+                                    </li>
+                                } @if (xsetting.AddCareerToFooter == true)
+                                {
+                                    <li>
+                                        <a asp-page="/Career"><i class="fas fa-angle-right"></i> @xsetting.CareerDisplayTitle</a>
+
+                                    </li>
+                                }
+                                @foreach (var item in ViewBag.linkExternal)
+                                {
+                                    <li>
+                                        <a target="_blank" href="@item.DirectUrl"><i class="fas fa-angle-right"></i> @item.Title</a>
+
+                                    </li>
+
+                                }
+                                @foreach (var item in ViewBag.SecPages)
+                                {
+                                    <li><a asp-page="/Source" asp-route-id="@item.Id" asp-route-title="@regex.Replace(item.Title, "-")"><i class="fas fa-angle-right"></i> @item.Title</a></li>
+                                }
+                                @if (supersetting.ActivateLogin == true)
+                                {
+                                    <li><a asp-page="/AuthV2/Account/Login" asp-area="V2"><i class="fas fa-angle-right"></i> Login</a></li>
+                                }
+                            </ul>
+                        </div>
+
+                        <div class="col-lg-3 col-md-6 mt-5 mt-lg-0">
+                            <h5>Working <span class="text-theme"> hours</span></h5>
+                            
+                            @Html.Raw(ViewBag.setting.WorkingHour)
+                            <div class="social-icons social-colored mt-3">
+                                <ul class="list-inline mb-0">
+
+                                    <li class="social-facebook"><a href="@ViewBag.setting.FacebookPage"><i class="fab fa-facebook-square"></i></a></li>
+                                    <li class="social-instagram"><a href="@ViewBag.setting.InstagramPage"><i class="fab fa-instagram"></i></a></li>
+                                    <li class="social-tiktok"><a href="@ViewBag.setting.TiktokPage"><i class="fab fa-instagram"></i></a></li>
+                                    <li class="social-linkedin"><a href="@ViewBag.setting.LinkedIn"><i class="fab fa-instagram"></i></a></li>
+                                    <li class="social-twitter"><a href="@ViewBag.setting.TwitterPage"><i class="fab fa-x-twitter"></i></a></li>
+                                    <li class="social-youtube"><a href="@ViewBag.setting.YoutubeChannel"><i class="fab fa-youtube"></i></a></li>
+
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="secondary-footer">
+                <div class="container">
+                    <div class="copyright footer-bottom-company">
+                        <div class="row align-items-center">
+                            <div class="col-md-12">
+                                <span>
+                                    Copyright @DateTime.UtcNow.Year <a href="https://www.exwhyzee.ng/" target="_blank" style="color:white;" class="devby">
+                                        Exwhyzee Technologies Limited.
+                                    </a> | All Rights Reserved
+                                </span>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    }
+}
