@@ -1,14 +1,18 @@
 
+using DocumentFormat.OpenXml.Spreadsheet;
 using ExwhyzeeTechnology.Application.Dtos;
 using ExwhyzeeTechnology.Application.Dtos.AwsDtos;
+using ExwhyzeeTechnology.Application.Repository.NotifyRegister;
 using ExwhyzeeTechnology.Application.Repository.Services;
 using ExwhyzeeTechnology.Application.Services.AWS;
 using ExwhyzeeTechnology.Domain.Models;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.Build.Framework;
 using Microsoft.EntityFrameworkCore;
+using System.ComponentModel.DataAnnotations;
+using System.Text.Encodings.Web;
 
 namespace ExwhyzeeTechnology.Website.Pages
 {
@@ -20,13 +24,16 @@ namespace ExwhyzeeTechnology.Website.Pages
         private readonly ExwhyzeeTechnology.Persistence.EF.SQL.DashboardDbContext _context;
         private readonly IConfiguration _config;
         private readonly IStorageService _storageService;
-
-        public CareerModel(ExwhyzeeTechnology.Persistence.EF.SQL.DashboardDbContext context, ISettingsService settingsService, IConfiguration config, IStorageService storageService)
+        private readonly IEmailSendService _email;
+        private readonly ISmsSendService _sms;
+        public CareerModel(ExwhyzeeTechnology.Persistence.EF.SQL.DashboardDbContext context, ISettingsService settingsService, IConfiguration config, IStorageService storageService, IEmailSendService email, ISmsSendService sms)
         {
             _context = context;
             _config = config;
             _storageService = storageService;
-             _settingsService = settingsService;
+            _settingsService = settingsService;
+            _email = email;
+            _sms = sms;
         }
 
 
@@ -64,13 +71,18 @@ namespace ExwhyzeeTechnology.Website.Pages
             }
 
             SuperSetting = setting.SuperSetting;
-            ViewData["CareerPath"] = new SelectList(_context.CareerPaths.OrderBy(x=>x.Title), "Id", "Title");
+            ViewData["CareerPath"] = new SelectList(_context.CareerPaths.OrderBy(x=>x.Title), "Title", "Title");
+            ViewData["CareerTrainingJobRoles"] = new SelectList(_context.CareerTrainingJobRoles.OrderBy(x=>x.Title), "Id", "Title");
 
             return Page();
         }
 
         [BindProperty]
         public CareerFile CareerFile { get; set; }
+
+
+        [BindProperty]
+        public List<long> SelectedJobRoleIds { get; set; } = new List<long>();
 
         // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
         public async Task<IActionResult> OnPostAsync()
@@ -252,13 +264,33 @@ namespace ExwhyzeeTechnology.Website.Pages
 
                 }
             }
-
+            CareerFile.Date = DateTime.Now;
             _context.CareerFiles.Add(CareerFile);
             await _context.SaveChangesAsync();
+            foreach (var jobId in SelectedJobRoleIds)
+            {
+                var selectedJobRole = new SelectedJobRole
+                {
+                    CareerFileId = CareerFile.Id,
+                    CareerTrainingJobRoleId = jobId
+                };
+
+                _context.SelectedJobRoles.Add(selectedJobRole);
+            }
+
+            await _context.SaveChangesAsync();
+
             TempData["success"] = "Successful";
 
+            
+            string messagedetails = $"Your Application Has Been Received.<br>";
+                
 
-            return RedirectToPage("./Submitted");
+             await _email.SendEmailPostmaster(CareerFile.Fullname, CareerFile.Email, "", "", $"EXWHYZEE APPLICATION", messagedetails);
+
+
+
+                return RedirectToPage("./Submitted");
         }
     }
 }

@@ -28,7 +28,9 @@ namespace ExwhyzeeTechnology.Website.Areas.Admin.Pages.ICareer
                 return NotFound();
             }
 
-            CareerFile = await _context.CareerFiles.FirstOrDefaultAsync(m => m.Id == id);
+            CareerFile = await _context.CareerFiles
+                .Include(x=>x.SelectedJobRoles).ThenInclude(x=>x.CareerTrainingJobRole)
+                .FirstOrDefaultAsync(m => m.Id == id);
 
             if (CareerFile == null)
             {

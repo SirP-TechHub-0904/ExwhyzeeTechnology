@@ -21,7 +21,7 @@ namespace ExwhyzeeTechnology.Pages.Shared.ViewComponents
             _context = context;
         }
 
-        public async Task<IViewComponentResult> InvokeAsync(string data)
+        public async Task<IViewComponentResult> InvokeAsync(string data, string tx)
         { 
              var Pages = await _context.PageCategories.Include(x=>x.WebPages).Where(x => x.Publish == true).OrderBy(x=>x.MenuSortOrder).ToListAsync();
             ViewBag.pages = Pages;
@@ -44,6 +44,7 @@ namespace ExwhyzeeTechnology.Pages.Shared.ViewComponents
             ViewBag.datataitle = data;
             var blogcategory = await _context.BlogCategories.Where(x => x.Publish == true).ToListAsync();
             ViewBag.blogcategory = blogcategory;
+            ViewBag.Tx = tx;
             return View();
         }
     }

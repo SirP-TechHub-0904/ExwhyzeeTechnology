@@ -144,14 +144,14 @@ namespace ExwhyzeeTechnology.Website.V2.Pages.Authv2.Account
                 }
                 if (passcheck == true && user.TwoFactorEnabled == true)
                 {
-                    if (user.UserStatus != Domain.Enum.Enum.UserStatus.Active)
-                    {
-                        if (adminrole.Equals(false) || superrole.Equals(true))
-                        {
-                            return RedirectToPage("./Locked");
+                    //if (user.UserStatus != Domain.Enum.Enum.UserStatus.Active)
+                    //{
+                    //    if (adminrole.Equals(false) || superrole.Equals(true))
+                    //    {
+                    //        return RedirectToPage("./Locked");
 
-                        }
-                    }
+                    //    }
+                    //}
                     var result = await _signInManager.PasswordSignInAsync(user.UserName, Input.Password, Input.RememberMe, lockoutOnFailure: false);
                     if (result.Succeeded)
                     {
@@ -165,11 +165,11 @@ namespace ExwhyzeeTechnology.Website.V2.Pages.Authv2.Account
                     if (result.IsLockedOut)
                     {
                         _logger.LogWarning("User account locked out.");
-                        if (adminrole.Equals(false) || superrole.Equals(true))
-                        {
-                            return RedirectToPage("./Locked");
+                        //if (adminrole.Equals(false) || superrole.Equals(true))
+                        //{
+                        //    return RedirectToPage("./Locked");
 
-                        }
+                        //}
                     }
                     else
                     {
@@ -206,96 +206,17 @@ namespace ExwhyzeeTechnology.Website.V2.Pages.Authv2.Account
                     if (user.UserStatus != Domain.Enum.Enum.UserStatus.Active)
                     {
 
-                        if (adminrole.Equals(false) || superrole.Equals(true))
-                        {
-                            return RedirectToPage("./Locked");
+                        //if (adminrole.Equals(false) || superrole.Equals(true))
+                        //{
+                        //    return RedirectToPage("./Locked");
 
-                        }
+                        //}
                     }
                     if (setting.ActivateDashboard == false)
                     {
                         return NotFound();
                     }
-                    if (superSettingdata.UserNipssArea == true)
-                    {
-                        if (user.UpdateProfile == true)
-                        {
-                            TempData["error"] = "Update your information";
-                            return RedirectToPage("/Account/UpdateProfile", new { area = "NIPSS" });
-
-                        }
-
-                        else if (user.UpdateEducation == true)
-                        {
-                            TempData["error"] = "Update your information";
-                            return RedirectToPage("/Account/Education", new { area = "NIPSS" });
-
-                        }
-                        else if (user.UpdateExperience == true)
-                        {
-                            TempData["error"] = "Update your information";
-                            return RedirectToPage("/Account/Experience", new { area = "NIPSS" });
-
-                        }
-                        else if (user.UpdateCertificate == true)
-                        {
-                            TempData["error"] = "Update your information";
-                            return RedirectToPage("/Account/Certificate", new { area = "NIPSS" });
-
-                        }
-                        else if (user.UpdateSkills == true)
-                        {
-                            TempData["error"] = "Update your information";
-                            return RedirectToPage("/Account/Skills", new { area = "NIPSS" });
-
-                        }
-                        else if (user.UpdateLanguage == true)
-                        {
-                            TempData["error"] = "Update your information";
-                            return RedirectToPage("/Account/Language", new { area = "NIPSS" });
-
-                        }
-                        else if (user.UpdateAwards == true)
-                        {
-                            TempData["error"] = "Update your information";
-                            return RedirectToPage("/Account/Awards", new { area = "NIPSS" });
-
-                        }
-
-                        else if (user.UpdateInterest == true)
-                        {
-                            TempData["error"] = "Update your information";
-                            return RedirectToPage("/Account/Interest", new { area = "NIPSS" });
-
-                        }
-
-                        else if (user.UpdateReference == true)
-                        {
-                            TempData["error"] = "Update your information";
-                            return RedirectToPage("/Account/Reference", new { area = "NIPSS" });
-
-                        }
-
-
-                        if (adminrole.Equals(true) || administrator.Equals(true) || superrole.Equals(true) || editorrole.Equals(true))
-                        {
-                            return RedirectToPage("/Dashboard/Index", new { area = "NIPSSADMIN" });
-                        }
-                        if (Staff.Equals(true) || Directing.Equals(true) || Management.Equals(true))
-                        {
-                            return RedirectToPage("/Dashboard/Index", new { area = "NIPSSADMIN" });
-                        }
-                        else if (Participant.Equals(true))
-                        {
-
-                            return RedirectToPage("/Dashboard/Index", new { area = "NIPSS" });
-                        }
-
-                    }
-                    else
-                    {
-
-
+                    
                         if (adminrole.Equals(true) || administrator.Equals(true) || superrole.Equals(true) || editorrole.Equals(true))
                         {
                             return RedirectToPage("/Dashboard/Index", new { area = "Admin" });
@@ -304,8 +225,7 @@ namespace ExwhyzeeTechnology.Website.V2.Pages.Authv2.Account
                         {
                             return RedirectToPage("/Dashboard/Index", new { area = "Staff" });
                         }
-
-                    }
+ 
 
                 }
                 else

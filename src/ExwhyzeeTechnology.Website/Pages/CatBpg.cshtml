@@ -61,7 +61,7 @@
         Layout = "/Pages/Shared/Layouts/Theme/Streamlab/_StreamlabLayout.cshtml";
     }
 }
-@await Component.InvokeAsync("BreadcrumOthers", new { data = Model.Setting.BlogDisplayTitle })
+@await Component.InvokeAsync("BreadcrumOthers", new { data = Model.Setting.BlogDisplayTitle, tx = "yes" })
 
 @if (Model.SuperSetting.TemplateLayoutKey == "Layout1111")
 {

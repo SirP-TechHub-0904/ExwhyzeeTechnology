@@ -53,34 +53,34 @@
                         @Html.DisplayFor(model => model.CareerFile.DOB)
                     </dd>
                     <dt class="col-sm-2">
-                      CV
+                        CV
                     </dt>
                     <dd class="col-sm-10">
-                        <a href="@Model.CareerFile.CvUrl" target="_blank">View CV</a> 
+                        <a href="@Model.CareerFile.CvUrl" target="_blank">View CV</a>
                     </dd>
-                   
-                    <dt class="col-sm-2"> 
-                        Certificate 
+
+                    <dt class="col-sm-2">
+                        Certificate
                     </dt>
                     <dd class="col-sm-10">
                         <a href="@Model.CareerFile.CertificateUrl" target="_blank">View Certificate</a>
                     </dd>
-                     
+
                     <dt class="col-sm-2">
                         Application Letter
                     </dt>
                     <dd class="col-sm-10">
-                        <a href="@Model.CareerFile.ApplicationUrl" target="_blank">View Application Letter</a> 
+                        <a href="@Model.CareerFile.ApplicationUrl" target="_blank">View Application Letter</a>
                     </dd>
-                    
+
                     <dt class="col-sm-2">
                         @Html.DisplayNameFor(model => model.CareerFile.PassportUrl)
                     </dt>
                     <dd class="col-sm-10">
                         <img src="@Model.CareerFile.PassportUrl" style="max-height:200px;" class="img-fluid" />
 
-                     </dd>
-                    
+                    </dd>
+
                     <dt class="col-sm-2">
                         @Html.DisplayNameFor(model => model.CareerFile.Date)
                     </dt>
@@ -88,7 +88,10 @@
                         @Html.DisplayFor(model => model.CareerFile.Date)
                     </dd>
                 </dl>
-                
+                @foreach (var data in Model.CareerFile.SelectedJobRoles)
+                {
+                    <h4>@data.CareerTrainingJobRole.Title</h4>
+                }
             </div>
         </div>
 

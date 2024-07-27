@@ -22,6 +22,9 @@ namespace ExwhyzeeTechnology.Website.Areas.Admin.Pages.UserManagement
         public UserStatus Status { get; set; }
          public GenderStatus Gender { get; set; }
         public string Roles { get; set; }
+        public string State { get; set; }
+        public string LGA { get; set; }
+        public DateTime Date { get; set; }
     }
     public class IndexModel : PageModel
     {

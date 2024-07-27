@@ -1,0 +1,221 @@
+﻿@page
+@model ExwhyzeeTechnology.Website.Areas.Admin.Pages.UserManagement.ApplicationDetailsModel
+
+@{
+    ViewData["Title"] = "ApplicationDetails";
+}
+
+<div class="card">
+    <div class="card-header">
+        <h3 class="card-title">APPLICATIONS Details</h3>
+
+
+    </div>
+    <!-- /.card-header -->
+    <div class="card-body">
+          
+        <dl class="row">
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.TrainingApplicationForm.Profile.FullnameX)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.TrainingApplicationForm.Profile.FullnameX)
+            </dd>
+            <dt class="col-sm-2">
+                Passport
+            </dt>
+
+            <dt class="col-sm-2">
+                NIN
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.TrainingApplicationForm.Profile.NinUrl)
+            </dd>
+            <dt class="col-sm-2">
+                Passport
+            </dt>
+
+            <dd class="col-sm-10">
+                <img src="@Model.TrainingApplicationForm.Profile.PassportFilePathUrl" style="max-height:200px;" />
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.TrainingApplicationForm.CareerTrainingJobRole)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.TrainingApplicationForm.CareerTrainingJobRole.Title)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.TrainingApplicationForm.Profile.Date)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.TrainingApplicationForm.Profile.Date)
+            </dd>
+
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.TrainingApplicationForm.Profile.Email)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.TrainingApplicationForm.Profile.Email)
+            </dd>
+
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.TrainingApplicationForm.Profile.PhoneNumber)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.TrainingApplicationForm.Profile.PhoneNumber)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.TrainingApplicationForm.Profile.DateOfBirth)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.TrainingApplicationForm.Profile.DateOfBirth)
+            </dd>
+
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.TrainingApplicationForm.Profile.State)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.TrainingApplicationForm.Profile.State)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.TrainingApplicationForm.Profile.PermanentLga)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.TrainingApplicationForm.Profile.PermanentLga)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.TrainingApplicationForm.Profile.Address)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.TrainingApplicationForm.Profile.Address)
+            </dd>
+
+
+
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.TrainingApplicationForm.HighestLevelOfEducation)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.TrainingApplicationForm.HighestLevelOfEducation)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.TrainingApplicationForm.FieldOfStudy)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.TrainingApplicationForm.FieldOfStudy)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.TrainingApplicationForm.CurrentEducationalStatus)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.TrainingApplicationForm.CurrentEducationalStatus)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.TrainingApplicationForm.ComputerLiteracy)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.TrainingApplicationForm.ComputerLiteracy)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.TrainingApplicationForm.WebDevelopment)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.TrainingApplicationForm.WebDevelopment)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.TrainingApplicationForm.GraphicDesign)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.TrainingApplicationForm.GraphicDesign)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.TrainingApplicationForm.DigitalMarketing)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.TrainingApplicationForm.DigitalMarketing)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.TrainingApplicationForm.Programming)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.TrainingApplicationForm.Programming)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.TrainingApplicationForm.DataAnalysis)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.TrainingApplicationForm.DataAnalysis)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.TrainingApplicationForm.OtherRelevant)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.TrainingApplicationForm.OtherRelevant)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.TrainingApplicationForm.ExperienceWithDigitalTools)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.TrainingApplicationForm.ExperienceWithDigitalTools)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.TrainingApplicationForm.WhyAreYouInterestedInThisDigitalSkill)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.TrainingApplicationForm.WhyAreYouInterestedInThisDigitalSkill)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.TrainingApplicationForm.HowDoYouBelieveThisProgramCanHelpYouAchieveYourPersonalGoal)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.TrainingApplicationForm.HowDoYouBelieveThisProgramCanHelpYouAchieveYourPersonalGoal)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.TrainingApplicationForm.WhatDoYouHopeToGainFromParticipatingInThisProgram)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.TrainingApplicationForm.WhatDoYouHopeToGainFromParticipatingInThisProgram)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.TrainingApplicationForm.DoYouHaveAnySpecialNeedsOrAccommodationsWeShouldBeAwareOf)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.TrainingApplicationForm.DoYouHaveAnySpecialNeedsOrAccommodationsWeShouldBeAwareOf)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.TrainingApplicationForm.HowDidYouHearAboutThisProgram)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.TrainingApplicationForm.HowDidYouHearAboutThisProgram)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.TrainingApplicationForm.AreYouCurrentlyEmployedOrSelfEmployed)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.TrainingApplicationForm.AreYouCurrentlyEmployedOrSelfEmployed)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.TrainingApplicationForm.EmploymentDetails)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.TrainingApplicationForm.EmploymentDetails)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.TrainingApplicationForm.DoYouHaveAnyOtherRelevantInformationYouWouldLikeToShare)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.TrainingApplicationForm.DoYouHaveAnyOtherRelevantInformationYouWouldLikeToShare)
+            </dd>
+
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.TrainingApplicationForm.AcceptTerms)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.TrainingApplicationForm.AcceptTerms)
+            </dd>
+        </dl>
+    </div>
+
+    <a asp-page="./Index">Back to List</a>
+</div>
+     

@@ -106,8 +106,7 @@ MESSAGE: @@message@@
             mailtext = mailtext.Replace("@@email@@", ClientRequest.Email);
             mailtext = mailtext.Replace("@@message@@", ClientRequest.Message);
 
-            //"NIPSS <admin@nipssportal.com.ng>"
-            await _email.SendEmailPostmasterAddFrom($"{SuperSetting.CompanyName} <client@juray.ng>", SuperSetting.CompanyName, Setting.EmailOne, "", "", $"WEBSITE CONTACT US FORM", mailtext);
+             await _email.SendEmailPostmasterAddFrom($"{SuperSetting.CompanyName} <client@juray.ng>", SuperSetting.CompanyName, Setting.EmailOne, "", "", $"WEBSITE CONTACT US FORM", mailtext);
 
             var dashboardsetting = await _context.DashboardSettings.FirstOrDefaultAsync();
             if (dashboardsetting.ActivateDashboard == true)

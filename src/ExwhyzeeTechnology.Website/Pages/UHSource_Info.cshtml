@@ -58,7 +58,7 @@
     }
 }
 
-@await Component.InvokeAsync("BreadcrumOthers", new { data = Model.Product.Title })
+@await Component.InvokeAsync("BreadcrumOthers", new { data = Model.Product.Title, tx = "yes" })
 @if (Model.Setting.ActivateProductsInHome == true || Model.Setting.ShowProductsInFooter == true)
 {
     if (Model.SuperSetting.TemplateLayoutKey == "Layout1111")

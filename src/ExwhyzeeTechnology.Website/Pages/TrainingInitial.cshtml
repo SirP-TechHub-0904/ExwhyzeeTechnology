@@ -1,0 +1,207 @@
+﻿@page
+@model ExwhyzeeTechnology.Website.Pages.TrainingInitialModel
+@{
+}
+@{
+    ViewData["Title"] = Model.Setting.TrainingMenuTitle;
+
+    ViewData["PageName"] = Model.Setting.TrainingMenuTitle;
+    ViewData["Description"] = Model.SuperSetting.CompanyDescription;
+    ViewData["Image"] = Model.SuperSetting.CompanyLogoUrl;
+
+    @if (Model.SuperSetting.TemplateLayoutKey == "Layout1111")
+    {
+        Layout = "/Pages/Shared/Layouts/Theme/RedbizTheme/_RedbizLayout.cshtml";
+    }
+    else if (Model.SuperSetting.TemplateLayoutKey == "Layout2222")
+    {
+        Layout = "/Pages/Shared/Layouts/Theme/Carspot/_CarspotLayout.cshtml";
+    }
+    else if (Model.SuperSetting.TemplateLayoutKey == "Layout3333")
+    {
+        Layout = "/Pages/Shared/Layouts/Theme/Alina/_AlinaLayout.cshtml";
+    }
+    else if (Model.SuperSetting.TemplateLayoutKey == "Layout4444")
+    {
+        Layout = "/Pages/Shared/Layouts/Theme/Archo/_ArchoLayout.cshtml";
+    }
+    else if (Model.SuperSetting.TemplateLayoutKey == "Layout5555")
+    {
+        Layout = "/Pages/Shared/Layouts/Theme/Bizup/_BizupLayout.cshtml";
+    }
+    else if (Model.SuperSetting.TemplateLayoutKey == "Layout6666")
+    {
+        Layout = "/Pages/Shared/Layouts/Theme/Industry/_IndustryLayout.cshtml";
+    }
+    else if (Model.SuperSetting.TemplateLayoutKey == "Layout7777")
+    {
+        Layout = "/Pages/Shared/Layouts/Theme/Lawnella/_LawnellaLayout.cshtml";
+    }
+    else if (Model.SuperSetting.TemplateLayoutKey == "Layout8888")
+    {
+        Layout = "/Pages/Shared/Layouts/Theme/Mistro/_MistroLayout.cshtml";
+    }
+    else if (Model.SuperSetting.TemplateLayoutKey == "Layout9999")
+    {
+        Layout = "/Pages/Shared/Layouts/Theme/Senatory/_SenatoryLayout.cshtml";
+    }
+    else if (Model.SuperSetting.TemplateLayoutKey == "Layout11111111")
+    {
+        Layout = "/Pages/Shared/Layouts/Theme/Education/_EducationLayout.cshtml";
+    }
+    else if (Model.SuperSetting.TemplateLayoutKey == "Layout12121212")
+    {
+        Layout = "/Pages/Shared/Layouts/Theme/Streamlab/_StreamlabLayout.cshtml";
+    }
+}
+
+@await Component.InvokeAsync("BreadcrumOthers", new { data = Model.Setting.TrainingMenuTitle, tx = "eyes" })
+
+@section MainStyle {
+    <link href="~/customcss/training.css" rel="stylesheet" />
+}
+
+
+
+<div class="h-[80vh] flex items-center justify-center relative sm:h-auto training-st">
+    <div class="absolute top-0 left-0 right-0 -z-[5] bg-nhBlue-100 h-[80vh] mix-blend-multiply"></div>
+
+    <div class="w-full bg-tr" style="background: url(@Model.Setting.TrainingBgImageUrl) 0% 0% / cover no-repeat; ">
+
+        <div class="max-w-[1240px] mx-auto px-4">
+
+            <div class="flex h-full gap-6 items-center sm:flex-col sm:mt-6">
+
+                <div class=" w-[700px] sm:w-full">
+
+                    <h1 class="text-5xl font-bold text-white sm:text-3xl">@Model.Setting.TrainingTitle</h1>
+                    <p class="p-3 text-sm font-medium bg-white rounded-2xl w-[420px] mb-4 border sm:w-full sub-title-t">
+                        @Model.Setting.TrainingSubTitle
+                    </p>
+                    <p class="mt-6 text-lg sm:text-base text-white">
+                        @Html.Raw(Model.Setting.TrainingDescription)
+                    </p>
+                </div>
+
+                <div class="flex-1 sm:w-full min-w-[522px] sm:min-w-full">
+
+                    <div class="w-full [&amp;>*]:w-full">
+
+                        <div class="flex flex-col gap-4 mt-4 p-10 bg-white rounded-xl sm:px-4">
+                            <h1 class="font-bold text-2xl mb-2">@Model.Setting.ApplyTitle</h1>
+
+                            <div class="flex w-full [&amp;>*]:flex-1 rounded-xl p-1">
+
+                                <form class="t-form" method="post">
+
+                                    @if (TempData["error"] != null)
+                                    {
+                                    <div class="alert alert-danger">
+                                        @TempData["error"]
+                                    </div>
+                                    }
+                                    @if (TempData["success"] != null)
+                                    {
+                                    <div class="alert alert-success">
+                                        @TempData["success"]
+                                    </div>
+                                    }
+                                    <div class="flex flex-col gap-4">
+
+                                        <div class="flex gap-4 w-full [&amp;>*]:flex-1 sm:flex-col">
+
+                                            <div class="flex flex-col gap-2">
+                                                <label for="firstNamesignin">First Name</label>
+
+                                                <input type="text" asp-for="UserDatas.FirstName" id="firstNamesignin" placeholder="First Name" class="bg-neutral-100 form-control" required="required">
+                                            </div>
+
+                                            <div class="flex flex-col gap-2">
+                                                <label for="firstName">Last Name</label>
+
+                                                <input type="text" asp-for="UserDatas.LastName" id="lastName" placeholder="Last Name" class="bg-neutral-100 form-control" required="required">
+                                            </div>
+                                        </div>
+
+                                        <div class="flex flex-col gap-2">
+                                            <label for="firstName">Email</label>
+
+                                            <input type="email" asp-for="UserDatas.Email" id="email" placeholder="user@example.com" class="bg-neutral-100 form-control" required="required">
+                                        </div>
+                                        <div class="flex flex-col gap-2">
+                                            <label for="firstName">Phone Number</label>
+
+                                            <input type="text" asp-for="UserDatas.PhoneNumber" id="phone" placeholder="Phone Number" class="bg-neutral-100 form-control" required="required">
+                                        </div>
+                                        <div class="flex flex-col gap-2">
+                                            <label for="firstName">National Identification Number (NIN)</label>
+
+                                            <input type="text" asp-for="UserDatas.NIN" id="phone" placeholder="NIN" class="bg-neutral-100 form-control" required="required">
+                                        </div>
+                                        <div class="flex gap-4 w-full [&amp;>*]:flex-1 sm:flex-col">
+
+                                            <div class="flex flex-col gap-2">
+                                                <label for="firstNamesignin">Date Of Birth</label>
+
+                                                <input type="date" asp-for="UserDatas.DateOfBirth" placeholder="Date Of Birth" class="bg-neutral-100 form-control" required="required">
+                                            </div>
+
+                                            <div class="flex flex-col gap-2">
+                                                <label for="firstName">Gender</label>
+                                                @Html.DropDownListFor(model => model.UserDatas.Gender, new SelectList(Enum.GetValues(typeof(ExwhyzeeTechnology.Domain.Enum.Enum.GenderStatus))), new { @class = "bg-neutral-100 form-control" })
+
+                                            </div>
+                                        </div>
+
+
+                                        <div class="flex flex-col gap-2">
+                                            <label for="password	">password</label>
+
+                                            <div class="relative">
+
+                                                <input type="password" name="password" id="password" placeholder="Enter Password" class="bg-neutral-100 w-full form-control">
+
+
+                                            </div>
+                                        </div>
+                                        <button class="bg-nhOrange-100 mt-2 text-white" type="submit">Get Started</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<main class="bg-white py-8 tr-sti">
+    <div class="max-w-[1240px] mx-auto px-4">
+        <div>
+            <div class="mb-4 sm:hidden">
+                <h1 class="text-2xl font-bold">@Model.Setting.CourseTitle</h1>
+                <p class="text-neutral-600 my-6">
+                    @Html.Raw(Model.Setting.CourseDescription)
+                </p>
+            </div>
+            <div class="row">
+                @foreach (var item in Model.JobRoles)
+                {
+                <div class="p-8 col-md-4 rounded-lg drop-shadow-sm sm:order-2 bg-yellow-100 border-yellow-200 border">
+                    <div class="items-center font-semibold mb-2 text-yellow-900">
+                        @item.Icon
+                        <h2>@item.Title</h2>
+                    </div>
+                    <p>
+                        @Html.Raw(item.Description)
+                    </p>
+                </div>
+                }
+
+                
+            </div>
+        </div>
+    </div>
+</main>

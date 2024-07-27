@@ -31,7 +31,7 @@ namespace ExwhyzeeTechnology.Application.Repository.NotifyRegister
                 var smsrequest = new HttpRequestMessage(HttpMethod.Post, "https://my.kudisms.net/api/sms");
                 var smscontent = new MultipartFormDataContent();
                 smscontent.Add(new StringContent(apiToken), "token");
-                smscontent.Add(new StringContent("NIPSS KURU"), "senderID");
+                smscontent.Add(new StringContent("EXWHYZEE"), "senderID");
                 smscontent.Add(new StringContent(contact), "recipients");
                 smscontent.Add(new StringContent(message), "message");
                 smscontent.Add(new StringContent("1"), "gateway");
@@ -81,7 +81,7 @@ namespace ExwhyzeeTechnology.Application.Repository.NotifyRegister
                 var smsrequest = new HttpRequestMessage(HttpMethod.Post, "https://my.kudisms.net/api/sms");
                 var smscontent = new MultipartFormDataContent();
                 smscontent.Add(new StringContent(apiToken), "token");
-                smscontent.Add(new StringContent("NIPSS KURU"), "senderID");
+                smscontent.Add(new StringContent("EXWHYZEE"), "senderID");
                 smscontent.Add(new StringContent(contact), "recipients");
                 smscontent.Add(new StringContent(message), "message");
                 smscontent.Add(new StringContent("1"), "gateway");

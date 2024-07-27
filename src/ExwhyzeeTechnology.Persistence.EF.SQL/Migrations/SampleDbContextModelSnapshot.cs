@@ -17,7 +17,7 @@ namespace ExwhyzeeTechnology.Persistence.EF.SQL.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "6.0.29")
+                .HasAnnotation("ProductVersion", "6.0.32")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
@@ -365,6 +365,31 @@ namespace ExwhyzeeTechnology.Persistence.EF.SQL.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("CareerPaths");
+                });
+
+            modelBuilder.Entity("ExwhyzeeTechnology.Domain.Models.CareerTrainingJobRole", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"), 1L, 1);
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("Disable")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Icon")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Title")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("CareerTrainingJobRoles");
                 });
 
             modelBuilder.Entity("ExwhyzeeTechnology.Domain.Models.ChatMessage", b =>
@@ -2303,7 +2328,16 @@ namespace ExwhyzeeTechnology.Persistence.EF.SQL.Migrations
                     b.Property<string>("MiddleName")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("NIN")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Nationality")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("NinKey")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("NinUrl")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("NormalizedEmail")
@@ -3179,6 +3213,29 @@ namespace ExwhyzeeTechnology.Persistence.EF.SQL.Migrations
                     b.ToTable("Salarys");
                 });
 
+            modelBuilder.Entity("ExwhyzeeTechnology.Domain.Models.SelectedJobRole", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"), 1L, 1);
+
+                    b.Property<long?>("CareerFileId")
+                        .HasColumnType("bigint");
+
+                    b.Property<long?>("CareerTrainingJobRoleId")
+                        .HasColumnType("bigint");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CareerFileId");
+
+                    b.HasIndex("CareerTrainingJobRoleId");
+
+                    b.ToTable("SelectedJobRoles");
+                });
+
             modelBuilder.Entity("ExwhyzeeTechnology.Domain.Models.SenderId", b =>
                 {
                     b.Property<long>("Id")
@@ -3255,6 +3312,9 @@ namespace ExwhyzeeTechnology.Persistence.EF.SQL.Migrations
                     b.Property<string>("AddressTwo")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("ApplyTitle")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("BankName")
                         .HasColumnType("nvarchar(max)");
 
@@ -3264,7 +3324,25 @@ namespace ExwhyzeeTechnology.Persistence.EF.SQL.Migrations
                     b.Property<string>("BreakingNewsRibonTitle")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("CareerDescription")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("CareerDisplayTitle")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CareerFooterTitle")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CareerMiniTitle")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CareerTitle")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CourseDescription")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CourseTitle")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("CustomMenuTop")
@@ -3405,6 +3483,12 @@ namespace ExwhyzeeTechnology.Persistence.EF.SQL.Migrations
                     b.Property<bool>("ShowThreeProducts")
                         .HasColumnType("bit");
 
+                    b.Property<bool>("ShowTrainingInFooter")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("ShowTrainingInMenu")
+                        .HasColumnType("bit");
+
                     b.Property<bool>("ShowTwoProducts")
                         .HasColumnType("bit");
 
@@ -3424,6 +3508,24 @@ namespace ExwhyzeeTechnology.Persistence.EF.SQL.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("TopNote")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("TrainingBgImageKey")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("TrainingBgImageUrl")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("TrainingDescription")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("TrainingMenuTitle")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("TrainingSubTitle")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("TrainingTitle")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("TwitterPage")
@@ -4058,6 +4160,89 @@ namespace ExwhyzeeTechnology.Persistence.EF.SQL.Migrations
                     b.HasIndex("TrainnerId");
 
                     b.ToTable("Trainings");
+                });
+
+            modelBuilder.Entity("ExwhyzeeTechnology.Domain.Models.TrainingApplicationForm", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"), 1L, 1);
+
+                    b.Property<bool>("AcceptTerms")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("AreYouCurrentlyEmployedOrSelfEmployed")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<long?>("CareerTrainingJobRoleId")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("ComputerLiteracy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CurrentEducationalStatus")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("DataAnalysis")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("DigitalMarketing")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("DoYouHaveAnyOtherRelevantInformationYouWouldLikeToShare")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("DoYouHaveAnySpecialNeedsOrAccommodationsWeShouldBeAwareOf")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("EmploymentDetails")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ExperienceWithDigitalTools")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FieldOfStudy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("GraphicDesign")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("HighestLevelOfEducation")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("HowDidYouHearAboutThisProgram")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("HowDoYouBelieveThisProgramCanHelpYouAchieveYourPersonalGoal")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("OtherRelevant")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ProfileId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Programming")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("WebDevelopment")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("WhatDoYouHopeToGainFromParticipatingInThisProgram")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("WhyAreYouInterestedInThisDigitalSkill")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CareerTrainingJobRoleId");
+
+                    b.HasIndex("ProfileId");
+
+                    b.ToTable("TrainingApplicationForms");
                 });
 
             modelBuilder.Entity("ExwhyzeeTechnology.Domain.Models.TrainingAttendance", b =>
@@ -5131,6 +5316,21 @@ namespace ExwhyzeeTechnology.Persistence.EF.SQL.Migrations
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("ExwhyzeeTechnology.Domain.Models.SelectedJobRole", b =>
+                {
+                    b.HasOne("ExwhyzeeTechnology.Domain.Models.CareerFile", "CareerFile")
+                        .WithMany("SelectedJobRoles")
+                        .HasForeignKey("CareerFileId");
+
+                    b.HasOne("ExwhyzeeTechnology.Domain.Models.CareerTrainingJobRole", "CareerTrainingJobRole")
+                        .WithMany()
+                        .HasForeignKey("CareerTrainingJobRoleId");
+
+                    b.Navigation("CareerFile");
+
+                    b.Navigation("CareerTrainingJobRole");
+                });
+
             modelBuilder.Entity("ExwhyzeeTechnology.Domain.Models.SmsMessage", b =>
                 {
                     b.HasOne("ExwhyzeeTechnology.Domain.Models.SmsMessageCategory", "SmsMessageCategory")
@@ -5169,6 +5369,21 @@ namespace ExwhyzeeTechnology.Persistence.EF.SQL.Migrations
                     b.Navigation("Moderator");
 
                     b.Navigation("Trainner");
+                });
+
+            modelBuilder.Entity("ExwhyzeeTechnology.Domain.Models.TrainingApplicationForm", b =>
+                {
+                    b.HasOne("ExwhyzeeTechnology.Domain.Models.CareerTrainingJobRole", "CareerTrainingJobRole")
+                        .WithMany()
+                        .HasForeignKey("CareerTrainingJobRoleId");
+
+                    b.HasOne("ExwhyzeeTechnology.Domain.Models.Profile", "Profile")
+                        .WithMany()
+                        .HasForeignKey("ProfileId");
+
+                    b.Navigation("CareerTrainingJobRole");
+
+                    b.Navigation("Profile");
                 });
 
             modelBuilder.Entity("ExwhyzeeTechnology.Domain.Models.TrainingAttendance", b =>
@@ -5341,6 +5556,11 @@ namespace ExwhyzeeTechnology.Persistence.EF.SQL.Migrations
             modelBuilder.Entity("ExwhyzeeTechnology.Domain.Models.BudgetSubCategory", b =>
                 {
                     b.Navigation("BudgetList");
+                });
+
+            modelBuilder.Entity("ExwhyzeeTechnology.Domain.Models.CareerFile", b =>
+                {
+                    b.Navigation("SelectedJobRoles");
                 });
 
             modelBuilder.Entity("ExwhyzeeTechnology.Domain.Models.CompanyProgramCategory", b =>

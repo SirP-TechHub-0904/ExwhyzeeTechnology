@@ -63,13 +63,14 @@
 @await Component.InvokeAsync("ProductHome")
 
 
-
+@await Component.InvokeAsync("PageSection", new { position = "middle", pageset = "home", takex = 3 })
 
 @await Component.InvokeAsync("BlogHome")
 @await Component.InvokeAsync("HomeTestimony")
 
 
 @await Component.InvokeAsync("PageSection", new { position = "bottom", pageset = "home", takex = 3 })
+
 
 
  

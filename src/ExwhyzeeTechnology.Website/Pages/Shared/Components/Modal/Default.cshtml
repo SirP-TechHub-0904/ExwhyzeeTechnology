@@ -5,10 +5,10 @@
     Domain.Models.PostModal xmodal = ViewBag.modal;
 
 }
- 
+
 @if (xmodal != null)
 {
-    <div class="modal fade" id="mainModal">
+    <div class="modal fade" id="mainModal" data-backdrop="static" data-keyboard="false">
         <div class="modal-dialog modal-md" style="width: 70% !important;">
             <div class="modal-content">
 
@@ -20,38 +20,157 @@
 
                         @if (xmodal.ShowTitle == true)
                         {
-                            <a asp-page="/Source" asp-route-id="@xmodal.ButtonLink" asp-route-title="@regex.Replace(xmodal.Title, "-")">
-                                <h3>@xmodal.Title</h3>
-                            </a>
+                            @if (xmodal.ButtonLink == "0")
+                            {
+                                // /
+                                <a href="#">
+                                    <h3>@xmodal.Title</h3>
+                                </a>
+                            }
+                            else if (xmodal.ButtonLink == "000")
+                            {
+                                // asp-page="/Contact"
+                                <a asp-page="/Contact">
+                                    <h3>@xmodal.Title</h3>
+                                </a>
+                            }
+                            else if (xmodal.ButtonLink == "0000")
+                            {
+                                // asp-page="/"
+                                <a asp-page="/TrainingInitial">
+                                    <h3>@xmodal.Title</h3>
+                                </a>
+                            }
+                            else if (xmodal.ButtonLink != "0" && xmodal.ButtonLink != "000")
+                            {
+                                //asp-page="/Source" asp-route-id="@xmodal.ButtonLink"
+                                <a asp-page="/Source" asp-route-id="@xmodal.ButtonLink" asp-route-title="@regex.Replace(xmodal.Title, "-")">
+                                    <h3>@xmodal.Title</h3>
+                                </a>
+                            }
+
 
                         }
                         @if (xmodal.ShowImage == true && xmodal.ShowOnlyImage == false)
                         {
                             <div style="margin:0 auto !important;text-align:center;">
-                                <a asp-page="/Source" asp-route-id="@xmodal.ButtonLink" asp-route-title="@regex.Replace(xmodal.Title, "-")">
-                                    <img src="@xmodal.ImageUrl" alt="@xmodal.Title" class="img-fluid img-responsive" style="margin:0 auto !important;text-align:center;" />
+                                @if (xmodal.ButtonLink == "0")
+                                {
+                                    //href="#" /
+                                    <a href="#">
+                                        <img src="@xmodal.ImageUrl" alt="@xmodal.Title" class="img-fluid img-responsive" style="margin:0 auto !important;text-align:center;" />
 
-                                </a>
+                                    </a>
+                                }
+                                else if (xmodal.ButtonLink == "000")
+                                {
+                                    // asp-page="/Contact"
+                                    <a asp-page="/Contact">
+                                        <img src="@xmodal.ImageUrl" alt="@xmodal.Title" class="img-fluid img-responsive" style="margin:0 auto !important;text-align:center;" />
+
+                                    </a>
+                                }
+                                else if (xmodal.ButtonLink == "0000")
+                                {
+                                    // asp-page="/TrainingInitial"
+                                    <a asp-page="/TrainingInitial">
+                                        <img src="@xmodal.ImageUrl" alt="@xmodal.Title" class="img-fluid img-responsive" style="margin:0 auto !important;text-align:center;" />
+
+                                    </a>
+                                }
+                                else if (xmodal.ButtonLink != "0" && xmodal.ButtonLink != "000")
+                                {
+                                    //asp-page="/Source" asp-route-id="@xmodal.ButtonLink"
+                                    <a asp-page="/Source" asp-route-id="@xmodal.ButtonLink" asp-route-title="@regex.Replace(xmodal.Title, "-")">
+                                        <img src="@xmodal.ImageUrl" alt="@xmodal.Title" class="img-fluid img-responsive" style="margin:0 auto !important;text-align:center;" />
+
+                                    </a>
+                                }
+
                             </div>
                         }
                         @if (xmodal.ShowDescription == true)
                         {
                             <div>
-                                <a asp-page="/Source" asp-route-id="@xmodal.ButtonLink" asp-route-title="@regex.Replace(xmodal.Title, "-")">
+                                @if (xmodal.ButtonLink == "0")
+                                {
+                                    //href="#" /
+                                    <a href="#">
 
-                                    @Html.Raw(xmodal.Description)
-                                </a>
+                                        @Html.Raw(xmodal.Description)
+                                    </a>
+                                }
+                                else if (xmodal.ButtonLink == "000")
+                                {
+                                    // asp-page="/Contact"
+                                    <a asp-page="/Contact">
+
+                                        @Html.Raw(xmodal.Description)
+                                    </a>
+                                }
+                                else if (xmodal.ButtonLink == "0000")
+                                {
+                                    // asp-page="/TrainingInitial"
+                                    <a asp-page="/TrainingInitial">
+
+                                        @Html.Raw(xmodal.Description)
+                                    </a>
+                                }
+                                else if (xmodal.ButtonLink != "0" && xmodal.ButtonLink != "000")
+                                {
+                                    //asp-page="/Source" asp-route-id="@xmodal.ButtonLink"
+                                    <a asp-page="/Source" asp-route-id="@xmodal.ButtonLink" asp-route-title="@regex.Replace(xmodal.Title, "-")">
+
+                                        @Html.Raw(xmodal.Description)
+                                    </a>
+                                }
+
                             </div>
                         }
                     }
                     else if (xmodal.ShowOnlyImage == true)
                     {
                         <div style="margin:0 auto !important;text-align:center;">
-                            <a asp-page="/Source" asp-route-id="@xmodal.ButtonLink" asp-route-title="@regex.Replace(xmodal.Title, "-")">
 
-                                <img src="@xmodal.ImageUrl" alt="@xmodal.Title" class="img-fluid img-responsive" style="margin:0 auto !important;text-align:center;" />
+                            @if (xmodal.ButtonLink == "0")
+                            {
+                                //href="#" /
+                                <a href="#">
 
-                            </a>
+                                    <img src="@xmodal.ImageUrl" alt="@xmodal.Title" class="img-fluid img-responsive" style="margin:0 auto !important;text-align:center;" />
+
+                                </a>
+                            }
+                            else if (xmodal.ButtonLink == "000")
+                            {
+                                // asp-page="/Contact"
+                                <a asp-page="/Contact">
+
+                                    <img src="@xmodal.ImageUrl" alt="@xmodal.Title" class="img-fluid img-responsive" style="margin:0 auto !important;text-align:center;" />
+
+                                </a>
+                            }
+                            else if (xmodal.ButtonLink == "0000")
+                            {
+                                // asp-page="/TrainingInitial"
+                                <a asp-page="/TrainingInitial">
+
+                                    <img src="@xmodal.ImageUrl" alt="@xmodal.Title" class="img-fluid img-responsive" style="margin:0 auto !important;text-align:center;" />
+
+                                </a>
+                            }
+                            else if (xmodal.ButtonLink != "0" && xmodal.ButtonLink != "000")
+                            {
+                                //asp-page="/Source" asp-route-id="@xmodal.ButtonLink"
+                                <a asp-page="/Source" asp-route-id="@xmodal.ButtonLink" asp-route-title="@regex.Replace(xmodal.Title, "-")">
+
+                                    <img src="@xmodal.ImageUrl" alt="@xmodal.Title" class="img-fluid img-responsive" style="margin:0 auto !important;text-align:center;" />
+
+                                </a>
+                            }
+
+
+
                         </div>
                     }
 
@@ -64,7 +183,11 @@
         </div>
         <!-- /.modal-dialog -->
     </div>
-
+    <script>
+        function closeModal() {
+            $('#mainModal').modal('hide');
+        }
+    </script>
     <script>
         //$(window).on('load', function () {
         //    var hasModalShownToday = localStorage.getItem('modalShownToday');
@@ -92,12 +215,12 @@
 
 
     <script>
-                //$(window).on('load', function () {
+        //$(window).on('load', function () {
 
-                //    $('#mainModal').modal('show');
+        //    $('#mainModal').modal('show');
 
 
-                //});
+        //});
     </script>
 
 }

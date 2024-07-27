@@ -29,5 +29,10 @@ namespace ExwhyzeeTechnology.Domain.Models
         public string PassportKey { get; set; }
 
         public DateTime Date { get; set; }
+
+        //public List<long> SelectedJobRoleIds { get; set; } = new List<long>();
+
+        //public List<long> SelectedJobRoles { get; set; } = new List<long>();
+        public ICollection<SelectedJobRole> SelectedJobRoles { get; set; }
     }
 }

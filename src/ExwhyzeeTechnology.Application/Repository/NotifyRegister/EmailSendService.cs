@@ -494,7 +494,7 @@ namespace ExwhyzeeTechnology.Application.Repository.NotifyRegister
 ";
             emailTemplate = emailTemplate.Replace("//CompanyName//", settings.CompanyName);
             emailTemplate = emailTemplate.Replace("//YOUR_LOGO_URL//", settings.CompanyLogoUrl);
-            emailTemplate = emailTemplate.Replace("//Subject//", subject);
+            emailTemplate = emailTemplate.Replace("//Subject//", "");
             emailTemplate = emailTemplate.Replace("//Body//", body);
             emailTemplate = emailTemplate.Replace("//CompanyEmail//", normalsettings.EmailOne ?? "");
             emailTemplate = emailTemplate.Replace("//Date//", DateTime.UtcNow.Year.ToString());
@@ -505,7 +505,7 @@ namespace ExwhyzeeTechnology.Application.Repository.NotifyRegister
             PostmarkResponse response = new PostmarkResponse();
             var message = new PostmarkMessage
             {
-                From = "NIPSS <admin@nipssportal.com.ng>",
+                From = "EXWHYZEE TECHNOLOGIES LTD <admin@exwhyzee.ng>",
                 To = to,
                 Subject = subject,
                 HtmlBody = emailTemplate
@@ -571,7 +571,7 @@ namespace ExwhyzeeTechnology.Application.Repository.NotifyRegister
 ";
             emailTemplate = emailTemplate.Replace("//CompanyName//", settings.CompanyName);
             emailTemplate = emailTemplate.Replace("//YOUR_LOGO_URL//", settings.CompanyLogoUrl);
-            emailTemplate = emailTemplate.Replace("//Subject//", subject);
+            emailTemplate = emailTemplate.Replace("//Subject//", "");
             emailTemplate = emailTemplate.Replace("//Body//", body);
             emailTemplate = emailTemplate.Replace("//CompanyEmail//", normalsettings.EmailOne ?? "");
             emailTemplate = emailTemplate.Replace("//Date//", DateTime.UtcNow.Year.ToString());
@@ -582,7 +582,7 @@ namespace ExwhyzeeTechnology.Application.Repository.NotifyRegister
             PostmarkResponse response = new PostmarkResponse();
             var message = new PostmarkMessage
             {
-                From = "NIPSS <admin@nipssportal.com.ng>",
+                From = "EXWHYZEE TECHNOLOGIES LTD <admin@exwhyzee.ng>",
                 To = to,
                 Subject = subject,
                 HtmlBody = emailTemplate

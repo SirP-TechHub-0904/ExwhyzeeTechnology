@@ -37,6 +37,9 @@ namespace ExwhyzeeTechnology.Website.Areas.Content.Pages.ISettings
         [BindProperty]
         public Setting Setting { get; set; }
 
+        [BindProperty]
+        public IFormFile? imagefileX { get; set; }
+
         public async Task<IActionResult> OnGetAsync(long? id)
         {
             if (id == null)
@@ -57,6 +60,52 @@ namespace ExwhyzeeTechnology.Website.Areas.Content.Pages.ISettings
         // For more details, see https://aka.ms/RazorPagesCRUD.
         public async Task<IActionResult> OnPostAsync()
         {
+
+            //image
+            if (imagefileX != null)
+            {
+                try
+                {
+                    // Process file
+                    await using var memoryStream = new MemoryStream();
+                    await imagefileX.CopyToAsync(memoryStream);
+
+                    var fileExt = Path.GetExtension(imagefileX.FileName);
+                    var docName = $"{Guid.NewGuid()}{fileExt}";
+                    // call server
+
+                    var s3Obj = new Application.Dtos.AwsDtos.S3Object()
+                    {
+                        BucketName = await _storageService.BucketName(),
+                        InputStream = memoryStream,
+                        Name = docName
+                    };
+
+                    var cred = new AwsCredentials()
+                    {
+                        AccessKey = _config["AwsConfiguration:AWSAccessKey"],
+                        SecretKey = _config["AwsConfiguration:AWSSecretKey"]
+                    };
+
+                    var xresult = await _storageService.UploadFileReturnUrlAsync(s3Obj, cred, Setting.TrainingBgImageKey);
+                    // 
+                    if (xresult.Message.Contains("200"))
+                    {
+                        Setting.TrainingBgImageUrl = xresult.Url;
+                        Setting.TrainingBgImageKey = xresult.Key;
+                    }
+                    else
+                    {
+                        TempData["error"] = "unable to upload image";
+                        //return Page();
+                    }
+                }
+                catch (Exception c)
+                {
+
+                }
+            }
+
             //image
             if (imagefile != null)
             {
@@ -194,7 +243,7 @@ namespace ExwhyzeeTechnology.Website.Areas.Content.Pages.ISettings
 
             try
             {
-                await _context.SaveChangesAsync(); 
+                await _context.SaveChangesAsync();
                 TempData["success"] = "Successful";
             }
             catch (DbUpdateConcurrencyException)

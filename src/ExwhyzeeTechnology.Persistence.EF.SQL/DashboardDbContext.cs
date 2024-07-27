@@ -13,6 +13,10 @@ public class DashboardDbContext : IdentityDbContext<Profile, IdentityRole, strin
     private readonly ITenantProvider _tenantProvider;
 
 
+    public DbSet<CareerTrainingJobRole> CareerTrainingJobRoles { get; set; } = null!;
+    public DbSet<SelectedJobRole> SelectedJobRoles { get; set; } = null!;
+
+
     public DbSet<SmsMessage> SmsMessages { get; set; } = null!;
     public DbSet<SmsMessageCategory> SmsMessageCategories { get; set; } = null!;
     public DbSet<SenderId> SenderIds { get; set; } = null!;
@@ -144,7 +148,7 @@ public class DashboardDbContext : IdentityDbContext<Profile, IdentityRole, strin
 
     public DbSet<Facility> Facilities { get; set; }
      
-
+    public DbSet<TrainingApplicationForm> TrainingApplicationForms { get; set; }
 
 
 

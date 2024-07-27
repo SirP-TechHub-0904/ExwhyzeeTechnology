@@ -24,6 +24,8 @@
                     <input type="hidden" asp-for="Setting.JobCardTitleBackgroundUrl" />
                     <input type="hidden" asp-for="Setting.SignatureKey" />
                     <input type="hidden" asp-for="Setting.SignatureUrl" />
+                    <input type="hidden" asp-for="Setting.TrainingBgImageUrl" />
+                    <input type="hidden" asp-for="Setting.TrainingBgImageKey" />
                     <div class="form-group">
                         <label asp-for="Setting.Qoute" class="control-label"></label>
                         <textarea asp-for="Setting.Qoute" class="form-control"></textarea>
@@ -80,6 +82,12 @@
                         <label asp-for="Setting.YoutubeChannel" class="control-label"></label>
                         <input asp-for="Setting.YoutubeChannel" class="form-control" />
                         <span asp-validation-for="Setting.YoutubeChannel" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="Setting.LinkedIn" class="control-label"></label>
+                        <input asp-for="Setting.LinkedIn" class="form-control" />
+                        <span asp-validation-for="Setting.LinkedIn" class="text-danger"></span>
                     </div>
                     <div class="form-group">
                         <label asp-for="Setting.EmailOne" class="control-label"></label>
@@ -295,10 +303,10 @@
 
                     @if (!String.IsNullOrEmpty(Model.Setting.DefaultTitleBackgroundUrl))
                     {
-                        <div class="form-group">
-                            <label class="control-label">Previouse Background</label><br />
-                            <img src="@Model.Setting.DefaultTitleBackgroundUrl" class="img-fluid" style="max-height:150px;" />
-                        </div>
+                    <div class="form-group">
+                        <label class="control-label">Previouse Background</label><br />
+                        <img src="@Model.Setting.DefaultTitleBackgroundUrl" class="img-fluid" style="max-height:150px;" />
+                    </div>
                     }
 
                     <div class="form-group">
@@ -362,10 +370,10 @@
                     </div>
                     @if (!String.IsNullOrEmpty(Model.Setting.JobCardTitleBackgroundUrl))
                     {
-                        <div class="form-group">
-                            <label class="control-label">Previouse Job Card Title Background </label><br />
-                            <img src="@Model.Setting.JobCardTitleBackgroundUrl" class="img-fluid" style="max-height:150px;" />
-                        </div>
+                    <div class="form-group">
+                        <label class="control-label">Previouse Job Card Title Background </label><br />
+                        <img src="@Model.Setting.JobCardTitleBackgroundUrl" class="img-fluid" style="max-height:150px;" />
+                    </div>
                     }
 
                     <div class="form-group">
@@ -391,10 +399,10 @@
 
                     @if (!String.IsNullOrEmpty(Model.Setting.SignatureUrl))
                     {
-                        <div class="form-group">
-                            <label class="control-label">Previouse Signature Url </label><br />
-                            <img src="@Model.Setting.SignatureUrl" class="img-fluid" style="max-height:150px;" />
-                        </div>
+                    <div class="form-group">
+                        <label class="control-label">Previouse Signature Url </label><br />
+                        <img src="@Model.Setting.SignatureUrl" class="img-fluid" style="max-height:150px;" />
+                    </div>
                     }
 
                     <div class="form-group">
@@ -477,10 +485,81 @@
                     </div>
 
 
+                    <div class="form-group">
+                        <label asp-for="Setting.TrainingMenuTitle" class="control-label"></label>
+                        <input asp-for="Setting.TrainingMenuTitle" class="form-control" />
+                        <span asp-validation-for="Setting.TrainingMenuTitle" class="text-danger"></span>
+                    </div>
 
+                    <div class="form-group">
+                        <label asp-for="Setting.TrainingSubTitle" class="control-label"></label>
+                        <input asp-for="Setting.TrainingSubTitle" class="form-control" />
+                        <span asp-validation-for="Setting.TrainingSubTitle" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Setting.TrainingTitle" class="control-label"></label>
+                        <input asp-for="Setting.TrainingTitle" class="form-control" />
+                        <span asp-validation-for="Setting.TrainingTitle" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Setting.TrainingDescription" class="control-label"></label>
+                        <input asp-for="Setting.TrainingDescription" class="form-control" />
+                        <span asp-validation-for="Setting.TrainingDescription" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Setting.ApplyTitle" class="control-label"></label>
+                        <input asp-for="Setting.ApplyTitle" class="form-control" />
+                        <span asp-validation-for="Setting.ApplyTitle" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Setting.CourseTitle" class="control-label"></label>
+                        <input asp-for="Setting.CourseTitle" class="form-control" />
+                        <span asp-validation-for="Setting.CourseTitle" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Setting.CourseDescription" class="control-label"></label>
+                        <input asp-for="Setting.CourseDescription" class="form-control" />
+                        <span asp-validation-for="Setting.CourseDescription" class="text-danger"></span>
+                    </div>
 
+                    <div class="form-group">
+                        <label asp-for="Setting.ShowTrainingInMenu" class="control-label"></label>
+                        <input asp-for="Setting.ShowTrainingInMenu" />
+                        <span asp-validation-for="Setting.ShowTrainingInMenu" class="text-danger"></span>
+                    </div>
 
+                    <div class="form-group">
+                        <label asp-for="Setting.ShowTrainingInFooter" class="control-label"></label>
+                        <input asp-for="Setting.ShowTrainingInFooter" />
+                        <span asp-validation-for="Setting.ShowTrainingInFooter" class="text-danger"></span>
+                    </div>
+                    @if (!String.IsNullOrEmpty(Model.Setting.TrainingBgImageUrl))
+                    {
+                    <div class="form-group">
+                        <label class="control-label">Previouse Training Bg Image</label><br />
+                        <img src="@Model.Setting.TrainingBgImageUrl" class="img-fluid" style="max-height:150px;" />
+                    </div>
+                    }
 
+                    <div class="form-group">
+                        <label class="control-label">Training Bg Image</label><br />
+                        <input type="file" class="control-label" asp-for="imagefileX" accept="image/*" />
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Setting.CareerTitle" class="control-label"></label>
+                        <input asp-for="Setting.CareerTitle" class="form-control" />
+                        <span asp-validation-for="Setting.CareerTitle" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Setting.CareerMiniTitle" class="control-label"></label>
+                        <input asp-for="Setting.CareerMiniTitle" class="form-control" />
+                        <span asp-validation-for="Setting.CareerMiniTitle" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Setting.CareerDescription" class="control-label"></label>
+                        <input asp-for="Setting.CareerDescription" class="form-control" />
+                        <span asp-validation-for="Setting.CareerDescription" class="text-danger"></span>
+                    </div>
                     <div class="form-group">
                         <input type="submit" value="Submit" class="btn btn-primary" />
                         <a asp-page="./Index" class="btn bg-gradient-warning btn-sm" style="float:right;">Back</a>

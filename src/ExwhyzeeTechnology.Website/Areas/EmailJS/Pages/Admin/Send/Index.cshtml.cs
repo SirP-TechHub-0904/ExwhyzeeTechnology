@@ -35,7 +35,7 @@ namespace ExwhyzeeTechnology.Website.Areas.EmailJS.Pages.Admin.Send
             string k = "https://nipss24.s3.amazonaws.com/30dd1e90-a424-45b9-b23a-c1990a56fc05.jpg?AWSAccessKeyId=AKIA4Y267QYK25XMO6WE&Expires=1806529807&Signature=2%2BFQ0OUrkwIFCJd162vTvEHwBgw%3D";
             string emailTemplate = @"
 
-<img class=""img-fluid w-100"" src=""XXXX"" alt=""NIPSS PORTAL"">
+<img class=""img-fluid w-100"" src=""XXXX"" alt=""Exwhyzee"">
 ";
             emailTemplate = emailTemplate.Replace("XXXX", k);
             //UserDatasList = new List<ProfileDto>();

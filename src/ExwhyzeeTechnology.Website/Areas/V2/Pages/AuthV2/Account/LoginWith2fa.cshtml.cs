@@ -47,7 +47,7 @@ namespace ExwhyzeeTechnology.Website.V2.Pages.Authv2.Account
             [Display(Name = "Remember this machine")]
             public bool RememberMachine { get; set; }
         }
-         
+
 
         [BindProperty]
         public SuperSetting SuperSetting { get; set; }
@@ -55,7 +55,7 @@ namespace ExwhyzeeTechnology.Website.V2.Pages.Authv2.Account
         public Setting Setting { get; set; }
 
         public async Task<IActionResult> OnGetAsync(bool rememberMe, string returnUrl = null)
-         {
+        {
             SuperSetting = await _context.SuperSettings.FirstOrDefaultAsync();
             Setting = await _context.Settings.FirstOrDefaultAsync();
 
@@ -68,11 +68,11 @@ namespace ExwhyzeeTechnology.Website.V2.Pages.Authv2.Account
             {
                 return NotFound();
             }
-             if (SuperSetting == null)
+            if (SuperSetting == null)
             {
                 return RedirectToPage("/AuthVadmin/Readonly", new { area = "V2" });
             }
-            
+
             // Ensure the user has gone through the username & password screen first
             var user = await _signInManager.GetTwoFactorAuthenticationUserAsync();
 
@@ -89,7 +89,7 @@ namespace ExwhyzeeTechnology.Website.V2.Pages.Authv2.Account
 
         public async Task<IActionResult> OnPostAsync(bool rememberMe, string returnUrl = null)
         {
-            
+
 
             returnUrl = returnUrl ?? Url.Content("~/");
             SuperSetting = await _context.SuperSettings.FirstOrDefaultAsync();
@@ -118,42 +118,19 @@ namespace ExwhyzeeTechnology.Website.V2.Pages.Authv2.Account
                 var administrator = await _userManager.IsInRoleAsync(user, "Administrator");
                 var useracc = await _userManager.IsInRoleAsync(user, "User");
                 var Participant = await _userManager.IsInRoleAsync(user, "Participant");
-            
-                if (SuperSetting.UserNipssArea == true)
+
+
+
+
+                if (adminrole.Equals(true) || administrator.Equals(true) || superrole.Equals(true) || editorrole.Equals(true))
                 {
-                    if (user.UpdateProfile == false)
-                    {
-                        return RedirectToPage("/Account/UpdateProfile", new { area = "NIPSS" });
-
-                    }
-                    if (adminrole.Equals(true) || administrator.Equals(true) || superrole.Equals(true) || editorrole.Equals(true))
-                    {
-                        return RedirectToPage("/Dashboard/Index", new { area = "NIPSSADMIN" });
-                    }
-                    else if (Participant.Equals(true))
-                    {
-                        if (user.ResetPassword == true)
-                        {
-                            return RedirectToPage("/AuthV2/Auth/ChangePassword", new { area = "V2" });
-                        }
-                        return RedirectToPage("/Dashboard/Index", new { area = "NIPSS" });
-                    }
-
+                    return RedirectToPage("/Dashboard/Index", new { area = "Admin" });
                 }
-                else
+                else if (useracc.Equals(true))
                 {
-
-
-                    if (adminrole.Equals(true) || administrator.Equals(true) || superrole.Equals(true) || editorrole.Equals(true))
-                    {
-                        return RedirectToPage("/Dashboard/Index", new { area = "Admin" });
-                    }
-                    else if (useracc.Equals(true))
-                    {
-                        return RedirectToPage("/Dashboard/Index", new { area = "Staff" });
-                    }
-
+                    return RedirectToPage("/Dashboard/Index", new { area = "Staff" });
                 }
+
             }
             else if (result.IsLockedOut)
             {
@@ -164,10 +141,10 @@ namespace ExwhyzeeTechnology.Website.V2.Pages.Authv2.Account
             {
                 _logger.LogWarning("Invalid authenticator code entered for user with ID '{UserId}'.", user.Id);
                 ModelState.AddModelError(string.Empty, "Invalid authenticator code.");
-             
-                 
+
+
                 return Page();
-            } 
+            }
             ModelState.AddModelError(string.Empty, "Invalid authenticator code.");
             return Page();
         }

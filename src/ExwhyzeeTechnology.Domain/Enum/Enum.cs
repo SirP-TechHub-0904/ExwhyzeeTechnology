@@ -228,7 +228,8 @@ namespace ExwhyzeeTechnology.Domain.Enum
         }
         public enum GenderStatus
         {
-            Male = 0,
+            None = 0,
+            Male = 2,
             Female = 1,
         }
         public enum ModalTime

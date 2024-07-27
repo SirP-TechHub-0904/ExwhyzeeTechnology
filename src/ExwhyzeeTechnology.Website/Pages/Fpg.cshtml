@@ -50,7 +50,7 @@
         Layout = "/Pages/Shared/Layouts/Theme/Streamlab/_StreamlabLayout.cshtml";
     }
 }
-@await Component.InvokeAsync("BreadcrumOthers", new { data = "FREQUENTLY ASKED QUESTIONS" })
+@await Component.InvokeAsync("BreadcrumOthers", new { data = "FREQUENTLY ASKED QUESTIONS", tx = "yes" })
 
 
 @if (Model.Setting.AddFaqToFooter == true || Model.Setting.AddFaqToFooter == true)

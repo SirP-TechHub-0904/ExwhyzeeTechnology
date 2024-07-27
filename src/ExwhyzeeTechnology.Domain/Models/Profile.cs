@@ -36,6 +36,8 @@ namespace ExwhyzeeTechnology.Domain.Models
         public UserStatus UserStatus { get; set; }
 
         [Display(Name = "Gender")]
+        [Required(ErrorMessage = "Gender is required.")]
+        [Range(1, int.MaxValue, ErrorMessage = "Please select a valid gender.")]
         public GenderStatus Gender { get; set; }
 
         [Display(Name = "Address")]
@@ -82,7 +84,7 @@ namespace ExwhyzeeTechnology.Domain.Models
         [Display(Name = "Genotype")]
         public string? Genotype { get; set; }
 
-        [Display(Name = "Appointment before Resuming at NIPSS")]
+        [Display(Name = "Appointment before Resuming")]
         public string? PreviousAppointment { get; set; }
 
         [Display(Name = "International Passport Number")]
@@ -247,6 +249,9 @@ namespace ExwhyzeeTechnology.Domain.Models
 
         public string? Logs { get; set; }
         public string? LastLogin { get; set; }
+        public string? NIN { get; set; }
+        public string? NinUrl { get; set; }
+        public string? NinKey { get; set; }
     }
 
 }

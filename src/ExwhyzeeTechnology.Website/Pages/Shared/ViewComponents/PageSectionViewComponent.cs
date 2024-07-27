@@ -55,6 +55,14 @@ namespace ExwhyzeeTechnology.Pages.Shared.ViewComponents
             }
             if (!String.IsNullOrEmpty(position) && !String.IsNullOrEmpty(pageset))
             {
+                if (position.ToLower() == "middle" && pageset.ToLower() == "home")
+                {
+                    page = page.Where(x => x.ShowInHome == true && x.HomeSortFrom == HomeSortFrom.Middle).OrderBy(x => x.HomePageSortOrder).AsQueryable();
+                    return View(await page.ToListAsync());
+                }
+            }
+            if (!String.IsNullOrEmpty(position) && !String.IsNullOrEmpty(pageset))
+            {
                 if (position.ToLower() == "bottom" && pageset.ToLower() == "home")
                 {
                     page = page.Where(x => x.ShowInHome == true && x.HomeSortFrom == HomeSortFrom.Bottom).OrderBy(x => x.HomePageSortOrder).AsQueryable();

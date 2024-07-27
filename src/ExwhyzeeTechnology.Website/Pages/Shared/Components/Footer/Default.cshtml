@@ -217,7 +217,13 @@
                         <div class="col-lg-3 col-md-6 mt-5 mt-lg-0 widget">
                             <h5>Other <span class="text-theme"> Link</span></h5>
                             <ul class="list-unstyled">
+                                @if (ViewBag.setting.ShowTrainingInFooter == true)
+                                {
+                                    <li>
+                                        <a asp-page="/TrainingInitial"><i class="fas fa-angle-right"></i> @ViewBag.setting.TrainingMenuTitle</a>
 
+                                    </li>
+                                }
                                 @foreach (var item in ViewBag.pages)
                                 {
                                     <li><a asp-page="/Source" asp-route-id="@item.Id" asp-route-title="@regex.Replace(item.Title, "-")">@item.Title <i class="fas fa-angle-right"></i></a></li>
@@ -236,7 +242,7 @@
                                 {
                                     <li><a asp-page="/Tpg"><i class="fas fa-angle-right"></i> Testimony</a></li>
                                 }
-                                @if (ViewBag.setting.AddBlogToMenu == true)
+                                @if (ViewBag.setting.AddBlogToFooter == true)
                                 {
                                     <li>
                                         <a asp-page="/Bpg"><i class="fas fa-angle-right"></i> @ViewBag.setting.BlogDisplayTitle</a>
@@ -298,8 +304,8 @@
 
                                     <li class="social-facebook"><a href="@ViewBag.setting.FacebookPage"><i class="fab fa-facebook-square"></i></a></li>
                                     <li class="social-instagram"><a href="@ViewBag.setting.InstagramPage"><i class="fab fa-instagram"></i></a></li>
-                                    <li class="social-tiktok"><a href="@ViewBag.setting.TiktokPage"><i class="fab fa-instagram"></i></a></li>
-                                    <li class="social-linkedin"><a href="@ViewBag.setting.LinkedIn"><i class="fab fa-instagram"></i></a></li>
+                                    <li class="social-tiktok"><a href="@ViewBag.setting.TiktokPage"><i class="fab fa-tiktok"></i></a></li>
+                                    <li class="social-linkedin"><a href="@ViewBag.setting.LinkedIn"><i class="fab fa-linkedin"></i></a></li>
                                     <li class="social-twitter"><a href="@ViewBag.setting.TwitterPage"><i class="fab fa-x-twitter"></i></a></li>
                                     <li class="social-youtube"><a href="@ViewBag.setting.YoutubeChannel"><i class="fab fa-youtube"></i></a></li>
 

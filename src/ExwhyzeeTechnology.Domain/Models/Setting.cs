@@ -256,5 +256,59 @@ namespace ExwhyzeeTechnology.Domain.Models
         [Display(Name = "Ribon Position")]
 
         public RibonPosition RibonPosition { get; set; }
+
+
+
+        [Display(Name = "Training SubTitle")]
+        public string? TrainingSubTitle { get; set; }
+
+
+        [Display(Name = "Training Menu Title")]
+        public string? TrainingMenuTitle { get; set; }
+
+        [Display(Name = "Training Title")]
+        public string? TrainingTitle { get; set; }
+
+
+        [Display(Name = "Training Description")]
+        public string? TrainingDescription { get; set; }
+
+         
+        public string? TrainingBgImageUrl { get; set; }
+        public string? TrainingBgImageKey { get; set; }
+
+        [Display(Name = "Apply Title")]
+        public string? ApplyTitle { get; set; }
+
+
+        [Display(Name = "Course Title")]
+        public string? CourseTitle { get; set; }
+
+
+        [Display(Name = "Course Description")]
+        public string? CourseDescription { get; set; }
+
+        public bool ShowTrainingInMenu  { get; set; }
+        public bool ShowTrainingInFooter  { get; set; }
+
+
+
+        [Display(Name = "Career Title")]
+        public string? CareerTitle { get; set; }
+
+
+
+        [Display(Name = "Career Description")]
+        public string? CareerDescription { get; set; }
+
+
+
+        [Display(Name = "Career Mini Title")]
+        public string? CareerMiniTitle { get; set; }
+
+
+
+        [Display(Name = "Career Footer Title")]
+        public string? CareerFooterTitle { get; set; }
     }
 }

@@ -54,7 +54,7 @@
         Layout = "/Pages/Shared/Layouts/Theme/Streamlab/_StreamlabLayout.cshtml";
     }
 }
-@await Component.InvokeAsync("BreadcrumOthers", new { data = Model.Setting.CareerDisplayTitle })
+@await Component.InvokeAsync("BreadcrumOthers", new { data = Model.Setting.CareerDisplayTitle, tx = "yes" })
 
 <div class="section-block">
     <div class="container">

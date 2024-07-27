@@ -55,7 +55,7 @@
         Layout = "/Pages/Shared/Layouts/Theme/Education/_EducationLayout.cshtml";
     }
 }
-@await Component.InvokeAsync("BreadcrumOthers", new { data = Model.SuperSetting.ProductTitleHome })
+@await Component.InvokeAsync("BreadcrumOthers", new { data = Model.SuperSetting.ProductTitleHome, tx = "yes" })
 
 
 @if (Model.Setting.ActivateProductsInHome == true || Model.Setting.ShowProductsInFooter == true)
