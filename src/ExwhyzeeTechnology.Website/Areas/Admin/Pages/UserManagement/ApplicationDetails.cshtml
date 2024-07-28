@@ -24,20 +24,17 @@
             <dt class="col-sm-2">
                 Passport
             </dt>
-
+            <dd class="col-sm-10">
+                <img src="@Model.TrainingApplicationForm.Profile.PassportFilePathUrl" style="max-height:200px;" />
+            </dd>
             <dt class="col-sm-2">
                 NIN
             </dt>
             <dd class="col-sm-10">
-                @Html.DisplayFor(model => model.TrainingApplicationForm.Profile.NinUrl)
+                <img src="@Model.TrainingApplicationForm.Profile.NinUrl" style="max-height:200px;" />
             </dd>
-            <dt class="col-sm-2">
-                Passport
-            </dt>
+           
 
-            <dd class="col-sm-10">
-                <img src="@Model.TrainingApplicationForm.Profile.PassportFilePathUrl" style="max-height:200px;" />
-            </dd>
             <dt class="col-sm-2">
                 @Html.DisplayNameFor(model => model.TrainingApplicationForm.CareerTrainingJobRole)
             </dt>
