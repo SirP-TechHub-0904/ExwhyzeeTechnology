@@ -11,8 +11,8 @@
     <ContainerRuntimeIdentifier>win10-x64</ContainerRuntimeIdentifier>
     <ContainerBaseImage>mcr.microsoft.com/dotnet/aspnet:6.0</ContainerBaseImage>
     <EnableSdkContainerDebugging>True</EnableSdkContainerDebugging>
-	  <!--<AspNetCoreHostingModel>OutOfProcess</AspNetCoreHostingModel>-->
-	  <!--<AspNetCoreModuleName>AspNetCoreModule</AspNetCoreModuleName>-->
+	  <AspNetCoreHostingModel>OutOfProcess</AspNetCoreHostingModel>
+	  <AspNetCoreModuleName>AspNetCoreModule</AspNetCoreModuleName>
   </PropertyGroup>
 
   <ItemGroup>
