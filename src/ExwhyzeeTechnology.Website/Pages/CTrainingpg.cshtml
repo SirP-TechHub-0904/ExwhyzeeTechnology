@@ -140,7 +140,7 @@
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label asp-for="State" class="control-label"></label>
+                                                <label asp-for="State" class="control-label">State of Origin</label>
                                                 <select asp-for="State" onchange="toggleLGA(this);" id="state" class="form-control" required="required">
                                                     <option value="" selected="selected">- Select -</option>
                                                     <option value="Abia">Abia</option>
@@ -186,7 +186,7 @@
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label asp-for="LGA" class="control-label"></label>
+                                                <label asp-for="LGA" class="control-label">LGA of Origin</label>
                                                 <select id="lga" asp-for="LGA" class="form-control select-lga" required="required">
                                                 </select>
                                                 <span asp-validation-for="LGA" class="text-danger"></span>
@@ -196,7 +196,7 @@
                                     
                                    
                                     <div class="form-group">
-                                        <label asp-for="Address" class="control-label"></label>
+                                        <label asp-for="Address" class="control-label">Current Contact Address</label>
                                         <input asp-for="Address" class="form-control" required="required" />
                                         <span asp-validation-for="Address" class="text-danger"></span>
                                     </div>

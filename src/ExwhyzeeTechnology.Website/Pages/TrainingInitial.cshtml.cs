@@ -173,6 +173,22 @@ namespace ExwhyzeeTechnology.Website.Pages
             {
                 ModelState.AddModelError(string.Empty, error.Description);
             }
+            Setting = await _context.Settings.FirstOrDefaultAsync();
+            var httpContext = HttpContext;
+            VerificationWebDto setting = await _settingsService.ValidateWeb(httpContext);
+            if (setting.SettingFound == false)
+            {
+                return RedirectToPage(setting.Path, new { area = setting.Area });
+            }
+            if (setting.Portfolio == true)
+            {
+                return RedirectToPage(setting.PortfolioPath);
+
+            }
+
+            SuperSetting = setting.SuperSetting;
+            JobRoles = await _context.CareerTrainingJobRoles.Where(x => x.Disable == false).ToListAsync();
+
             return Page();
         }
     }
