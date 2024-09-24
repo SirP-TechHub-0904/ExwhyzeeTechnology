@@ -137,6 +137,7 @@
         }
     </style>
     @await Component.InvokeAsync("DashboardCSS")
+    @RenderSection("MainStyle", required: false)
 
     <style>
         .secdaiv {
@@ -215,8 +216,15 @@
                 <!-- Sidebar Menu -->
                 <nav class="mt-2">
                     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+                        @if (User.Identity.IsAuthenticated && User.IsInRole("Student"))
+                        {
+                            @await Component.InvokeAsync("StudentNavigation")
+                        }
+                        else
+                        {
+                            @await Component.InvokeAsync("UserNavigation")
 
-                        @await Component.InvokeAsync("UserNavigation")
+                        }
                         <li class="nav-item" style="margin-bottom:70px;">
                             <a href="javascript:document.getElementById('logoutForm').submit()" class="nav-link">
                                 <i class="nav-icon fas fa-th"></i>
@@ -240,7 +248,7 @@
             <!-- /.content-header -->
             <!-- Main content -->
             <section class="content">
-                <div class="container-fluid" style="margin-top:10px;">
+                <div class="container-fluid" style="padding-top: 10px;">
                     @RenderBody()
 
                 </div><!-- /.container-fluid -->
@@ -375,7 +383,7 @@
                 "autoWidth": false,
                 "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],
                 "responsive": false,
-                "scrollX": true, 
+                "scrollX": true,
             }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
             $('#example2').DataTable({
                 "paging": true,

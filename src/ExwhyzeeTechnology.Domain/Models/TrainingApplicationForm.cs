@@ -65,8 +65,15 @@ namespace ExwhyzeeTechnology.Domain.Models
         [Display(Name = "Are you currently employed or self-employed? If so, please provide details.")]
         public string? AreYouCurrentlyEmployedOrSelfEmployed { get; set; }
 
+        [Display(Name = "Employment Status")]
+        public string? EmploymentStatus { get; set; }
         [Display(Name = "Employment details")]
         public string? EmploymentDetails { get; set; }
+        [Display(Name = "Nature of Job")]
+        public string? NatureOfJob { get; set; }
+
+        [Display(Name = "Monthly Income")]
+        public string? MonthlyIncome { get; set; }
 
         [Display(Name = "Do you have any other relevant information you would like to share?")]
         public string? DoYouHaveAnyOtherRelevantInformationYouWouldLikeToShare { get; set; }

@@ -92,7 +92,9 @@
 
                             <div class="flex w-full [&amp;>*]:flex-1 rounded-xl p-1">
 
-                                <form class="t-form" method="post">
+
+                                @*class="t-form" method="post"*@
+                                <form method="post">
                                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
                                     @if (TempData["error"] != null)
@@ -149,23 +151,39 @@
 
                                             <div class="flex flex-col gap-2">
                                                 <label for="firstName">Gender</label>
-                                                @Html.DropDownListFor(model => model.UserDatas.Gender, new SelectList(Enum.GetValues(typeof(ExwhyzeeTechnology.Domain.Enum.Enum.GenderStatus))), new { @class = "bg-neutral-100 form-control" })
+                                                <select asp-for="UserDatas.Gender" required class="bg-neutral-100 w-full form-control">
+                                                    <option value="">Choose</option>
+                                                    <option value="2">Male</option>
+                                                    <option value="1">Female</option>
+                                                </select>
+                                                @*@Html.DropDownListFor(model => model.UserDatas.Gender, new SelectList(Enum.GetValues(typeof(ExwhyzeeTechnology.Domain.Enum.Enum.GenderStatus))), new { @class = "bg-neutral-100 form-control" })*@
 
                                             </div>
                                         </div>
 
 
                                         <div class="flex flex-col gap-2">
-                                            <label for="password	">password</label>
-
+                                            <!-- Password Label and Input -->
+                                            <label for="password">Password</label>
                                             <div class="relative">
-
                                                 <input type="password" name="password" id="password" placeholder="Enter Password" class="bg-neutral-100 w-full form-control">
-
-
+                                                <!-- Show Password Toggle -->
+                                                <span id="togglePassword" class="absolute inset-y-0 right-0 pr-3 flex items-center cursor-pointer">
+                                                    👁️
+                                                </span>
                                             </div>
                                         </div>
-                                        <button class="bg-nhOrange-100 mt-2 text-white" type="submit">Get Started</button>
+                                        <input asp-for="FirstNum" type="hidden" />
+                                        <input asp-for="SecondNum" type="hidden" />
+
+                                        <!-- Simple CAPTCHA -->
+                                        <div class="flex flex-col gap-2 mt-4">
+                                            <label for="captcha">What is @Model.FirstNum + @Model.SecondNum?</label>
+                                            <div class="relative">
+                                                <input type="text" asp-for="TotalNum" placeholder="Enter your answer" class="bg-neutral-100 w-full form-control">
+                                            </div>
+                                        </div>
+                                        <input class="bg-nhOrange-100 mt-2 text-white" type="submit" value="Get Started" />
                                     </div>
                                 </form>
                             </div>
@@ -190,19 +208,42 @@
             <div class="row">
                 @foreach (var item in Model.JobRoles)
                 {
-                <div class="p-8 col-md-4 rounded-lg drop-shadow-sm sm:order-2 bg-yellow-100 border-yellow-200 border">
-                    <div class="items-center font-semibold mb-2 text-yellow-900">
-                        @item.Icon
-                        <h2>@item.Title</h2>
+                    <div class="p-8 col-md-4 rounded-lg drop-shadow-sm sm:order-2 bg-yellow-100 border-yellow-200 border">
+                        <div class="items-center font-semibold mb-2 text-yellow-900">
+                            @item.Icon
+                            <h2>@item.Title</h2>
+                        </div>
+                        <p>
+                            @Html.Raw(item.Description)
+                        </p>
                     </div>
-                    <p>
-                        @Html.Raw(item.Description)
-                    </p>
-                </div>
                 }
 
-                
+
             </div>
         </div>
     </div>
 </main>
+
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+    <script>
+        // Show/Hide Password Toggle
+        const passwordInput = document.getElementById('password');
+        const togglePassword = document.getElementById('togglePassword');
+
+        togglePassword.addEventListener('click', function () {
+            // Toggle the type attribute
+            const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+            passwordInput.setAttribute('type', type);
+
+            // Toggle the eye icon
+            this.textContent = type === 'password' ? '👁️' : '🙈';
+        });
+
+    </script>
+
+}

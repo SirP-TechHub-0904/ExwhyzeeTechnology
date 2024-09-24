@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 using static ExwhyzeeTechnology.Domain.Enum.Enum;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace ExwhyzeeTechnology.Domain.Models
 {
@@ -205,6 +206,12 @@ namespace ExwhyzeeTechnology.Domain.Models
         [Display(Name = "Website Address")]
         public string? WebsiteAddress { get; set; }
 
+        [Display(Name = "Any Disabilities")]
+        public string? AnyDisabilities { get; set; }
+
+        [Display(Name = "If Yes, please specify")]
+        public string? SpecifyTheDisabilities { get; set; }
+
 
         [Display(Name = "Date Of Birth Status")]
         public DOBStatus DateOfBirthStatus { get; set; }
@@ -219,6 +226,11 @@ namespace ExwhyzeeTechnology.Domain.Models
         public UserCategory UserCategory { get; set; }
 
 
+        [Display(Name = "Name and address of Guadian/Next of kin")]
+        public string? NameAndAddressOfGuadianAndNextOfkin { get; set; }
+
+        [Display(Name = "Ask the respondent if he/she is free from any illness")]
+        public string? AskTheRespondentIfHeSheIsFreeFromAnyIllness { get; set; }
 
         [Display(Name = "Referee (2 Referees)")]
         public string? Referee { get; set; }

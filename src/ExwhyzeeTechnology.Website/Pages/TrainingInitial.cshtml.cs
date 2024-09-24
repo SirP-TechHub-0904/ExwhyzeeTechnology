@@ -59,6 +59,10 @@ namespace ExwhyzeeTechnology.Website.Pages
 
             SuperSetting = setting.SuperSetting;
             JobRoles = await _context.CareerTrainingJobRoles.Where(x => x.Disable == false).ToListAsync();
+
+            Random random = new Random();
+            FirstNum = random.Next(1, 10);
+            SecondNum = random.Next(1, 10);
             return Page();
         }
 
@@ -68,11 +72,67 @@ namespace ExwhyzeeTechnology.Website.Pages
         [BindProperty]
         public string Password { get; set; }
 
+        [BindProperty]
+        public int FirstNum { get; set; }
 
+
+        [BindProperty]
+        public int SecondNum { get; set; }
+
+        [BindProperty]
+        public int TotalNum { get; set; }
         public long ApplyId { get; set; }
         // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
         public async Task<IActionResult> OnPostAsync()
         {
+            Setting = await _context.Settings.FirstOrDefaultAsync();
+            var httpContext = HttpContext;
+            VerificationWebDto setting = await _settingsService.ValidateWeb(httpContext);
+            Random random = new Random();
+           
+            if (FirstNum + SecondNum != TotalNum)
+            {
+                TempData["error"] = "Incorrect CAPTCHA. Please try again.";
+               
+                if (setting.SettingFound == false)
+                {
+                    return RedirectToPage(setting.Path, new { area = setting.Area });
+                }
+                if (setting.Portfolio == true)
+                {
+                    return RedirectToPage(setting.PortfolioPath);
+
+                }
+
+                SuperSetting = setting.SuperSetting;
+                JobRoles = await _context.CareerTrainingJobRoles.Where(x => x.Disable == false).ToListAsync();
+                 
+                return Page();
+            }
+
+          if(UserDatas.FirstName.Contains("http") || UserDatas.FirstName.Contains("/")
+            || UserDatas.LastName.Contains("http") || UserDatas.LastName.Contains("/"))
+            {
+                TempData["error"] = "Invalid Input";
+
+                if (setting.SettingFound == false)
+                {
+                    return RedirectToPage(setting.Path, new { area = setting.Area });
+                }
+                if (setting.Portfolio == true)
+                {
+                    return RedirectToPage(setting.PortfolioPath);
+
+                } 
+                SuperSetting = setting.SuperSetting;
+                JobRoles = await _context.CareerTrainingJobRoles.Where(x => x.Disable == false).ToListAsync();
+                return Page();
+            }
+
+            //var xuser = await _userManager.Users.Where(x => x.FirstName.Contains("http") || x.FirstName.Contains("/") ||
+            //x.MiddleName.Contains("http") || x.MiddleName.Contains("/")
+
+                //|| x.LastName.Contains("http") || x.LastName.Contains("/")).ToListAsync();
 
 
             var user = new Profile
@@ -120,7 +180,7 @@ namespace ExwhyzeeTechnology.Website.Pages
                 await _userManager.AddToRoleAsync(user, "TRAINING");
                 try
                 {
-                    List<string> category = new List<string> { "EDUCATION", "EXPERIENCE", "CERTIFICATIONS", "SKILLS", "LANGUAGES", "AWARDS", "INTEREST", "REFERENCES" };
+                    List<string> category = new List<string> { "EDUCATION", "EXPERIENCE", "DIGITAL SKILLS EXPEREINCE", "SKILLS", "DIGITAL SKILL CERTIFICATES", "DIGITAL SKILLS AREA TO TRAIN ON IGF", "PROFESSIONAL ACHIEVEMENT", "LANGUAGES", "AWARDS", "INTEREST", "REFERENCES" };
 
                     foreach (string item in category)
                     {
@@ -173,10 +233,7 @@ namespace ExwhyzeeTechnology.Website.Pages
             {
                 ModelState.AddModelError(string.Empty, error.Description);
             }
-            Setting = await _context.Settings.FirstOrDefaultAsync();
-            var httpContext = HttpContext;
-            VerificationWebDto setting = await _settingsService.ValidateWeb(httpContext);
-            if (setting.SettingFound == false)
+              if (setting.SettingFound == false)
             {
                 return RedirectToPage(setting.Path, new { area = setting.Area });
             }
@@ -188,7 +245,7 @@ namespace ExwhyzeeTechnology.Website.Pages
 
             SuperSetting = setting.SuperSetting;
             JobRoles = await _context.CareerTrainingJobRoles.Where(x => x.Disable == false).ToListAsync();
-
+       
             return Page();
         }
     }

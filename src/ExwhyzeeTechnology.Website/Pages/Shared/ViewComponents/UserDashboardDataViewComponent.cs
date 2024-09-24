@@ -68,7 +68,10 @@ namespace ExwhyzeeTechnology.Pages.Shared.ViewComponents
                     {
                         ViewBag.userRole = "Editor";
                     }
-                    
+                    else if (userRoles.Contains("Student"))
+                    {
+                        ViewBag.userRole = "Student";
+                    }
                     else
                     {
                         ViewBag.userRole = "User";

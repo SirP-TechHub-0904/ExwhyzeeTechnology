@@ -71,6 +71,9 @@
     <Content Remove="Areas\IPortfolio\Pages\_ViewImports.cshtml" />
     <Content Remove="Areas\IPortfolio\Pages\_ViewStart.cshtml" />
     <Content Remove="Areas\SMS\Pages\Error.cshtml" />
+    <Content Remove="Areas\Student\Pages\Error.cshtml" />
+    <Content Remove="Areas\Student\Pages\_ValidationScriptsPartial.cshtml" />
+    <Content Remove="Areas\Student\Pages\_ViewImports.cshtml" />
     <Content Remove="Pages\Shared\Components\Slider\Datacheck.cshtml" />
     <Content Remove="Pages\Shared\Components\TestimonyHome\Default.cshtml" />
     <Content Remove="web.config" />
@@ -286,6 +289,9 @@
     <None Include="Areas\Staff\Pages\_ValidationScriptsPartial.cshtml" />
     <None Include="Areas\Staff\Pages\_ViewImports.cshtml" />
     <None Include="Areas\Staff\Pages\_ViewStart.cshtml" />
+    <None Include="Areas\Student\Pages\Error.cshtml" />
+    <None Include="Areas\Student\Pages\_ValidationScriptsPartial.cshtml" />
+    <None Include="Areas\Student\Pages\_ViewImports.cshtml" />
     <None Include="Pages\Shared\Components\Slider\Datacheck.cshtml" />
     <None Include="Pages\Shared\Components\Slider\Default.cshtml" />
     <None Include="Pages\Shared\Components\RoleData\Default.cshtml" />

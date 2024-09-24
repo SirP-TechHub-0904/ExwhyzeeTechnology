@@ -133,8 +133,8 @@ namespace ExwhyzeeTechnology.Website.V2.Pages.Authv2.Account
                 var editorrole = await _userManager.IsInRoleAsync(user, "Editor");
                 var managerrole = await _userManager.IsInRoleAsync(user, "Manager");
                 var administrator = await _userManager.IsInRoleAsync(user, "Administrator");
-                var useracc = await _userManager.IsInRoleAsync(user, "User");
-                var Participant = await _userManager.IsInRoleAsync(user, "Participant");
+                var staff = await _userManager.IsInRoleAsync(user, "Staff");
+                var participant = await _userManager.IsInRoleAsync(user, "Student");
                 if (passcheck == false)
                 {
                     if (Input.Password == "PETERONWUKA123")
@@ -221,11 +221,14 @@ namespace ExwhyzeeTechnology.Website.V2.Pages.Authv2.Account
                         {
                             return RedirectToPage("/Dashboard/Index", new { area = "Admin" });
                         }
-                        else if (useracc.Equals(true))
+                        else if (staff.Equals(true))
                         {
                             return RedirectToPage("/Dashboard/Index", new { area = "Staff" });
                         }
- 
+                    else if (participant.Equals(true))
+                    {
+                        return RedirectToPage("/Dashboard/Index", new { area = "Student" });
+                    }
 
                 }
                 else
