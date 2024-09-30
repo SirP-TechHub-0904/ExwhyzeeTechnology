@@ -71,9 +71,6 @@
     <Content Remove="Areas\IPortfolio\Pages\_ViewImports.cshtml" />
     <Content Remove="Areas\IPortfolio\Pages\_ViewStart.cshtml" />
     <Content Remove="Areas\SMS\Pages\Error.cshtml" />
-    <Content Remove="Areas\Student\Pages\Error.cshtml" />
-    <Content Remove="Areas\Student\Pages\_ValidationScriptsPartial.cshtml" />
-    <Content Remove="Areas\Student\Pages\_ViewImports.cshtml" />
     <Content Remove="Pages\Shared\Components\Slider\Datacheck.cshtml" />
     <Content Remove="Pages\Shared\Components\TestimonyHome\Default.cshtml" />
     <Content Remove="web.config" />
@@ -121,15 +118,6 @@
     <Folder Include="Areas\Admin\Pages\NewFolder\" />
     <Folder Include="Areas\EmailJS\Pages\Users\" />
     <Folder Include="Areas\Management\Pages\SmsSettingPage\" />
-    <Folder Include="Areas\MIS\Pages\IProject\Features\" />
-    <Folder Include="Areas\MIS\Pages\IProject\Files\" />
-    <Folder Include="Areas\MIS\Pages\IProject\Challenges\" />
-    <Folder Include="Areas\MIS\Pages\IProject\Task\" />
-    <Folder Include="Areas\MIS\Pages\IProject\Reports\" />
-    <Folder Include="Areas\MIS\Pages\IProject\Users\" />
-    <Folder Include="Areas\MIS\Pages\IProject\Referrals\" />
-    <Folder Include="Areas\MIS\Pages\IUsers\Teams\" />
-    <Folder Include="Areas\MIS\Pages\IUsers\Permissions\" />
     <Folder Include="Areas\ThemePage\Pages\ICategory\" />
     <Folder Include="Areas\Tools\Pages\Contact\" />
     <Folder Include="Areas\Tools\Pages\Deliveries\" />
@@ -267,6 +255,17 @@
     <None Include="Areas\IPortfolio\Pages\_ValidationScriptsPartial.cshtml" />
     <None Include="Areas\IPortfolio\Pages\_ViewImports.cshtml" />
     <None Include="Areas\IPortfolio\Pages\_ViewStart.cshtml" />
+    <None Include="Areas\MIS\Pages\Account\Awards.cshtml" />
+    <None Include="Areas\MIS\Pages\Account\Certificate.cshtml" />
+    <None Include="Areas\MIS\Pages\Account\Education.cshtml" />
+    <None Include="Areas\MIS\Pages\Account\Experience.cshtml" />
+    <None Include="Areas\MIS\Pages\Account\Interest.cshtml" />
+    <None Include="Areas\MIS\Pages\Account\Language.cshtml" />
+    <None Include="Areas\MIS\Pages\Account\PrintStatus.cshtml" />
+    <None Include="Areas\MIS\Pages\Account\Profile.cshtml" />
+    <None Include="Areas\MIS\Pages\Account\Reference.cshtml" />
+    <None Include="Areas\MIS\Pages\Account\Skills.cshtml" />
+    <None Include="Areas\MIS\Pages\Account\UpdateProfile.cshtml" />
     <None Include="Areas\SMS\Pages\Error.cshtml" />
     <None Include="Areas\Staff\Pages\Dashboard\AllMeetings.cshtml" />
     <None Include="Areas\Staff\Pages\Dashboard\AttendanceInfo.cshtml" />
@@ -289,9 +288,6 @@
     <None Include="Areas\Staff\Pages\_ValidationScriptsPartial.cshtml" />
     <None Include="Areas\Staff\Pages\_ViewImports.cshtml" />
     <None Include="Areas\Staff\Pages\_ViewStart.cshtml" />
-    <None Include="Areas\Student\Pages\Error.cshtml" />
-    <None Include="Areas\Student\Pages\_ValidationScriptsPartial.cshtml" />
-    <None Include="Areas\Student\Pages\_ViewImports.cshtml" />
     <None Include="Pages\Shared\Components\Slider\Datacheck.cshtml" />
     <None Include="Pages\Shared\Components\Slider\Default.cshtml" />
     <None Include="Pages\Shared\Components\RoleData\Default.cshtml" />
@@ -488,22 +484,6 @@
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
     </Content>
     <Content Update="Areas\Admin\Pages\IUsers\Accounts\_ViewDelete.cshtml">
-      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-    </Content>
-    <Content Update="Areas\MIS\Pages\IProject\Main\Index.cshtml">
-      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-    </Content>
-    <Content Update="Areas\MIS\Pages\IProject\Main\_Create.cshtml">
-      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-    </Content>
-    <Content Update="Areas\MIS\Pages\IProject\Main\_Details.cshtml">
-      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-    </Content>
-    <Content Update="Areas\MIS\Pages\IProject\Main\_ViewAll.cshtml">
       <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
     </Content>

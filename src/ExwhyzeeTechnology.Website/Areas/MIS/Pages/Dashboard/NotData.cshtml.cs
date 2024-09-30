@@ -3,14 +3,10 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace ExwhyzeeTechnology.Website.Areas.MIS.Pages.Dashboard
 {
-    [Microsoft.AspNetCore.Authorization.Authorize]
-
-    public class IndexModel : PageModel
+    public class NotDataModel : PageModel
     {
         public void OnGet()
         {
         }
-
-       
     }
 }

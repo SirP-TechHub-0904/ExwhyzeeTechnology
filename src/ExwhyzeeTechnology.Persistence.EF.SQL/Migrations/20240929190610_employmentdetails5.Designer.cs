@@ -4,6 +4,7 @@ using ExwhyzeeTechnology.Persistence.EF.SQL;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ExwhyzeeTechnology.Persistence.EF.SQL.Migrations
 {
     [DbContext(typeof(DashboardDbContext))]
-    partial class SampleDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240929190610_employmentdetails5")]
+    partial class employmentdetails5
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -2224,8 +2226,8 @@ namespace ExwhyzeeTechnology.Persistence.EF.SQL.Migrations
                     b.Property<string>("AltPhoneNumber")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("AnyDisability")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<bool>("AnyDisability")
+                        .HasColumnType("bit");
 
                     b.Property<string>("AskTheRespondentIfHeSheIsFreeFromAnyIllness")
                         .HasColumnType("nvarchar(max)");

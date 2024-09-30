@@ -216,7 +216,7 @@
                 <!-- Sidebar Menu -->
                 <nav class="mt-2">
                     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-                        @if (User.Identity.IsAuthenticated && User.IsInRole("Student"))
+                        @if (User.Identity.IsAuthenticated && User.IsInRole("Student") || User.IsInRole("TRAINING"))
                         {
                             @await Component.InvokeAsync("StudentNavigation")
                         }

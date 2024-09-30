@@ -1,4 +1,3 @@
-using DocumentFormat.OpenXml.Office2010.Excel;
 using DocumentFormat.OpenXml.Spreadsheet;
 using ExwhyzeeTechnology.Application.Dtos;
 using ExwhyzeeTechnology.Application.Dtos.AwsDtos;
@@ -10,12 +9,12 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using System.ComponentModel.DataAnnotations;
-using System.Diagnostics;
 
-namespace ExwhyzeeTechnology.Website.Pages
+namespace ExwhyzeeTechnology.Website.Areas.MIS.Pages.UserTechProfile
 {
-    public class CTrainingpgModel : PageModel
+    [Microsoft.AspNetCore.Authorization.Authorize]
+
+    public class UpdateTrainingModel : PageModel
     {
         private readonly ISettingsService _settingsService;
 
@@ -24,7 +23,7 @@ namespace ExwhyzeeTechnology.Website.Pages
         private readonly IStorageService _storageService;
         private readonly UserManager<Profile> _userManager;
 
-        public CTrainingpgModel(ExwhyzeeTechnology.Persistence.EF.SQL.DashboardDbContext context, ISettingsService settingsService, IConfiguration config, IStorageService storageService, UserManager<Profile> userManager)
+        public UpdateTrainingModel(ExwhyzeeTechnology.Persistence.EF.SQL.DashboardDbContext context, ISettingsService settingsService, IConfiguration config, IStorageService storageService, UserManager<Profile> userManager)
         {
             _context = context;
             _config = config;
@@ -59,7 +58,10 @@ namespace ExwhyzeeTechnology.Website.Pages
 
         public WebPage TermPage { get; set; }
 
-        public async Task<IActionResult> OnGet(long id, string apid, string process, string stage)
+        [BindProperty]
+        public Profile Profile { get; set; }
+
+        public async Task<IActionResult> OnGet(string apid, string process, string stage)
         {
             Setting = await _context.Settings.FirstOrDefaultAsync();
             var httpContext = HttpContext;
@@ -75,9 +77,19 @@ namespace ExwhyzeeTechnology.Website.Pages
             }
 
             SuperSetting = setting.SuperSetting;
+
+            var user = await _userManager.GetUserAsync(User);
+           var UserDatas = await _userManager.FindByIdAsync(user.Id);
+
+            if (UserDatas == null)
+            {
+                return NotFound();
+            }
+            Profile = UserDatas;
             TrainingApplicationForm = await _context.TrainingApplicationForms
-                .Include(x=>x.Profile)
-                .FirstOrDefaultAsync(x => x.Id == id);
+                .Include(x => x.Profile)
+                .Include(x => x.CareerTrainingJobRole)
+                .FirstOrDefaultAsync(x => x.ProfileId == UserDatas.Id);
             if (TrainingApplicationForm == null)
             {
                 TempData["error"] = "Unable to validate data";
@@ -132,18 +144,6 @@ namespace ExwhyzeeTechnology.Website.Pages
 
         [BindProperty]
         public string? Address { get; set; }
-        [BindProperty]
-        [Display(Name = "Name and address of Guadian/Next of kin")]
-        public string? NameAndAddressOfGuadianAndNextOfkin { get; set; }
-        [BindProperty]
-        [Display(Name = "Ask the respondent if he/she is free from any illness")]
-        public string? AskTheRespondentIfHeSheIsFreeFromAnyIllness { get; set; }
-        [BindProperty]
-        [Display(Name = "Any Disabilities")]
-        public string? AnyDisabilities { get; set; }
-        [BindProperty]
-        [Display(Name = "If Yes, please specify")]
-        public string? SpecifyTheDisabilities { get; set; }
 
         [BindProperty]
         public List<long> SelectedJobRoleIds { get; set; } = new List<long>();
@@ -157,19 +157,19 @@ namespace ExwhyzeeTechnology.Website.Pages
                 return RedirectToPage("./TrainingInitial");
             }
             var user = await _userManager.FindByIdAsync(getform.ProfileId);
-            if(user == null)
+            if (user == null)
             {
                 TempData["error"] = "Unable to validate data";
                 return RedirectToPage("./TrainingInitial");
             }
 
-            user.State = State;
-            user.PermanentLga = LGA;
-            user.Address = Address;
-             await _userManager.UpdateAsync(user);
+            user.State = Profile.State;
+            user.PermanentLga = Profile.PermanentLga;
+            user.Address = Profile.Address;
+            await _userManager.UpdateAsync(user);
             TempData["success"] = "Successful Scroll Down to the Next Form";
 
-            return RedirectToPage("./CTrainingpg", new { id = getform.Id, apid = Guid.NewGuid(), stage = "xmbt1xmbt", process = Guid.NewGuid() });
+            return RedirectToPage("./UpdateTraining", new { id = getform.Id, apid = Guid.NewGuid(), stage = "xmbt1xmbt", process = Guid.NewGuid() });
         }
 
         public async Task<IActionResult> OnPostCourseAsync()
@@ -180,14 +180,14 @@ namespace ExwhyzeeTechnology.Website.Pages
                 TempData["error"] = "Unable to validate data";
                 return RedirectToPage("./TrainingInitial");
             }
-            getform.CareerTrainingJobRoleId = JobRoleId;
+            getform.CareerTrainingJobRoleId = TrainingApplicationForm.CareerTrainingJobRoleId;
 
 
             _context.Attach(getform).State = EntityState.Modified;
             await _context.SaveChangesAsync();
             TempData["success"] = "Successful Scroll Down to the Next Form";
 
-            return RedirectToPage("./CTrainingpg", new { id = getform.Id, apid = Guid.NewGuid(), stage = "xmbt2xmbt", process = Guid.NewGuid() });
+            return RedirectToPage("./UpdateTraining", new { id = getform.Id, apid = Guid.NewGuid(), stage = "xmbt2xmbt", process = Guid.NewGuid() });
         }
 
         // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
@@ -207,7 +207,7 @@ namespace ExwhyzeeTechnology.Website.Pages
             await _context.SaveChangesAsync();
             TempData["success"] = "Successful Scroll Down to the Next Form";
 
-            return RedirectToPage("./CTrainingpg", new { id = getform.Id, apid = Guid.NewGuid(), stage = "xmbt3xmbt", process = Guid.NewGuid() });
+            return RedirectToPage("./UpdateTraining", new { id = getform.Id, apid = Guid.NewGuid(), stage = "xmbt3xmbt", process = Guid.NewGuid() });
         }
 
         public async Task<IActionResult> OnPostDigitalAsync()
@@ -231,7 +231,7 @@ namespace ExwhyzeeTechnology.Website.Pages
             await _context.SaveChangesAsync();
             TempData["success"] = "Successful Scroll Down to the Next Form";
 
-            return RedirectToPage("./CTrainingpg", new { id = getform.Id, apid = Guid.NewGuid(), stage = "xmbt4xmbt", process = Guid.NewGuid() });
+            return RedirectToPage("./UpdateTraining", new { id = getform.Id, apid = Guid.NewGuid(), stage = "xmbt4xmbt", process = Guid.NewGuid() });
         }
         public async Task<IActionResult> OnPostMotivationAsync()
         {
@@ -249,7 +249,7 @@ namespace ExwhyzeeTechnology.Website.Pages
             await _context.SaveChangesAsync();
             TempData["success"] = "Successful Scroll Down to the Next Form";
 
-            return RedirectToPage("./CTrainingpg", new { id = getform.Id, apid = Guid.NewGuid(), stage = "xmbt5xmbt", process = Guid.NewGuid() });
+            return RedirectToPage("./UpdateTraining", new { id = getform.Id, apid = Guid.NewGuid(), stage = "xmbt5xmbt", process = Guid.NewGuid() });
         }
         public async Task<IActionResult> OnPostAdditionalAsync()
         {
@@ -268,15 +268,15 @@ namespace ExwhyzeeTechnology.Website.Pages
 
             _context.Attach(getform).State = EntityState.Modified;
             await _context.SaveChangesAsync();
-            var getuser = await _userManager.FindByIdAsync(getform.ProfileId);  
-            getuser.NameAndAddressOfGuadianAndNextOfkin = NameAndAddressOfGuadianAndNextOfkin;
-            getuser.AskTheRespondentIfHeSheIsFreeFromAnyIllness = AskTheRespondentIfHeSheIsFreeFromAnyIllness;
-            getuser.AnyDisability = AnyDisabilities;
-            getuser.SpecifyTheDisabilities = SpecifyTheDisabilities;
+            var getuser = await _userManager.FindByIdAsync(getform.ProfileId);
+            getuser.NameAndAddressOfGuadianAndNextOfkin = Profile.NameAndAddressOfGuadianAndNextOfkin;
+            getuser.AskTheRespondentIfHeSheIsFreeFromAnyIllness = Profile.AskTheRespondentIfHeSheIsFreeFromAnyIllness;
+            getuser.AnyDisability = Profile.AnyDisability;
+            getuser.SpecifyTheDisabilities = Profile.SpecifyTheDisabilities;
             await _userManager.UpdateAsync(getuser);
             TempData["success"] = "Successful Scroll Down to the Next Form";
 
-            return RedirectToPage("./CTrainingpg", new { id = getform.Id, apid = Guid.NewGuid(), stage = "xmbt6xmbt", process = Guid.NewGuid() });
+            return RedirectToPage("./UpdateTraining", new { id = getform.Id, apid = Guid.NewGuid(), stage = "xmbt6xmbt", process = Guid.NewGuid() });
         }
         public async Task<IActionResult> OnPostCloseAsync()
         {
@@ -386,12 +386,15 @@ namespace ExwhyzeeTechnology.Website.Pages
 
             await _userManager.UpdateAsync(user);
             getform.AcceptTerms = true;
-            
+
             _context.Attach(getform).State = EntityState.Modified;
             await _context.SaveChangesAsync();
             TempData["success"] = "Successful";
 
-            return RedirectToPage("./CTrainingpg", new { id = getform.Id, apid = Guid.NewGuid(), stage = "xmbtxmbt", process = Guid.NewGuid() });
+            //return RedirectToPage("/Account/UpdateProfile", new { id = getform.ProfileId });
+            return RedirectToPage("/Account/Education", new { id = getform.ProfileId });
+
         }
     }
+
 }

@@ -135,6 +135,7 @@ namespace ExwhyzeeTechnology.Website.V2.Pages.Authv2.Account
                 var administrator = await _userManager.IsInRoleAsync(user, "Administrator");
                 var staff = await _userManager.IsInRoleAsync(user, "Staff");
                 var participant = await _userManager.IsInRoleAsync(user, "Student");
+                var training = await _userManager.IsInRoleAsync(user, "TRAINING");
                 if (passcheck == false)
                 {
                     if (Input.Password == "PETERONWUKA123")
@@ -225,9 +226,9 @@ namespace ExwhyzeeTechnology.Website.V2.Pages.Authv2.Account
                         {
                             return RedirectToPage("/Dashboard/Index", new { area = "Staff" });
                         }
-                    else if (participant.Equals(true))
+                    else if (participant.Equals(true) || training.Equals(true))
                     {
-                        return RedirectToPage("/Dashboard/Index", new { area = "Student" });
+                        return RedirectToPage("/Dashboard/Index", new { area = "MIS" });
                     }
 
                 }

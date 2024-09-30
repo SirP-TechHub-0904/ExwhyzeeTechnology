@@ -89,19 +89,20 @@ namespace ExwhyzeeTechnology.Website.V2.Pages.Authv2.Account
                     protocol: Request.Scheme);
 
               string datavalue = $"Please reset your password by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.";
-                var mailsent = await _email.SendEmailWithResult(user.FullnameX, user.Email, "", "", $"Reset Password", datavalue);
+                //var mailsent = await _email.SendEmailWithResult(user.FullnameX, user.Email, "", "", $"Reset Password", datavalue);
 
-                var datasend = new NotifyDto()
-                {
-                    Title = "Reset Password",
-                    NotificationTitle = "Reset Password",
-                    Content = datavalue,
-                    Receipient = Input.Email,
-                    Name = user.FullnameX,
-                    IsEmail = true
+                //var datasend = new NotifyDto()
+                //{
+                //    Title = "Reset Password",
+                //    NotificationTitle = "Reset Password",
+                //    Content = datavalue,
+                //    Receipient = Input.Email,
+                //    Name = user.FullnameX,
+                //    IsEmail = true
                     
-                };
-                await _notify.RegisterNotification(datasend);
+                //};
+                //await _notify.RegisterNotification(datasend);
+                await _email.SendEmailPostmaster(user.FullnameX, user.Email, "", "", $"Reset Password", datavalue);
 
 
                 return RedirectToPage("./ForgotPasswordConfirmation");

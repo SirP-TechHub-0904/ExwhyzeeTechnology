@@ -1,16 +1,15 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace ExwhyzeeTechnology.Website.Areas.MIS.Pages.Dashboard
+namespace ExwhyzeeTechnology.Website.Areas.MIS.Pages.TechClasses
 {
     [Microsoft.AspNetCore.Authorization.Authorize]
 
     public class IndexModel : PageModel
     {
-        public void OnGet()
+        public async Task<IActionResult> OnGetAsync()
         {
+            return RedirectToPage("/UserTechProfile/NoAdmission");
         }
-
-       
     }
 }

@@ -207,7 +207,7 @@ namespace ExwhyzeeTechnology.Domain.Models
         public string? WebsiteAddress { get; set; }
 
         [Display(Name = "Any Disabilities")]
-        public string? AnyDisabilities { get; set; }
+        public string? AnyDisability { get; set; }
 
         [Display(Name = "If Yes, please specify")]
         public string? SpecifyTheDisabilities { get; set; }

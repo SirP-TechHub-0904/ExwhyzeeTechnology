@@ -116,13 +116,13 @@
                                             <div class="flex flex-col gap-2">
                                                 <label for="firstNamesignin">First Name</label>
 
-                                                <input type="text" asp-for="UserDatas.FirstName" id="firstNamesignin" placeholder="First Name" class="bg-neutral-100 form-control" required="required">
+                                                <input type="text" asp-for="UserDatas.FirstName" oninput="this.value = this.value.toUpperCase()" id="firstNamesignin" placeholder="First Name" class="bg-neutral-100 form-control" required="required">
                                             </div>
 
                                             <div class="flex flex-col gap-2">
                                                 <label for="firstName">Last Name</label>
 
-                                                <input type="text" asp-for="UserDatas.LastName" id="lastName" placeholder="Last Name" class="bg-neutral-100 form-control" required="required">
+                                                <input type="text" asp-for="UserDatas.LastName" oninput="this.value = this.value.toUpperCase()" id="lastName" placeholder="Last Name" class="bg-neutral-100 form-control" required="required">
                                             </div>
                                         </div>
 
@@ -134,12 +134,12 @@
                                         <div class="flex flex-col gap-2">
                                             <label for="firstName">Phone Number</label>
 
-                                            <input type="text" asp-for="UserDatas.PhoneNumber" id="phone" placeholder="Phone Number" class="bg-neutral-100 form-control" required="required">
+                                            <input type="number" asp-for="UserDatas.PhoneNumber" id="phone" placeholder="Phone Number" class="bg-neutral-100 form-control" required="required">
                                         </div>
                                         <div class="flex flex-col gap-2">
                                             <label for="firstName">National Identification Number (NIN)</label>
 
-                                            <input type="text" asp-for="UserDatas.NIN" id="phone" placeholder="NIN" class="bg-neutral-100 form-control" required="required">
+                                            <input type="number" asp-for="UserDatas.NIN" id="phone" placeholder="NIN" class="bg-neutral-100 form-control" required="required">
                                         </div>
                                         <div class="flex gap-4 w-full [&amp;>*]:flex-1 sm:flex-col">
 
@@ -166,7 +166,7 @@
                                             <!-- Password Label and Input -->
                                             <label for="password">Password</label>
                                             <div class="relative">
-                                                <input type="password" name="password" id="password" placeholder="Enter Password" class="bg-neutral-100 w-full form-control">
+                                                <input type="password" name="password" id="password" placeholder="Enter Password" class="bg-neutral-100 w-full form-control" required="required">
                                                 <!-- Show Password Toggle -->
                                                 <span id="togglePassword" class="absolute inset-y-0 right-0 pr-3 flex items-center cursor-pointer">
                                                     👁️
