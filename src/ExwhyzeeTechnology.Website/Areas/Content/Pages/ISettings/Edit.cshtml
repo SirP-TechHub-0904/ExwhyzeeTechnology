@@ -303,10 +303,10 @@
 
                     @if (!String.IsNullOrEmpty(Model.Setting.DefaultTitleBackgroundUrl))
                     {
-                    <div class="form-group">
-                        <label class="control-label">Previouse Background</label><br />
-                        <img src="@Model.Setting.DefaultTitleBackgroundUrl" class="img-fluid" style="max-height:150px;" />
-                    </div>
+                        <div class="form-group">
+                            <label class="control-label">Previouse Background</label><br />
+                            <img src="@Model.Setting.DefaultTitleBackgroundUrl" class="img-fluid" style="max-height:150px;" />
+                        </div>
                     }
 
                     <div class="form-group">
@@ -370,10 +370,10 @@
                     </div>
                     @if (!String.IsNullOrEmpty(Model.Setting.JobCardTitleBackgroundUrl))
                     {
-                    <div class="form-group">
-                        <label class="control-label">Previouse Job Card Title Background </label><br />
-                        <img src="@Model.Setting.JobCardTitleBackgroundUrl" class="img-fluid" style="max-height:150px;" />
-                    </div>
+                        <div class="form-group">
+                            <label class="control-label">Previouse Job Card Title Background </label><br />
+                            <img src="@Model.Setting.JobCardTitleBackgroundUrl" class="img-fluid" style="max-height:150px;" />
+                        </div>
                     }
 
                     <div class="form-group">
@@ -399,10 +399,10 @@
 
                     @if (!String.IsNullOrEmpty(Model.Setting.SignatureUrl))
                     {
-                    <div class="form-group">
-                        <label class="control-label">Previouse Signature Url </label><br />
-                        <img src="@Model.Setting.SignatureUrl" class="img-fluid" style="max-height:150px;" />
-                    </div>
+                        <div class="form-group">
+                            <label class="control-label">Previouse Signature Url </label><br />
+                            <img src="@Model.Setting.SignatureUrl" class="img-fluid" style="max-height:150px;" />
+                        </div>
                     }
 
                     <div class="form-group">
@@ -535,10 +535,10 @@
                     </div>
                     @if (!String.IsNullOrEmpty(Model.Setting.TrainingBgImageUrl))
                     {
-                    <div class="form-group">
-                        <label class="control-label">Previouse Training Bg Image</label><br />
-                        <img src="@Model.Setting.TrainingBgImageUrl" class="img-fluid" style="max-height:150px;" />
-                    </div>
+                        <div class="form-group">
+                            <label class="control-label">Previouse Training Bg Image</label><br />
+                            <img src="@Model.Setting.TrainingBgImageUrl" class="img-fluid" style="max-height:150px;" />
+                        </div>
                     }
 
                     <div class="form-group">
@@ -559,6 +559,11 @@
                         <label asp-for="Setting.CareerDescription" class="control-label"></label>
                         <input asp-for="Setting.CareerDescription" class="form-control" />
                         <span asp-validation-for="Setting.CareerDescription" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Setting.ApplicationLetter" class="control-label">Application Letter (Keyword: **name** **course** **cohort** **startdate** **enddate**)</label>
+                        <textarea asp-for="Setting.ApplicationLetter" class="form-control summernote" ></textarea>
+                        <span asp-validation-for="Setting.ApplicationLetter" class="text-danger"></span>
                     </div>
                     <div class="form-group">
                         <input type="submit" value="Submit" class="btn btn-primary" />

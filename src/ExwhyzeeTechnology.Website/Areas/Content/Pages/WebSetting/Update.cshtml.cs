@@ -450,6 +450,7 @@ namespace ExwhyzeeTechnology.Website.Areas.Content.Pages.WebSetting
             updatesetting.EnableBreakingNewsRibon = Setting.EnableBreakingNewsRibon; 
             updatesetting.RibonPosition = Setting.RibonPosition;
             updatesetting.BreakingNewsRibonTitle = Setting.BreakingNewsRibonTitle;
+            updatesetting.ApplicationLetter = Setting.ApplicationLetter;
             try
             {
                 _context.Attach(updatesetting).State = EntityState.Modified; 

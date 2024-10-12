@@ -4,216 +4,1177 @@
 @{
     ViewData["Title"] = "ApplicationDetails";
 }
+<style>
+    .applicant .form-group {
+        margin-bottom: 0;
+        box-shadow: 1px 1px 1px 1px #00000073;
+        padding: 5px;
+        margin: 4px;
+    }
 
-<div class="card">
-    <div class="card-header">
-        <h3 class="card-title">APPLICATIONS Details</h3>
+    .applicant p {
+        margin-top: 0;
+        margin-bottom: 0;
+    }
 
+    .applicant label {
+        display: inline-block;
+        margin-bottom: 0;
+    }
+</style>
+<div class="container-fluid applicant">
+    <button type="button" class="btn btn-block btn-primary btn-xs" style="margin:10px 0;">
+        <h3>APPLICANT INFORMATION</h3>
+    </button>
+
+    <div class="row">
+
+
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header p-2">
+                    <ul class="nav nav-pills">
+                        <li class="nav-item"><a class="nav-link active" href="#application" data-toggle="tab">Application</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#profile" data-toggle="tab">Profile</a></li>
+                    </ul>
+                </div>
+                <div class="card-body">
+                    <div class="tab-content">
+                        <div class="active tab-pane" id="application">
+                            <section>
+                                <div class="">
+                                    <div class="row">
+                                        <div class="col">
+                                            <div class="accordion c-train" id="accordion">
+
+                                                <div class="accordion-item box-active box-3-mc">
+
+
+                                                    <h2 class="accordion-header" id="headingTTwo">
+                                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTTwob" aria-expanded="false" aria-controls="collapseTTwob">
+                                                            0.  Basic Information  <i class="fa fa-check"></i>
+                                                        </button>
+                                                    </h2>
+
+
+                                                    <div id="collapseTTwob" class="accordion-collapse collapse" aria-labelledby="headingTTwob" data-bs-parent="#accordion">
+                                                        <div class="accordion-body">
+                                                            <form>
+                                                                <div class="row">
+                                                                    <div class="col-md-12">
+                                                                        <div class="form-group">
+                                                                            <label asp-for="Profile.NIN" class="control-label">Fullname</label>
+                                                                            <p class="form-control-static">@Model.Profile.FullnameX</p>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-md-6">
+                                                                        <div class="form-group">
+                                                                            <label asp-for="Profile.Email" class="control-label"></label>
+                                                                            <p class="form-control-static">@Model.Profile.Email</p>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-md-6">
+                                                                        <div class="form-group">
+                                                                            <label asp-for="Profile.PhoneNumber" class="control-label"></label>
+                                                                            <p class="form-control-static">@Model.Profile.PhoneNumber</p>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-md-4">
+                                                                        <div class="form-group">
+                                                                            <label asp-for="Profile.NIN" class="control-label"></label>
+                                                                            <p class="form-control-static">@Model.Profile.NIN</p>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-md-4">
+                                                                        <div class="form-group">
+                                                                            <label asp-for="Profile.DateOfBirth" class="control-label"></label>
+                                                                            @if (Model.Profile.DateOfBirth != null)
+                                                                            {
+
+                                                                                <p class="form-control-static">@Model.Profile.DateOfBirth.Value.ToString("dd MMM, yyyy")</p>
+                                                                            }
+                                                                            else
+                                                                            { <p class="form-control-static">../../....</p>
+                                                                            }
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-md-4">
+                                                                        <div class="form-group">
+                                                                            <label asp-for="Profile.Gender" class="control-label"></label>
+                                                                            <p class="form-control-static">@Model.Profile.Gender</p>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                @{ string boxBB = Model.Stage == "xmbtwxmbt" ? "box-active" : "box-active"; }
+                                                <div class="accordion-item @boxBB box-3-mc">
+
+                                                    @if (Model.Stage == "xmbtwxmbt")
+                                                    {
+                                                        <h2 class="accordion-header" id="headingTTwo">
+                                                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTTwo" aria-expanded="false" aria-controls="collapseTTwo">
+                                                                1. Contact Information
+                                                            </button>
+                                                        </h2>
+                                                    }
+                                                    else
+                                                    {
+                                                        <h2 class="accordion-header" id="headingTTwo">
+                                                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTTwo" aria-expanded="false" aria-controls="collapseTTwo">
+                                                                1. Contact Information @if (Model.F9 == true)
+                                                                {<i class="fa fa-check"></i>}
+                                                            </button>
+                                                        </h2>
+                                                    }
+                                                    @{ string collapseClassB = Model.Stage == "xmbtwxmbt" ? "" : ""; }
+
+
+                                                    <div id="collapseTTwo" class="accordion-collapse collapse @collapseClassB" aria-labelledby="headingTTwo" data-bs-parent="#accordion">
+                                                        <div class="accordion-body">
+                                                            <form method="post" asp-page-handler="Bio" asp-page="UpdateTraining">
+                                                                <input type="hidden" asp-for="TrainingApplicationForm.Id" />
+                                                                <div class="row">
+                                                                    <div class="col-md-6">
+                                                                        <div class="form-group">
+                                                                            <label asp-for="Profile.State" class="control-label">State of Origin</label>
+                                                                            <p class="form-control-static">@Model.Profile.State</p>
+
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-md-6">
+                                                                        <div class="form-group">
+                                                                            <label asp-for="Profile.PermanentLga" class="control-label">LGA of Origin</label>
+                                                                            <p class="form-control-static">@Model.Profile.PermanentLga</p>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+
+
+                                                                <div class="form-group">
+                                                                    <label asp-for="Profile.Address" class="control-label">Current Contact Address</label>
+                                                                    <p class="form-control-static">@Model.Profile.Address</p>
+                                                                </div>
+
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+
+
+                                                @{ string boxA = Model.Stage == "xmbt1xmbt" ? "box-active" : "box-active"; }
+                                                <div class="accordion-item @boxA box-3-mc">
+                                                    @if (Model.Stage == "xmbt1xmbt")
+                                                    {
+                                                        <h2 class="accordion-header" id="headingOne">
+                                                            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                                                2. JOB ROLES (COURSE)
+                                                            </button>
+                                                        </h2>
+                                                    }
+                                                    else
+                                                    {
+                                                        <h2 class="accordion-header" id="headingOne">
+                                                            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                                                2. COURSE (JOB ROLES) @if (Model.F1 == true)
+                                                                {<i class="fa fa-check"></i>}
+                                                            </button>
+                                                        </h2>
+                                                    }
+                                                    @{ string collapseClassCourse = Model.Stage == "xmbt1xmbt" ? "" : ""; }
+                                                    <div id="collapseOne" class="accordion-collapse collapse @collapseClassCourse" aria-labelledby="headingOne" data-bs-parent="#accordion">
+                                                        <div class="accordion-body">
+                                                            <form method="post" asp-page-handler="Course">
+                                                                <input type="hidden" asp-for="TrainingApplicationForm.Id" />
+                                                                @if (Model.TrainingApplicationForm.CareerTrainingJobRoleId != null)
+                                                                {
+                                                                    <h4>@Model.TrainingApplicationForm.CareerTrainingJobRole.Title</h4>
+                                                                }
+                                                                else
+                                                                {
+                                                                    <div class="form-group">
+                                                                        <label asp-for="TrainingApplicationForm.CareerTrainingJobRoleId" class="control-label">JOB ROLES (COURSE)</label>
+                                                                        <p class="form-control-static">@Model.TrainingApplicationForm.CareerTrainingJobRoleId</p>
+                                                                    </div>
+
+                                                                }
+                                                            </form>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                @{ string boxB = Model.Stage == "xmbt2xmbt" ? "box-active" : "box-active"; }
+                                                <div class="accordion-item @boxB box-3-mc">
+
+                                                    @if (Model.Stage == "xmbt2xmbt")
+                                                    {
+                                                        <h2 class="accordion-header" id="headingTwo">
+                                                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                                                3. Educational Background
+                                                            </button>
+                                                        </h2>
+                                                    }
+                                                    else
+                                                    {
+                                                        <h2 class="accordion-header" id="headingTwo">
+                                                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                                                3. Educational Background @if (Model.F2 == true)
+                                                                {<i class="fa fa-check"></i>}
+                                                            </button>
+                                                        </h2>
+                                                    }
+                                                    @{ string collapseClassEdu = Model.Stage == "xmbt2xmbt" ? "" : ""; }
+
+
+                                                    <div id="collapseTwo" class="accordion-collapse collapse @collapseClassEdu" aria-labelledby="headingTwo" data-bs-parent="#accordion">
+                                                        <div class="accordion-body">
+                                                            <form method="post" asp-page-handler="Educational">
+                                                                <input type="hidden" asp-for="TrainingApplicationForm.Id" />
+
+                                                                <div class="form-group">
+                                                                    <label asp-for="TrainingApplicationForm.HighestLevelOfEducation" class="control-label"></label>
+                                                                    <p class="form-control-static">@Model.TrainingApplicationForm.HighestLevelOfEducation</p>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label asp-for="TrainingApplicationForm.FieldOfStudy" class="control-label"></label>
+                                                                    <p class="form-control-static">@Model.TrainingApplicationForm.FieldOfStudy</p>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label asp-for="TrainingApplicationForm.CurrentEducationalStatus" class="control-label"></label>
+                                                                    <p class="form-control-static">@Model.TrainingApplicationForm.CurrentEducationalStatus</p>
+                                                                </div>
+
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                @{ string boxC = Model.Stage == "xmbt3xmbt" ? "box-active" : "box-active"; }
+                                                <div class="accordion-item @boxC box-3-mc">
+                                                    @if (Model.Stage == "xmbt3xmbt")
+                                                    {
+                                                        <h2 class="accordion-header" id="headingThree">
+                                                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                                                4. Digital Skills and Experience
+                                                            </button>
+                                                        </h2>
+                                                    }
+                                                    else
+                                                    {
+                                                        <h2 class="accordion-header" id="headingThree">
+                                                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                                                4. Digital Skills and Experience @if (Model.F3 == true)
+                                                                {<i class="fa fa-check"></i>}
+                                                            </button>
+                                                        </h2>
+
+                                                    }
+                                                    @{ string collapseClassDigit = Model.Stage == "xmbt3xmbt" ? "" : ""; }
+
+
+                                                    <div id="collapseThree" class="accordion-collapse collapse @collapseClassDigit" aria-labelledby="headingThree" data-bs-parent="#accordion">
+                                                        <div class="accordion-body">
+                                                            <form method="post" asp-page-handler="Digital">
+                                                                <input type="hidden" asp-for="TrainingApplicationForm.Id" />
+
+                                                                <div class="form-group">
+                                                                    <label asp-for="TrainingApplicationForm.ComputerLiteracy" class="control-label"></label>
+                                                                    <p class="form-control-static">@Model.TrainingApplicationForm.ComputerLiteracy</p>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label asp-for="TrainingApplicationForm.WebDevelopment" class="control-label"></label>
+                                                                    <p class="form-control-static">@Model.TrainingApplicationForm.WebDevelopment</p>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label asp-for="TrainingApplicationForm.GraphicDesign" class="control-label"></label>
+                                                                    <p class="form-control-static">@Model.TrainingApplicationForm.GraphicDesign</p>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label asp-for="TrainingApplicationForm.DigitalMarketing" class="control-label"></label>
+                                                                    <p class="form-control-static">@Model.TrainingApplicationForm.DigitalMarketing</p>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label asp-for="TrainingApplicationForm.Programming" class="control-label"></label>
+                                                                    <p class="form-control-static">@Model.TrainingApplicationForm.Programming</p>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label asp-for="TrainingApplicationForm.DataAnalysis" class="control-label"></label>
+                                                                    <p class="form-control-static">@Model.TrainingApplicationForm.DataAnalysis</p>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label asp-for="TrainingApplicationForm.OtherRelevant" class="control-label"></label>
+                                                                    <p class="form-control-static">@Model.TrainingApplicationForm.OtherRelevant</p>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label asp-for="TrainingApplicationForm.ExperienceWithDigitalTools" class="control-label"></label>
+                                                                    <p class="form-control-static">@Model.TrainingApplicationForm.ExperienceWithDigitalTools</p>
+                                                                </div>
+
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                @{ string boxD = Model.Stage == "xmbt4xmbt" ? "box-active" : "box-active"; }
+                                                <div class="accordion-item @boxD box-3-mc">
+                                                    @if (Model.Stage == "xmbt4xmbt")
+                                                    {
+
+                                                        <h2 class="accordion-header" id="headingFour">
+                                                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                                                                5. Motivation and Aspirations
+                                                            </button>
+                                                        </h2>
+                                                    }
+                                                    else
+                                                    {
+
+                                                        <h2 class="accordion-header" id="headingFour">
+                                                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                                                                5. Motivation and Aspirations @if (Model.F4 == true)
+                                                                {<i class="fa fa-check"></i>}
+                                                            </button>
+                                                        </h2>
+
+                                                    }
+                                                    @{ string collapseClassMotivation = Model.Stage == "xmbt4xmbt" ? "" : ""; }
+
+                                                    <div id="collapseFour" class="accordion-collapse collapse @collapseClassMotivation" aria-labelledby="headingFour" data-bs-parent="#accordion">
+                                                        <div class="accordion-body">
+                                                            <form method="post" asp-page-handler="Motivation">
+                                                                <input type="hidden" asp-for="TrainingApplicationForm.Id" />
+
+                                                                <div class="form-group">
+                                                                    <label asp-for="TrainingApplicationForm.WhyAreYouInterestedInThisDigitalSkill" class="control-label"></label>
+                                                                    <p class="form-control-static">@Model.TrainingApplicationForm.WhyAreYouInterestedInThisDigitalSkill</p>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label asp-for="TrainingApplicationForm.HowDoYouBelieveThisProgramCanHelpYouAchieveYourPersonalGoal" class="control-label"></label>
+                                                                    <p class="form-control-static">@Model.TrainingApplicationForm.HowDoYouBelieveThisProgramCanHelpYouAchieveYourPersonalGoal</p>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label asp-for="TrainingApplicationForm.WhatDoYouHopeToGainFromParticipatingInThisProgram" class="control-label"></label>
+                                                                    <p class="form-control-static">@Model.TrainingApplicationForm.WhatDoYouHopeToGainFromParticipatingInThisProgram</p>
+                                                                </div>
+
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                @{ string boxE = Model.Stage == "xmbt5xmbt" ? "box-active" : "box-active"; }
+                                                <div class="accordion-item @boxE box-3-mc">
+                                                    @if (Model.Stage == "xmbt5xmbt")
+                                                    {
+
+                                                        <h2 class="accordion-header" id="headingFive">
+                                                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+                                                                6. Additional Information
+                                                            </button>
+                                                        </h2>
+                                                    }
+                                                    else
+                                                    {
+
+                                                        <h2 class="accordion-header" id="headingFive">
+                                                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+                                                                6. Additional Information @if (Model.F5 == true)
+                                                                {<i class="fa fa-check"></i>}
+                                                            </button>
+                                                        </h2>
+
+                                                    }
+                                                    @{ string collapseClassAdditional = Model.Stage == "xmbt5xmbt" ? "" : ""; }
+
+                                                    <div id="collapseFive" class="accordion-collapse collapse @collapseClassAdditional" aria-labelledby="headingFive" data-bs-parent="#accordion">
+                                                        <div class="accordion-body">
+                                                            <form method="post" asp-page-handler="Additional">
+                                                                <input type="hidden" asp-for="TrainingApplicationForm.Id" />
+                                                                <div class="form-group">
+                                                                    <label asp-for="Profile.AnyDisability" class="control-label"></label>
+                                                                    <p class="form-control-static">@Model.Profile.AnyDisability</p>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label asp-for="Profile.SpecifyTheDisabilities" class="control-label"></label>
+                                                                    <p class="form-control-static">@Model.Profile.SpecifyTheDisabilities</p>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label asp-for="TrainingApplicationForm.DoYouHaveAnySpecialNeedsOrAccommodationsWeShouldBeAwareOf" class="control-label"></label>
+                                                                    <p class="form-control-static">@Model.TrainingApplicationForm.DoYouHaveAnySpecialNeedsOrAccommodationsWeShouldBeAwareOf</p>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label asp-for="TrainingApplicationForm.HowDidYouHearAboutThisProgram" class="control-label"></label>
+                                                                    <p class="form-control-static">@Model.TrainingApplicationForm.HowDidYouHearAboutThisProgram</p>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label asp-for="TrainingApplicationForm.EmploymentStatus" class="control-label"></label>
+                                                                    <p class="form-control-static">@Model.TrainingApplicationForm.EmploymentStatus</p>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label asp-for="TrainingApplicationForm.NatureOfJob" class="control-label"></label>
+                                                                    <p class="form-control-static">@Model.TrainingApplicationForm.NatureOfJob</p>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label asp-for="TrainingApplicationForm.MonthlyIncome" class="control-label"></label>
+                                                                    <p class="form-control-static">@Model.TrainingApplicationForm.MonthlyIncome</p>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label asp-for="TrainingApplicationForm.DoYouHaveAnyOtherRelevantInformationYouWouldLikeToShare" class="control-label"></label>
+                                                                    <p class="form-control-static">@Model.TrainingApplicationForm.DoYouHaveAnyOtherRelevantInformationYouWouldLikeToShare</p>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label asp-for="Profile.NameAndAddressOfGuadianAndNextOfkin" class="control-label"></label>
+                                                                    <p class="form-control-static">@Model.Profile.NameAndAddressOfGuadianAndNextOfkin</p>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label asp-for="Profile.AskTheRespondentIfHeSheIsFreeFromAnyIllness" class="control-label"></label>
+                                                                    <p class="form-control-static">@Model.Profile.AskTheRespondentIfHeSheIsFreeFromAnyIllness</p>
+                                                                </div>
+
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                @{ string boxF = Model.Stage == "xmbt6xmbt" ? "box-active" : "box-active"; }
+                                                <div class="accordion-item @boxF box-3-mc">
+                                                    @if (Model.Stage == "xmbt6xmbt")
+                                                    {
+
+                                                        <h2 class="accordion-header" id="headingSix">
+                                                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSix" aria-expanded="false" aria-controls="collapseSix">
+                                                                7. Passport and Terms of Operations
+                                                            </button>
+                                                        </h2>
+                                                    }
+                                                    else
+                                                    {
+
+                                                        <h2 class="accordion-header" id="headingSix">
+                                                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSix" aria-expanded="false" aria-controls="collapseSix">
+                                                                7. Passport and Terms of Operations @if (Model.F6 == true)
+                                                                {<i class="fa fa-check"></i>}
+                                                            </button>
+                                                        </h2>
+
+                                                    }
+                                                    @{ string collapseClassClose = Model.Stage == "xmbt6xmbt" ? "" : ""; }
+
+                                                    <div id="collapseSix" class="accordion-collapse collapse @collapseClassClose" aria-labelledby="headingSix" data-bs-parent="#accordion">
+                                                        <div class="accordion-body">
+                                                            <div>
+                                                                <img src="@Model.Profile.PassportFilePathUrl" style="height:100px;" /><br />
+                                                                <h5>Passport Photo</h5>
+                                                            </div>
+                                                            <div>
+                                                                <img src="@Model.Profile.NinUrl" style="height:100px;" /><br />
+                                                                <h5>NIN ID Card</h5>
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+
+                                                @if (Model.F6 == true)
+                                                {
+                                                    <div class="box-active">
+
+                                                        <div class="row">
+                                                            <div class="col-md-4"></div>
+                                                            <div class="col-md-4">
+                                                                <h4 class="text-center">Your Application has been update</h4>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+                                                }
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+                        </div>
+
+                        <div class="tab-pane" id="profile">
+
+                            <div class=" ">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div>
+                                            <dl class="row">
+
+
+                                                <dt class="col-sm-2">
+                                                    @Html.DisplayNameFor(model => model.UserDatas.RefCode)
+                                                </dt>
+                                                <dd class="col-sm-10">
+                                                    @Html.DisplayFor(model => model.UserDatas.RefCode)
+                                                </dd>
+
+
+                                                <dt class="col-sm-2">
+                                                    @Html.DisplayNameFor(model => model.UserDatas.PhoneNumber)
+                                                </dt>
+                                                <dd class="col-sm-10">
+                                                    @Html.DisplayFor(model => model.UserDatas.PhoneNumber)
+                                                </dd>
+
+                                                <dt class="col-sm-2">
+                                                    @Html.DisplayNameFor(model => model.UserDatas.AltPhoneNumber)
+                                                </dt>
+                                                <dd class="col-sm-10">
+                                                    @Html.DisplayFor(model => model.UserDatas.AltPhoneNumber)
+                                                </dd>
+
+
+                                                <dt class="col-sm-2">
+                                                    @Html.DisplayNameFor(model => model.UserDatas.Email)
+                                                </dt>
+                                                <dd class="col-sm-10">
+                                                    @Html.DisplayFor(model => model.UserDatas.Email)
+                                                </dd>
+
+                                                <dt class="col-sm-2">
+                                                    @Html.DisplayNameFor(model => model.UserDatas.PersonalEmail)
+                                                </dt>
+                                                <dd class="col-sm-10">
+                                                    @Html.DisplayFor(model => model.UserDatas.PersonalEmail)
+                                                </dd>
+
+
+
+                                                <dt class="col-sm-2">
+                                                    @Html.DisplayNameFor(model => model.UserDatas.PermanentHomeAddress)
+                                                </dt>
+                                                <dd class="col-sm-10">
+                                                    @Html.DisplayFor(model => model.UserDatas.PermanentHomeAddress)
+                                                </dd>
+
+
+
+
+                                                <dt class="col-sm-2">
+                                                    @Html.DisplayNameFor(model => model.UserDatas.PermanentLga)
+                                                </dt>
+                                                <dd class="col-sm-10">
+                                                    @Html.DisplayFor(model => model.UserDatas.PermanentLga)
+                                                </dd>
+
+
+
+                                                <dt class="col-sm-2">
+                                                    @Html.DisplayNameFor(model => model.UserDatas.PermanentState)
+                                                </dt>
+                                                <dd class="col-sm-10">
+                                                    @Html.DisplayFor(model => model.UserDatas.PermanentState)
+                                                </dd>
+
+
+                                                <dt class="col-sm-2">
+                                                    @Html.DisplayNameFor(model => model.UserDatas.Address)
+                                                </dt>
+                                                <dd class="col-sm-10">
+                                                    @Html.DisplayFor(model => model.UserDatas.Address)
+                                                </dd>
+
+
+
+                                                <dt class="col-sm-2">
+                                                    @Html.DisplayNameFor(model => model.UserDatas.City)
+                                                </dt>
+                                                <dd class="col-sm-10">
+                                                    @Html.DisplayFor(model => model.UserDatas.City)
+                                                </dd>
+
+
+
+
+                                                <dt class="col-sm-2">
+                                                    @Html.DisplayNameFor(model => model.UserDatas.State)
+                                                </dt>
+                                                <dd class="col-sm-10">
+                                                    @Html.DisplayFor(model => model.UserDatas.State)
+                                                </dd>
+
+
+
+                                                <dt class="col-sm-2">
+                                                    @Html.DisplayNameFor(model => model.UserDatas.Country)
+                                                </dt>
+                                                <dd class="col-sm-10">
+                                                    @Html.DisplayFor(model => model.UserDatas.Country)
+                                                </dd>
+
+
+
+                                                <dt class="col-sm-2">
+                                                    @Html.DisplayNameFor(model => model.UserDatas.DateOfBirth)
+                                                </dt>
+                                                <dd class="col-sm-10">
+                                                    @if (Model.UserDatas.DateOfBirth != null)
+                                                    {
+                                                        @Model.UserDatas.DateOfBirth.Value.Date.ToString("dd MMM, yyyy")
+
+                                                    }
+                                                </dd>
+
+
+
+
+                                                <dt class="col-sm-2">
+                                                    @Html.DisplayNameFor(model => model.UserDatas.Gender)
+                                                </dt>
+                                                <dd class="col-sm-10">
+                                                    @Html.DisplayFor(model => model.UserDatas.Gender)
+                                                </dd>
+
+
+
+                                                <dt class="col-sm-2">
+                                                    @Html.DisplayNameFor(model => model.UserDatas.BVN)
+                                                </dt>
+                                                <dd class="col-sm-10">
+                                                    @Html.DisplayFor(model => model.UserDatas.BVN)
+                                                </dd>
+
+
+
+                                                <dt class="col-sm-2">
+                                                    @Html.DisplayNameFor(model => model.UserDatas.MaritalStatus)
+                                                </dt>
+                                                <dd class="col-sm-10">
+                                                    @Html.DisplayFor(model => model.UserDatas.MaritalStatus)
+                                                </dd>
+
+
+
+                                                <dt class="col-sm-2">
+                                                    @Html.DisplayNameFor(model => model.UserDatas.Biography)
+                                                </dt>
+                                                <dd class="col-sm-10">
+                                                    @Html.Raw(Model.UserDatas.Biography)
+                                                </dd>
+
+
+
+                                                <dt class="col-sm-2">
+                                                    @Html.DisplayNameFor(model => model.UserDatas.PassportFilePathUrl)
+                                                </dt>
+                                                <dd class="col-sm-10">
+
+                                                    <img src="@Model.UserDatas.PassportFilePathUrl" style="max-height:200px;" />
+
+                                                </dd>
+
+
+                                                <dt class="col-sm-2">
+                                                    @Html.DisplayNameFor(model => model.UserDatas.ValidIDCardUrl)
+                                                </dt>
+                                                <dd class="col-sm-10">
+
+                                                    <img src="@Model.UserDatas.ValidIDCardUrl" style="max-height:200px;" />
+
+                                                </dd>
+
+
+
+                                                <dt class="col-sm-2">
+                                                    @Html.DisplayNameFor(model => model.UserDatas.EmergencyContactName)
+                                                </dt>
+                                                <dd class="col-sm-10">
+                                                    @Html.DisplayFor(model => model.UserDatas.EmergencyContactName)
+                                                </dd>
+
+
+                                                <dt class="col-sm-2">
+                                                    @Html.DisplayNameFor(model => model.UserDatas.EmergencyContactNumber)
+                                                </dt>
+                                                <dd class="col-sm-10">
+                                                    @Html.DisplayFor(model => model.UserDatas.EmergencyContactNumber)
+                                                </dd>
+
+
+                                                <dt class="col-sm-2">
+                                                    @Html.DisplayNameFor(model => model.UserDatas.EmergencyContactRelationship)
+                                                </dt>
+                                                <dd class="col-sm-10">
+                                                    @Html.DisplayFor(model => model.UserDatas.EmergencyContactRelationship)
+                                                </dd>
+                                                <dt class="col-sm-2">
+                                                    @Html.DisplayNameFor(model => model.UserDatas.EmergencyContactValidIdCardUrl)
+                                                </dt>
+                                                <dd class="col-sm-10">
+
+                                                    <img src="@Model.UserDatas.EmergencyContactValidIdCardUrl" style="max-height:200px;" />
+
+                                                </dd>
+
+
+                                                <dt class="col-sm-2">
+                                                    @Html.DisplayNameFor(model => model.UserDatas.Referee)
+                                                </dt>
+                                                <dd class="col-sm-10">
+                                                    @Html.Raw(Model.UserDatas.Referee)
+                                                </dd>
+
+
+                                                @*<dt class="col-sm-2">
+                                                        @Html.DisplayNameFor(model => model.UserDatas.CVFilePathUrl)
+                                                    </dt>
+                                                    <dd class="col-sm-10">
+                                                        <a href="@Model.UserDatas.CVFilePathUrl" download="@Model.UserDatas.GetFullName()">Download CV</a>
+                                                    </dd>*@
+
+                                            </dl>
+                                            <div>
+                                                @if (Model.AdditionalProfile.Count() > 0)
+                                                {
+
+                                                    <h4>Additional Information</h4>
+                                                    <table class="table table-bordered">
+                                                        @foreach (var item in Model.AdditionalProfile)
+                                                        {
+                                                            <thead>
+                                                                <tr>
+                                                                    <th>@Html.DisplayFor(model => item.Title)</th>
+                                                                    <td>@Html.DisplayFor(model => item.Description)</td>
+                                                                </tr>
+                                                            </thead>
+
+                                                        }
+                                                    </table>
+                                                }
+                                            </div>
+                                            <div>
+                                                @foreach (var item in Model.ProfileCategories)
+                                                {
+                                                    if (item != null)
+                                                    {
+                                                        <div class="daiv" style="margin-bottom:20px;">
+                                                            <h4>@item.Title</h4>
+                                                            <div>
+                                                                @foreach (var list in item.ProfileCategoryLists)
+                                                                {
+
+
+                                                                    @if (item.Title.ToUpper().Contains("EDUCATION"))
+                                                                    {
+                                                                        <div class="secdaiv">
+
+                                                                            @if (!String.IsNullOrEmpty(list.Qualification))
+                                                                            {
+                                                                                <div>
+                                                                                    <strong>
+                                                                                        @if (!String.IsNullOrEmpty(list.FieldOfStudy))
+                                                                                        {
+                                                                                            @list.FieldOfStudy
+
+                                                                                        }
+
+                                                                                    </strong>
+                                                                                    <br />
+                                                                                    <strong>
+
+                                                                                        @if (!String.IsNullOrEmpty(list.Qualification))
+                                                                                        {
+                                                                                            @list.Qualification
+
+                                                                                        }
+                                                                                    </strong> <span>
+                                                                                        @if (!String.IsNullOrEmpty(list.StartDate))
+                                                                                        {
+
+                                                                                            <span>
+                                                                                                @list.StartDate
+                                                                                            </span>
+
+                                                                                        } -  @if (list.Currently == false)
+                                                                                        {
+                                                                                            @if (!String.IsNullOrEmpty(list.EndDate))
+                                                                                            {
+
+                                                                                                @list.EndDate
+
+                                                                                            }
+                                                                                        }
+                                                                                        else
+                                                                                        {
+                                                                                            <text>Current</text>
+
+                                                                                        }
+                                                                                    </span>
+                                                                                    <br />
+                                                                                    <strong>
+                                                                                        @if (!String.IsNullOrEmpty(list.Title))
+                                                                                        {
+
+                                                                                            @list.Title
+
+                                                                                        }
+                                                                                    </strong> @if (!String.IsNullOrEmpty(list.City))
+                                                                                    {
+                                                                                        <span>
+                                                                                            - @list.City
+                                                                                        </span>
+
+                                                                                    }
+                                                                                </div>
+
+                                                                            }
+
+                                                                        </div>}
+
+
+                                                                    @if (item.Title.ToUpper().Contains("EXPERIENCE"))
+                                                                    {
+                                                                        <div class="secdaiv">
+                                                                            @if (!String.IsNullOrEmpty(list.Title))
+                                                                            {
+                                                                                <div>
+                                                                                    <strong>
+                                                                                        @if (!String.IsNullOrEmpty(list.Title))
+                                                                                        {
+
+                                                                                            @list.Title
+
+                                                                                        }
+                                                                                    </strong> <span>
+                                                                                        @if (!String.IsNullOrEmpty(list.StartDate))
+                                                                                        {
+
+                                                                                            @list.StartDate
+
+                                                                                        } @if (list.Currently == false)
+                                                                                        {
+                                                                                            @if (!String.IsNullOrEmpty(list.EndDate))
+                                                                                            {
+
+                                                                                                <text> -</text> @list.EndDate
+
+                                                                                            }
+                                                                                        }
+                                                                                        else
+                                                                                        {
+                                                                                            <text>Current</text>
+
+                                                                                        }
+                                                                                    </span>
+                                                                                    <br />
+                                                                                    <strong>
+                                                                                        @if (!String.IsNullOrEmpty(list.Employer))
+                                                                                        {
+
+                                                                                            @list.Employer
+
+                                                                                        }
+                                                                                    </strong> @if (!String.IsNullOrEmpty(list.City))
+                                                                                    {
+                                                                                        <span>
+                                                                                            - @list.City
+                                                                                        </span>
+
+                                                                                    }
+                                                                                    <br />
+                                                                                    @if (!String.IsNullOrEmpty(list.Description))
+                                                                                    {
+                                                                                        <span>
+                                                                                            @Html.Raw(list.Description)
+                                                                                        </span>
+
+                                                                                    }
+                                                                                </div>
+
+                                                                            }
+                                                                        </div>
+                                                                    }
+
+
+                                                                    @if (item.Title.ToUpper().Contains("CERTIFICATIONS"))
+                                                                    {
+                                                                        <div class="secdaiv">
+                                                                            @if (!String.IsNullOrEmpty(list.Title))
+                                                                            {
+                                                                                <div>
+                                                                                    <strong>
+                                                                                        @if (!String.IsNullOrEmpty(list.Title))
+                                                                                        {
+
+                                                                                            @list.Title
+
+                                                                                        }
+                                                                                    </strong> <span>
+                                                                                        @if (!String.IsNullOrEmpty(list.StartDate))
+                                                                                        {
+
+                                                                                            <span>- @list.StartDate</span>
+
+                                                                                        }
+                                                                                    </span>
+
+                                                                                </div>
+
+                                                                            }
+                                                                        </div>
+                                                                    }
+
+
+                                                                    @if (item.Title.ToUpper().Contains("AWARDS"))
+                                                                    {
+                                                                        <div class="secdaiv">
+                                                                            @if (!String.IsNullOrEmpty(list.Title))
+                                                                            {
+                                                                                <div>
+                                                                                    <span>
+                                                                                        @if (!String.IsNullOrEmpty(list.Title))
+                                                                                        {
+
+                                                                                            @list.Title
+
+                                                                                        }
+                                                                                    </span>
+
+                                                                                </div>
+
+                                                                            }
+                                                                        </div>
+                                                                    }
+
+
+
+                                                                    @if (item.Title.ToUpper().Contains("SKILLS"))
+                                                                    {
+                                                                        <div class="secdaiv">
+                                                                            @if (!String.IsNullOrEmpty(list.Title))
+                                                                            {
+                                                                                <div>
+                                                                                    <span>
+                                                                                        @if (!String.IsNullOrEmpty(list.Title))
+                                                                                        {
+
+                                                                                            @list.Title
+
+                                                                                        }
+                                                                                    </span>
+
+                                                                                </div>
+
+                                                                            }
+                                                                        </div>
+                                                                    }
+
+
+
+                                                                    @if (item.Title.ToUpper().Contains("LANGUAGES"))
+                                                                    {
+                                                                        <div class="secdaiv">
+                                                                            @if (!String.IsNullOrEmpty(list.Title))
+                                                                            {
+                                                                                <div>
+                                                                                    <span>
+                                                                                        @if (!String.IsNullOrEmpty(list.Title))
+                                                                                        {
+
+                                                                                            @list.Title
+
+                                                                                        }
+                                                                                    </span>
+
+                                                                                </div>
+
+                                                                            }
+
+                                                                        </div>}
+
+
+                                                                    @if (item.Title.ToUpper().Contains("INTEREST"))
+                                                                    {
+                                                                        <div class="secdaiv">
+                                                                            @if (!String.IsNullOrEmpty(list.Title))
+                                                                            {
+                                                                                <div>
+                                                                                    <span>
+                                                                                        @if (!String.IsNullOrEmpty(list.Title))
+                                                                                        {
+
+                                                                                            @list.Title
+
+                                                                                        }
+                                                                                    </span>
+
+                                                                                </div>
+
+                                                                            }
+                                                                        </div>
+                                                                    }
+
+
+
+                                                                    @if (item.Title.ToUpper().Contains("REFERENCES"))
+                                                                    {
+                                                                        <div class="secdaiv">
+                                                                            @if (!String.IsNullOrEmpty(list.Description))
+                                                                            {
+                                                                                <div>
+                                                                                    <span>
+                                                                                        @if (!String.IsNullOrEmpty(list.Description))
+                                                                                        {
+
+                                                                                            @list.Description
+
+                                                                                        }
+                                                                                    </span>
+
+                                                                                </div>
+
+                                                                            }
+                                                                        </div>
+                                                                    }
+
+
+                                                                }
+                                                            </div>
+
+
+                                                        </div>
+                                                    }
+                                                }
+                                            </div>
+
+
+                                        </div>
+
+
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+
+                </div>
+            </div>
+
+
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">ADMISSION PROCESS</h3>
+
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label asp-for="Profile.NIN" class="control-label">Fullname</label>
+                                <p class="form-control-static">@Model.Profile.FullnameX</p>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label asp-for="Profile.Email" class="control-label"></label>
+                                <p class="form-control-static">@Model.Profile.Email</p>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label asp-for="Profile.PhoneNumber" class="control-label"></label>
+                                <p class="form-control-static">@Model.Profile.PhoneNumber</p>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label asp-for="Profile.NIN" class="control-label"></label>
+                                <p class="form-control-static">@Model.Profile.NIN</p>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label asp-for="Profile.State" class="control-label"></label>
+                                <p class="form-control-static">@Model.Profile.State</p>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label asp-for="Profile.PermanentLga" class="control-label"></label>
+                                <p class="form-control-static">@Model.Profile.PermanentLga</p>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label asp-for="Profile.Address" class="control-label"></label>
+                                <p class="form-control-static">@Model.Profile.Address</p>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label class="control-label">Course Applied</label>
+                                <p class="form-control-static bg-warning" style="padding:30px;">
+                                    @if (Model.TrainingApplicationForm.CareerTrainingJobRole != null)
+                                    {
+
+                                        @Model.TrainingApplicationForm.CareerTrainingJobRole.Title
+
+                                    }
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <form method="post">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <input type="hidden" asp-for="UserId" value="@Model.Profile.Id" />
+
+                        <div class="form-group">
+                            <label asp-for="SelectedCourseId">Course</label>
+                            <select id="courseDropdown" asp-for="SelectedCourseId" asp-items="ViewBag.CourseId" class="form-control">
+                                <option value="">Choose</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="SelectedCohortId">Cohort</label>
+                            <select id="cohortDropdown" asp-for="SelectedCohortId" class="form-control">
+                                <option value="">Select Cohort</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="OTP" class="control-label"></label>
+                            <input asp-for="OTP" class="form-control" />
+                            <span asp-validation-for="OTP" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <input type="submit" value="Approve" class="btn btn-success" />
+                            <form method="post">
+                                <input type="submit" value="Reject" class="btn btn-danger" />
+                            </form>
+                            <a asp-page="./Index" class="btn bg-gradient-warning btn-sm" style="float:right;">Back</a>
+
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+        </div>
 
     </div>
-    <!-- /.card-header -->
-    <div class="card-body">
-
-        <dl class="row">
-            <dt class="col-sm-2">
-                @Html.DisplayNameFor(model => model.TrainingApplicationForm.Profile.FullnameX)
-            </dt>
-            <dd class="col-sm-10">
-                @Html.DisplayFor(model => model.TrainingApplicationForm.Profile.FullnameX)
-            </dd>
-            <dt class="col-sm-2">
-                Passport
-            </dt>
-            <dd class="col-sm-10">
-                <img src="@Model.TrainingApplicationForm.Profile.PassportFilePathUrl" style="max-height:200px;" />
-            </dd>
-            <dt class="col-sm-2">
-                NIN
-            </dt>
-            <dd class="col-sm-10">
-                <img src="@Model.TrainingApplicationForm.Profile.NinUrl" style="max-height:200px;" />
-            </dd>
 
 
-            <dt class="col-sm-2">
-                @Html.DisplayNameFor(model => model.TrainingApplicationForm.CareerTrainingJobRole)
-            </dt>
-            <dd class="col-sm-10">
-                @Html.DisplayFor(model => model.TrainingApplicationForm.CareerTrainingJobRole.Title)
-            </dd>
-            <dt class="col-sm-2">
-                @Html.DisplayNameFor(model => model.TrainingApplicationForm.Profile.Date)
-            </dt>
-            <dd class="col-sm-10">
-                @Html.DisplayFor(model => model.TrainingApplicationForm.Profile.Date)
-            </dd>
-
-            <dt class="col-sm-2">
-                @Html.DisplayNameFor(model => model.TrainingApplicationForm.Profile.Email)
-            </dt>
-            <dd class="col-sm-10">
-                @Html.DisplayFor(model => model.TrainingApplicationForm.Profile.Email)
-            </dd>
-
-            <dt class="col-sm-2">
-                @Html.DisplayNameFor(model => model.TrainingApplicationForm.Profile.PhoneNumber)
-            </dt>
-            <dd class="col-sm-10">
-                @Html.DisplayFor(model => model.TrainingApplicationForm.Profile.PhoneNumber)
-            </dd>
-            <dt class="col-sm-2">
-                @Html.DisplayNameFor(model => model.TrainingApplicationForm.Profile.DateOfBirth)
-            </dt>
-            <dd class="col-sm-10">
-                @Html.DisplayFor(model => model.TrainingApplicationForm.Profile.DateOfBirth)
-            </dd>
-
-            <dt class="col-sm-2">
-                @Html.DisplayNameFor(model => model.TrainingApplicationForm.Profile.State)
-            </dt>
-            <dd class="col-sm-10">
-                @Html.DisplayFor(model => model.TrainingApplicationForm.Profile.State)
-            </dd>
-            <dt class="col-sm-2">
-                @Html.DisplayNameFor(model => model.TrainingApplicationForm.Profile.PermanentLga)
-            </dt>
-            <dd class="col-sm-10">
-                @Html.DisplayFor(model => model.TrainingApplicationForm.Profile.PermanentLga)
-            </dd>
-            <dt class="col-sm-2">
-                @Html.DisplayNameFor(model => model.TrainingApplicationForm.Profile.Address)
-            </dt>
-            <dd class="col-sm-10">
-                @Html.DisplayFor(model => model.TrainingApplicationForm.Profile.Address)
-            </dd>
-
-
-
-            <dt class="col-sm-2">
-                @Html.DisplayNameFor(model => model.TrainingApplicationForm.HighestLevelOfEducation)
-            </dt>
-            <dd class="col-sm-10">
-                @Html.DisplayFor(model => model.TrainingApplicationForm.HighestLevelOfEducation)
-            </dd>
-            <dt class="col-sm-2">
-                @Html.DisplayNameFor(model => model.TrainingApplicationForm.FieldOfStudy)
-            </dt>
-            <dd class="col-sm-10">
-                @Html.DisplayFor(model => model.TrainingApplicationForm.FieldOfStudy)
-            </dd>
-            <dt class="col-sm-2">
-                @Html.DisplayNameFor(model => model.TrainingApplicationForm.CurrentEducationalStatus)
-            </dt>
-            <dd class="col-sm-10">
-                @Html.DisplayFor(model => model.TrainingApplicationForm.CurrentEducationalStatus)
-            </dd>
-            <dt class="col-sm-2">
-                @Html.DisplayNameFor(model => model.TrainingApplicationForm.ComputerLiteracy)
-            </dt>
-            <dd class="col-sm-10">
-                @Html.DisplayFor(model => model.TrainingApplicationForm.ComputerLiteracy)
-            </dd>
-            <dt class="col-sm-2">
-                @Html.DisplayNameFor(model => model.TrainingApplicationForm.WebDevelopment)
-            </dt>
-            <dd class="col-sm-10">
-                @Html.DisplayFor(model => model.TrainingApplicationForm.WebDevelopment)
-            </dd>
-            <dt class="col-sm-2">
-                @Html.DisplayNameFor(model => model.TrainingApplicationForm.GraphicDesign)
-            </dt>
-            <dd class="col-sm-10">
-                @Html.DisplayFor(model => model.TrainingApplicationForm.GraphicDesign)
-            </dd>
-            <dt class="col-sm-2">
-                @Html.DisplayNameFor(model => model.TrainingApplicationForm.DigitalMarketing)
-            </dt>
-            <dd class="col-sm-10">
-                @Html.DisplayFor(model => model.TrainingApplicationForm.DigitalMarketing)
-            </dd>
-            <dt class="col-sm-2">
-                @Html.DisplayNameFor(model => model.TrainingApplicationForm.Programming)
-            </dt>
-            <dd class="col-sm-10">
-                @Html.DisplayFor(model => model.TrainingApplicationForm.Programming)
-            </dd>
-            <dt class="col-sm-2">
-                @Html.DisplayNameFor(model => model.TrainingApplicationForm.DataAnalysis)
-            </dt>
-            <dd class="col-sm-10">
-                @Html.DisplayFor(model => model.TrainingApplicationForm.DataAnalysis)
-            </dd>
-            <dt class="col-sm-2">
-                @Html.DisplayNameFor(model => model.TrainingApplicationForm.OtherRelevant)
-            </dt>
-            <dd class="col-sm-10">
-                @Html.DisplayFor(model => model.TrainingApplicationForm.OtherRelevant)
-            </dd>
-            <dt class="col-sm-2">
-                @Html.DisplayNameFor(model => model.TrainingApplicationForm.ExperienceWithDigitalTools)
-            </dt>
-            <dd class="col-sm-10">
-                @Html.DisplayFor(model => model.TrainingApplicationForm.ExperienceWithDigitalTools)
-            </dd>
-            <dt class="col-sm-2">
-                @Html.DisplayNameFor(model => model.TrainingApplicationForm.WhyAreYouInterestedInThisDigitalSkill)
-            </dt>
-            <dd class="col-sm-10">
-                @Html.DisplayFor(model => model.TrainingApplicationForm.WhyAreYouInterestedInThisDigitalSkill)
-            </dd>
-            <dt class="col-sm-2">
-                @Html.DisplayNameFor(model => model.TrainingApplicationForm.HowDoYouBelieveThisProgramCanHelpYouAchieveYourPersonalGoal)
-            </dt>
-            <dd class="col-sm-10">
-                @Html.DisplayFor(model => model.TrainingApplicationForm.HowDoYouBelieveThisProgramCanHelpYouAchieveYourPersonalGoal)
-            </dd>
-            <dt class="col-sm-2">
-                @Html.DisplayNameFor(model => model.TrainingApplicationForm.WhatDoYouHopeToGainFromParticipatingInThisProgram)
-            </dt>
-            <dd class="col-sm-10">
-                @Html.DisplayFor(model => model.TrainingApplicationForm.WhatDoYouHopeToGainFromParticipatingInThisProgram)
-            </dd>
-            <dt class="col-sm-2">
-                @Html.DisplayNameFor(model => model.TrainingApplicationForm.DoYouHaveAnySpecialNeedsOrAccommodationsWeShouldBeAwareOf)
-            </dt>
-            <dd class="col-sm-10">
-                @Html.DisplayFor(model => model.TrainingApplicationForm.DoYouHaveAnySpecialNeedsOrAccommodationsWeShouldBeAwareOf)
-            </dd>
-            <dt class="col-sm-2">
-                @Html.DisplayNameFor(model => model.TrainingApplicationForm.HowDidYouHearAboutThisProgram)
-            </dt>
-            <dd class="col-sm-10">
-                @Html.DisplayFor(model => model.TrainingApplicationForm.HowDidYouHearAboutThisProgram)
-            </dd>
-            <dt class="col-sm-2">
-                @Html.DisplayNameFor(model => model.TrainingApplicationForm.AreYouCurrentlyEmployedOrSelfEmployed)
-            </dt>
-            <dd class="col-sm-10">
-                @Html.DisplayFor(model => model.TrainingApplicationForm.AreYouCurrentlyEmployedOrSelfEmployed)
-            </dd>
-            <dt class="col-sm-2">
-                @Html.DisplayNameFor(model => model.TrainingApplicationForm.EmploymentDetails)
-            </dt>
-            <dd class="col-sm-10">
-                @Html.DisplayFor(model => model.TrainingApplicationForm.EmploymentDetails)
-            </dd>
-            <dt class="col-sm-2">
-                @Html.DisplayNameFor(model => model.TrainingApplicationForm.DoYouHaveAnyOtherRelevantInformationYouWouldLikeToShare)
-            </dt>
-            <dd class="col-sm-10">
-                @Html.DisplayFor(model => model.TrainingApplicationForm.DoYouHaveAnyOtherRelevantInformationYouWouldLikeToShare)
-            </dd>
-
-            <dt class="col-sm-2">
-                @Html.DisplayNameFor(model => model.TrainingApplicationForm.AcceptTerms)
-            </dt>
-            <dd class="col-sm-10">
-                @Html.DisplayFor(model => model.TrainingApplicationForm.AcceptTerms)
-            </dd>
-        </dl>
-    </div>
-
-    <a asp-page="./Index">Back to List</a>
-    <a asp-page="./Delete" asp-route-id="@Model.TrainingApplicationForm.ProfileId" class="btn btn-danger">Delete</a>
-</div>
-     
+    @section Scripts {
+        <script type="text/javascript">
+            $(document).ready(function () {
+                $('#courseDropdown').change(function () {
+                    var courseId = $(this).val();
+                    $.get('/Admin/UserManagement/ApplicationDetails?handler=CohortsByCourseId&courseId=' + courseId, function (data) {
+                        var cohortDropdown = $('#cohortDropdown');
+                        cohortDropdown.empty();
+                        $.each(data, function (index, cohort) {
+                            cohortDropdown.append('<option value="' + cohort.id + '">' + cohort.cohortNumber + '</option>');
+                        });
+                    });
+                });
+            });</script>
+    }

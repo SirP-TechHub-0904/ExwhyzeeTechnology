@@ -5,7 +5,11 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Migrations;
- 
+using ExwhyzeeTechnology.Domain.Models.Data;
+using System.Security.Claims;
+using System.Text.Json;
+using Microsoft.AspNetCore.Http;
+
 namespace ExwhyzeeTechnology.Persistence.EF.SQL;
 
 public class DashboardDbContext : IdentityDbContext<Profile, IdentityRole, string>
@@ -23,6 +27,8 @@ public class DashboardDbContext : IdentityDbContext<Profile, IdentityRole, strin
 
 
     //public DbSet<--> -- { get; set; } = null!;
+    public DbSet<EvaluationQuestion> EvaluationQuestions { get; set; } = null!;
+    public DbSet<EvaluationQuestionCategory> EvaluationQuestionCategories { get; set; } = null!;
     public DbSet<SmsSetting> SmsSettings { get; set; } = null!;
     public DbSet<DialCode> DialCodes { get; set; } = null!;
     public DbSet<PriceSetting> PriceSettings { get; set; } = null!;
@@ -143,18 +149,34 @@ public class DashboardDbContext : IdentityDbContext<Profile, IdentityRole, strin
     public DbSet<BudgetSubCategory> BudgetSubCategories { get; set; }
     public DbSet<BudgetList> BudgetLists { get; set; }
 
-    
 
 
+
+    public DbSet<ActivityLog> ActivityLogs { get; set; }
     public DbSet<Facility> Facilities { get; set; }
-     
+
     public DbSet<TrainingApplicationForm> TrainingApplicationForms { get; set; }
 
 
 
-    public DashboardDbContext(DbContextOptions options, ITenantProvider tenantProvider) : base(options)
+    public DbSet<Cohort> Cohorts { get; set; }
+    public DbSet<CohortAttendance> CohortAttendances { get; set; }
+    public DbSet<Course> Courses { get; set; }
+    public DbSet<DialyActivity> DialyActivities { get; set; }
+    public DbSet<DialyEvaluationQuestion> DialyEvaluationQuestions { get; set; }
+    public DbSet<DialyParticipantEvaluation> DialyParticipantEvaluations { get; set; }
+    public DbSet<Participant> Participants { get; set; }
+    public DbSet<TimeTable> TimeTables { get; set; }
+    public DbSet<TrainingTest> TrainingTests { get; set; }
+    public DbSet<TrainingTestOption> TrainingTestOptions { get; set; }
+
+
+    private readonly IHttpContextAccessor _httpContextAccessor;
+
+    public DashboardDbContext(DbContextOptions options, ITenantProvider tenantProvider, IHttpContextAccessor httpContextAccessor) : base(options)
     {
         _tenantProvider = tenantProvider;
+        _httpContextAccessor = httpContextAccessor;
     }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -172,6 +194,54 @@ public class DashboardDbContext : IdentityDbContext<Profile, IdentityRole, strin
 
         //configurationBuilder.Properties<string>()
         //    .HaveMaxLength(255);
+    }
+    public override int SaveChanges()
+    {
+        LogActivities();
+        return base.SaveChanges();
+    }
+
+    public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
+    {
+        LogActivities();
+        return base.SaveChangesAsync(cancellationToken);
+    }
+
+    private void LogActivities()
+    {
+        var userId = _httpContextAccessor.HttpContext?.User?.FindFirstValue(ClaimTypes.NameIdentifier);
+        var deviceInfo = _httpContextAccessor.HttpContext?.Request?.Headers["User-Agent"].ToString();
+
+
+        var entries = ChangeTracker.Entries()
+            .Where(e => e.State == EntityState.Added || e.State == EntityState.Modified)
+            .ToList();
+
+        foreach (var entry in entries)
+        {
+            var action = entry.State == EntityState.Added ? "Created" : "Edited";
+            var entityName = entry.Entity.GetType().Name;
+
+            // Optional: Serialize the property changes to JSON
+            var changes = new Dictionary<string, object>();
+            foreach (var prop in entry.Properties)
+            {
+                changes[prop.Metadata.Name] = prop.CurrentValue;
+            }
+
+            var log = new ActivityLog
+            {
+                EntityName = entityName,
+                Action = action,
+                Changes = JsonSerializer.Serialize(changes),
+                Timestamp = DateTime.UtcNow,
+                UserId = userId ?? "Unknown", // Handle cases where UserId may not be available
+                DeviceInformation = deviceInfo ?? "Unknown" // Capture the device info
+            };
+
+            // Save the log to the database or another log destination
+            ActivityLogs.Add(log);
+        }
     }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)

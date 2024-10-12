@@ -1,0 +1,83 @@
+﻿@page
+@model ExwhyzeeTechnology.Website.Areas.Admin.Pages.ICourse.ICohort.CreateModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<div class="card card-default">
+    <div class="card-header">
+        <h3 class="card-title">NEW COHORT ON COURSE</h3>
+
+    </div>
+    <!-- /.card-header -->
+
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-12">
+                <form method="post">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="form-group">
+                        <label asp-for="Cohort.CourseId" class="control-label"></label>
+                        <select asp-for="Cohort.CourseId" class="form-control" asp-items="ViewBag.CourseId"></select>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Cohort.CohortNumber" class="control-label"></label>
+                        <input asp-for="Cohort.CohortNumber" class="form-control" />
+                        <span asp-validation-for="Cohort.CohortNumber" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Cohort.CohortCode" class="control-label"></label>
+                        <input asp-for="Cohort.CohortCode" class="form-control" />
+                        <span asp-validation-for="Cohort.CohortCode" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Cohort.Description" class="control-label"></label>
+                        <input asp-for="Cohort.Description" class="form-control" />
+                        <span asp-validation-for="Cohort.Description" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Cohort.StartDate" class="control-label"></label>
+                        <input asp-for="Cohort.StartDate" class="form-control" />
+                        <span asp-validation-for="Cohort.StartDate" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Cohort.EndDate" class="control-label"></label>
+                        <input asp-for="Cohort.EndDate" class="form-control" />
+                        <span asp-validation-for="Cohort.EndDate" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Cohort.Year" class="control-label"></label>
+                        <input asp-for="Cohort.Year" class="form-control" />
+                        <span asp-validation-for="Cohort.Year" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Cohort.CourseStatus" class="control-label"></label>
+                        @Html.DropDownListFor(model => model.Cohort.CourseStatus, new SelectList(Enum.GetValues(typeof(ExwhyzeeTechnology.Domain.Enum.Enum.CourseStatus))), new { @class = "form-control" })
+                        <span asp-validation-for="Cohort.CourseStatus" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Cohort.Theme" class="control-label"></label>
+                        <textarea asp-for="Cohort.Theme" class="form-control" oninput="this.value = this.value.toUpperCase()"></textarea>
+                        <span asp-validation-for="Cohort.Theme" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" value="Submit" class="btn btn-primary" />
+                        <a asp-page="./Index" class="btn bg-gradient-warning btn-sm" style="float:right;">Back</a>
+
+                    </div>
+                </form>
+            </div>
+        </div>
+
+
+        <!-- /.row -->
+    </div>
+    <!-- /.card-body -->
+    <div class="card-footer">
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

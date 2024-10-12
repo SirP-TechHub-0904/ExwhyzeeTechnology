@@ -264,6 +264,12 @@ namespace ExwhyzeeTechnology.Domain.Models
         public string? NIN { get; set; }
         public string? NinUrl { get; set; }
         public string? NinKey { get; set; }
+
+         
+        public string? LastKnownIP { get; set; }
+        public string? LastKnownUserAgent { get; set; }
+
+
     }
 
 }

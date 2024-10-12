@@ -24,6 +24,11 @@ namespace ExwhyzeeTechnology.Domain.Enum
 
 
         }
+        public enum EvaluationAnswerType
+        {
+            Options = 0,
+            Typing = 2
+        }
         public enum SenderIdStatus
         {
             Pending = 1,
@@ -49,7 +54,7 @@ namespace ExwhyzeeTechnology.Domain.Enum
             Verified = 2,
 
             [Description("Cancelled")]
-            Cancelled = 3, 
+            Cancelled = 3,
 
         }
         public enum ParticipantStatus
@@ -102,16 +107,47 @@ namespace ExwhyzeeTechnology.Domain.Enum
 
         }
 
+        public enum AdmissionStatus
+        {
+            [Description("NONE")]
+            NONE = 0,
+            [Description("Admitted")]
+            Admitted = 2,
+            [Description("Disqualified")]
+            Disqualified = 2, 
+        }
+
+        public enum TrainingTestType
+        {
+            PreTest = 0,
+            PostTest = 2,
+        }
+     
         public enum ResultType
         {
-            
+
             [Description("YesNo")]
             YesNo = 0,
 
             [Description("Text")]
             Text = 3,
-             
 
+
+        }
+        public enum AttendanceSignInStatus
+        {
+
+            Present = 3,
+            Absent = 2,
+            Null = 0
+        }
+
+        public enum AttendanceSignOutStatus
+        {
+
+            Present = 3,
+            Absent = 2,
+            Null = 0
         }
         public enum CourseStatus
         {
@@ -139,7 +175,7 @@ namespace ExwhyzeeTechnology.Domain.Enum
 
             [Description("Allocated")]
             Allocated = 3,
-             
+
         }
         public enum MailSender
         {
@@ -154,7 +190,7 @@ namespace ExwhyzeeTechnology.Domain.Enum
 
             [Description("Webmail")]
             Webmail = 4,
-             
+
 
         }
         public enum Priority
@@ -187,7 +223,7 @@ namespace ExwhyzeeTechnology.Domain.Enum
             [Description("Success")]
             Success = 2,
 
-             
+
 
         }
         public enum EmailType

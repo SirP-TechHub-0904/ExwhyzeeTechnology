@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static ExwhyzeeTechnology.Domain.Enum.Enum;
 
 namespace ExwhyzeeTechnology.Domain.Models
 {
@@ -82,5 +83,6 @@ namespace ExwhyzeeTechnology.Domain.Models
         public CareerTrainingJobRole CareerTrainingJobRole { get; set; }
 
         public bool AcceptTerms {  get; set; }
+        public AdmissionStatus AdmissionStatus { get; set; }
     }
 }

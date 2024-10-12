@@ -666,6 +666,14 @@
                                     </div>
                                 </li>
 
+                                <li>
+                                    <div class="form-group">
+                                        <label asp-for="Setting.ApplicationLetter" class="control-label">Application Letter (Keyword: **name** **course** **cohort** **startdate** **enddate**)</label>
+                                        <textarea asp-for="Setting.ApplicationLetter" class="form-control summernote"></textarea>
+                                        <span asp-validation-for="Setting.ApplicationLetter" class="text-danger"></span>
+                                    </div>
+                                </li>
+
 
                             </ul>
                         </div>

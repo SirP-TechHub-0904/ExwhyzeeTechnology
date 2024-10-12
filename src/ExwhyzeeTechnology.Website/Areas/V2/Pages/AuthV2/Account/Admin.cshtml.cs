@@ -121,33 +121,7 @@ namespace ExwhyzeeTechnology.Website.V2.Pages.Authv2.Account
                 //    return RedirectToPage("/Account/Lockout", new { area = "Identity" });
 
                 //}
-                if (passcheck == true && user.TwoFactorEnabled == true)
-                {
-                    var result = await _signInManager.PasswordSignInAsync(user.UserName, Input.Password, Input.RememberMe, lockoutOnFailure: false);
-                    if (result.Succeeded)
-                    {
-
-                        return LocalRedirect(returnUrl);
-                    }
-                    if (result.RequiresTwoFactor)
-                    {
-                        return RedirectToPage("/Account/LoginWith2fa", new { area = "Identity", ReturnUrl = returnUrl, RememberMe = Input.RememberMe });
-                    }
-                    if (result.IsLockedOut)
-                    {
-                        _logger.LogWarning("User account locked out.");
-                        return RedirectToPage("./Lockout");
-                    }
-                    else
-                    {
-                        var allErrors = ModelState.Values.SelectMany(v => v.Errors);
-                        ModelState.AddModelError(string.Empty, "Invalid login attempt.");
-                        SuperSetting = await _context.SuperSettings.FirstOrDefaultAsync();
-                        Setting = await _context.Settings.FirstOrDefaultAsync();
-                        return Page();
-                    }
-                }
-                else if (passcheck == true)
+                if (passcheck == true)
                 {
                     await _signInManager.SignInAsync(user, isPersistent: false);
 

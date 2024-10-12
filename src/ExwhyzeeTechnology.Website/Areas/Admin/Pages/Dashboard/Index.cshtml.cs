@@ -1,13 +1,16 @@
+using DocumentFormat.OpenXml.Office2010.Excel;
 using ExwhyzeeTechnology.Application.Dtos;
 using ExwhyzeeTechnology.Application.Dtos.Dashboarrd;
 using ExwhyzeeTechnology.Application.Services;
 using ExwhyzeeTechnology.Domain.Models;
+using ExwhyzeeTechnology.Domain.Models.Data;
 using ExwhyzeeTechnology.Website.Areas.Admin.Pages.UserManagement;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using System.Globalization;
+using static ExwhyzeeTechnology.Domain.Enum.Enum;
 
 namespace ExwhyzeeTechnology.Website.Areas.Admin.Pages.Dashboard
 {
@@ -25,278 +28,73 @@ namespace ExwhyzeeTechnology.Website.Areas.Admin.Pages.Dashboard
             _userManager = userManager;
         }
 
-        public IList<DataListDto> DataListDto { get; set; } = new List<DataListDto>();
-        public IList<DataListDto> DataListMain { get; set; } = new List<DataListDto>();
-        public IList<QueryDataList> Query1 { get; set; } = new List<QueryDataList>();
-        public IList<QueryDataList> Query2 { get; set; } = new List<QueryDataList>();
+        public IList<TrainingApplicationForm> TrainingApplicationForm { get; set; }
+        // Property to hold the grouped result
+        public IList<CareerApplicationCountViewModel> CareerApplicationCounts { get; set; }
+        // List of background color classes
+        public List<string> Colors { get; set; } = new List<string>
+    {
+        "bg-danger", "bg-primary", "bg-warning", "bg-info",
+        "bg-secondary", "bg-dark", "bg-light", "bg-muted", "bg-success"
+    };
+        public int AllApplication {  get; set; }
+        public int AllMale {  get; set; }
+        public int AllFemale {  get; set; }
 
-        public bool Custom { get; set; }
-        public IList<DashboardData> DashboardDatas { get; set; }
-        public IList<UserCategory> UserCategories { get; set; }
-
-        public IList<XProjectTask> XProjectTask { get; set; }
-        public IList<DataListDto> UserDashboard { get; set; } = new List<DataListDto>();
-        public IList<DataListDto> UserAccountDashboard { get; set; } = new List<DataListDto>();
+        public int AllAdmitted { get; set; }
+        public int MaleAdmitted { get; set; }
+        public int FemaleAdmitted { get; set; }
+        public IList<CareerApplicationCountViewModel> AddmittedCount { get; set; }
         public async Task OnGetAsync()
         {
-            var dashboardsettings = await _context.DashboardSettings.FirstOrDefaultAsync();
+           var TrainingApplicationForm = _context.TrainingApplicationForms.Include(x=>x.CareerTrainingJobRole)
+              .AsQueryable();
 
-            DashboardDatas = await _context.DashboardDatas
-                .Include(x => x.DashboardDataLists)
-                .ToListAsync();
-            if(dashboardsettings != null) { 
-            Custom = dashboardsettings.UserCustomDashboard;
-                //
-            }
-            //
+            AllApplication = TrainingApplicationForm.Count();
+            AllMale = TrainingApplicationForm.Where(x=>x.Profile.Gender == Domain.Enum.Enum.GenderStatus.Male).Count();
+            AllFemale = TrainingApplicationForm.Where(x=>x.Profile.Gender == Domain.Enum.Enum.GenderStatus.Female).Count();
 
-            var useraccount = await _context.UserCategories.Include(x=>x.Profiles).Where(x=>x.Publish == true && x.ShowInDashboard == true).ToListAsync();
-            
-            foreach(var item in useraccount)
+            CareerApplicationCounts = await _context.TrainingApplicationForms
+            .Include(x => x.CareerTrainingJobRole) // Include the CareerTrainingJobRole for career names
+            .GroupBy(x => new { x.CareerTrainingJobRoleId, x.CareerTrainingJobRole.Title })
+            .Select(g => new CareerApplicationCountViewModel
             {
-                UserAccountDashboard.Add(new DataListDto
+                CareerName = g.Key.Title ?? "NO CHOICE",  // Grouped by Career Name
+                ApplicationCount = g.Count()    // Count the number of applications for each career
+            })
+            .ToListAsync();
+
+
+            ///
+            // Query the database to include Courses, Cohorts, and Participants (with User details)
+            var list = _context.Participants
+                .Include(x=>x.User)
+                .AsQueryable();
+
+           
+            // Calculate the total admitted participants
+            AllAdmitted = await list.CountAsync();
+
+            // Calculate the number of male admitted participants
+            MaleAdmitted = await list.CountAsync(p => p.User.Gender == GenderStatus.Male);
+
+            // Calculate the number of female admitted participants
+            FemaleAdmitted = await list.CountAsync(p => p.User.Gender == GenderStatus.Male);
+
+            // Group admitted participants by Cohort and Course and count the admissions
+            AddmittedCount = await _context.Courses
+                .GroupBy(p => new { p.Id, p.Name })
+                .Select(g => new CareerApplicationCountViewModel
                 {
-                    DataCount = item.Profiles.Count().ToString(),
-                    DataTitle = item.Title,
-                    DataPath = "/CH/Index",
-                    DataArea = item.Id.ToString(),
-                    DataColor = MainServices.SelectColor()
-                });
-            }
-            var report = _context.Report.AsQueryable();
-
-            DataListDto.Add(new DataListDto
-            {
-                DataCount = report.Count().ToString(),
-                DataTitle = "REPORT",
-                DataPath = "/IReport/Index",
-                DataColor = MainServices.SelectColor()
-            });
-
-            var request = _context.ClientRequest.AsQueryable();
-
-            DataListDto.Add(new DataListDto
-            {
-                DataCount = request.Count().ToString(),
-                DataTitle = "CLIENT REQUEST",
-                DataPath = "/IReport/Index",
-                DataColor = MainServices.SelectColor()
-            });
-
-            var jobs = _context.Jobs.AsQueryable();
-
-            DataListDto.Add(new DataListDto
-            {
-                DataCount = jobs.Count().ToString(),
-                DataTitle = "JOBS",
-                DataPath = "/IReport/Index",
-                DataColor = MainServices.SelectColor()
-            });
-
-            var training = _context.Trainings.AsQueryable();
-
-            DataListDto.Add(new DataListDto
-            {
-                DataCount = training.Count().ToString(),
-                DataTitle = "TRAININGS",
-                DataPath = "/IReport/Index",
-                DataColor = MainServices.SelectColor()
-            });
-
-            var expenses = _context.CompayExpenses.AsQueryable();
-            DataListDto.Add(new DataListDto
-            {
-                DataCount = expenses.Sum(x => x.Amount).ToString("C", CultureInfo.GetCultureInfo("en-NG")),
-                DataTitle = "EXPENSES",
-                DataPath = "/IReport/Index",
-                DataColor = MainServices.SelectColor()
-            });
-
-
-            var blog = _context.Blogs.AsQueryable();
-            DataListDto.Add(new DataListDto
-            {
-                DataCount = blog.Count().ToString(),
-                DataTitle = "NEWS POST",
-                DataPath = "/IReport/Index",
-                DataColor = MainServices.SelectColor()
-            });
-
-            var testimony = _context.Testimonies.AsQueryable();
-            DataListDto.Add(new DataListDto
-            {
-                DataCount = testimony.Count().ToString(),
-                DataTitle = "TESTIMONIES",
-                DataPath = "/IReport/Index",
-                DataColor = MainServices.SelectColor()
-            });
-
-
-            var career = _context.CareerFiles.AsQueryable();
-            DataListDto.Add(new DataListDto
-            {
-                DataCount = career.Count().ToString(),
-                DataTitle = "CAREER",
-                DataPath = "/IReport/Index",
-                DataColor = MainServices.SelectColor()
-            });
-
-
-
-            DataListDto.Add(new DataListDto
-            {
-                DataCount = "0",
-                DataTitle = "SMS SENT",
-                DataPath = "/IReport/Index",
-                DataColor = MainServices.SelectColor()
-            });
-
-            DataListDto.Add(new DataListDto
-            {
-                DataCount = "0",
-                DataTitle = "EMAILS SENT",
-                DataPath = "/IReport/Index",
-                DataColor = MainServices.SelectColor()
-            });
-            DataListDto.Add(new DataListDto
-            {
-                DataCount = "0",
-                DataTitle = "NEWSLETTER SENT",
-                DataPath = "/IReport/Index",
-                DataColor = MainServices.SelectColor()
-            });
-
-            DataListDto.Add(new DataListDto
-            {
-                DataCount = "0",
-                DataTitle = "PROPOSALS SENT",
-                DataPath = "/IReport/Index",
-                DataColor = MainServices.SelectColor()
-            });
-
-            var UserDatasList = new List<ProfileDto>();
-            var UserDatas = await _userManager.Users.ToListAsync();
-
-            var excludedRoles = new List<string> { "mSuperAdmin", "SubAdmin" };
-
-            foreach (var user in UserDatas)
-            {
-                var userRoles = await _userManager.GetRolesAsync(user);
-
-                if (userRoles.All(roleName => !excludedRoles.Contains(roleName)))
-                {
-                    var profile = new ProfileDto
-                    {
-                        Fullname = user.FirstName + " " + user.MiddleName + " " + user.LastName,
-                        Phone = user.PhoneNumber,
-                        Email = user.Email,
-                        Status = user.UserStatus,
-                        Id = user.Id,
-                        Roles = string.Join(", ", userRoles) // Combine roles into a comma-separated string
-                    };
-
-                    UserDatasList.Add(profile);
-                }
-            }
-
-            var users = UserDatasList.AsQueryable();
-
-            DataListMain.Add(new DataListDto
-            {
-                DataCount = users.Count().ToString(),
-                DataTitle = "USERS",
-                DataPath = "/UserManagement/Index",
-                DataColor = MainServices.SelectColor()
-            });
-            DataListMain.Add(new DataListDto
-            {
-                DataCount = users.Where(x=>x.Gender == Domain.Enum.Enum.GenderStatus.Male).Count().ToString(),
-                DataTitle = "MALES",
-                DataPath = "/UserManagement/Index",
-                DataColor = MainServices.SelectColor()
-            });
-            DataListMain.Add(new DataListDto
-            {
-                DataCount = users.Where(x => x.Gender == Domain.Enum.Enum.GenderStatus.Male).Count().ToString(),
-                DataTitle = "FEMALES",
-                DataPath = "/UserManagement/Index",
-                DataColor = MainServices.SelectColor()
-            });
-
-            DataListMain.Add(new DataListDto
-            {
-                DataCount = "0",
-                DataTitle = "CLIENTS",
-                DataPath = "/IReport/Index",
-                DataColor = MainServices.SelectColor()
-            });
-
-            var products = _context.Products.AsQueryable();
-
-            DataListMain.Add(new DataListDto
-            {
-                DataCount = products.Count().ToString(),
-                DataTitle = "PRODUCTS",
-                DataPath = "/IProduct/Main/Index",
-                DataArea = "Content",
-                DataColor = MainServices.SelectColor()
-            });
-
-            var proposal = _context.Proposals.AsQueryable();
-
-            DataListMain.Add(new DataListDto
-            {
-                DataCount = proposal.Count().ToString(),
-                DataTitle = "PROPOSALS",
-                DataPath = "/IProposalPage/Index",
-                DataColor = MainServices.SelectColor()
-            });
-
-            try
-            {
-
-
-
-                Query1 = new List<QueryDataList>();
-                Query1.Add(new QueryDataList { MainData = "State 1", AgainstData = "777", ColorData = "#FFA07A" });
-                Query1.Add(new QueryDataList { MainData = "State 2", AgainstData = "343", ColorData = "#ffce56" });
-                Query1.Add(new QueryDataList { MainData = "State 3", AgainstData = "6654", ColorData = "#D3D3D3" });
-                Query1.Add(new QueryDataList { MainData = "State 4", AgainstData = "6643", ColorData = "#000000" });
-
-
-
-            }
-            catch (Exception c)
-            {
-
-            }
-            try
-            {
-
-
-
-                Query2 = new List<QueryDataList>();
-                Query2.Add(new QueryDataList { MainData = "State 1", AgainstData = "777", ColorData = "#FFA07A" });
-                Query2.Add(new QueryDataList { MainData = "State 2", AgainstData = "343", ColorData = "#ffce56" });
-                Query2.Add(new QueryDataList { MainData = "State 3", AgainstData = "6654", ColorData = "#D3D3D3" });
-                Query2.Add(new QueryDataList { MainData = "State 4", AgainstData = "6643", ColorData = "#000000" });
-
-
-
-            }
-            catch (Exception c)
-            {
-
-            }
-            //
-            XProjectTask = await _context.XProjectTasks
-                .Include(x => x.XProjectSection).ThenInclude(x => x.XProject)
-                .Include(x => x.ApprovedBy)
-                .Include(x => x.TestedBy)
-                .Include(x => x.User)
-                 
+                    CareerName = g.Key.Name,            // Grouped by Course Name 
+                    ApplicationCount = g.Count()        // Count the number of admitted participants per cohort
+                })
                 .ToListAsync();
         }
     }
-
+    public class CareerApplicationCountViewModel
+    {
+        public string CareerName { get; set; }
+        public int ApplicationCount { get; set; }
+    }
 }

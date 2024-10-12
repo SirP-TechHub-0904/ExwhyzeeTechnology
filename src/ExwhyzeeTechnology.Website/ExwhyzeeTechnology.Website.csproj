@@ -62,15 +62,6 @@
     <Content Remove="Areas\Admin\Pages\UserManagement\Data.cshtml" />
     <Content Remove="Areas\Admin\Pages\UserManagement\UpdateUserPermissionAdmin.cshtml" />
     <Content Remove="Areas\Content\Pages\Advance\Search.cshtml" />
-    <Content Remove="Areas\EmailJS\Pages\Error.cshtml" />
-    <Content Remove="Areas\EmailJS\Pages\_ValidationScriptsPartial.cshtml" />
-    <Content Remove="Areas\EmailJS\Pages\_ViewImports.cshtml" />
-    <Content Remove="Areas\EmailJS\Pages\_ViewStart.cshtml" />
-    <Content Remove="Areas\IPortfolio\Pages\Error.cshtml" />
-    <Content Remove="Areas\IPortfolio\Pages\_ValidationScriptsPartial.cshtml" />
-    <Content Remove="Areas\IPortfolio\Pages\_ViewImports.cshtml" />
-    <Content Remove="Areas\IPortfolio\Pages\_ViewStart.cshtml" />
-    <Content Remove="Areas\SMS\Pages\Error.cshtml" />
     <Content Remove="Pages\Shared\Components\Slider\Datacheck.cshtml" />
     <Content Remove="Pages\Shared\Components\TestimonyHome\Default.cshtml" />
     <Content Remove="web.config" />
@@ -84,9 +75,9 @@
     <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="6.0.13" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="6.0.15" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="6.0.15" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="6.0.32" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.32" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="6.0.32">
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="6.0.33" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.33" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="6.0.33">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
@@ -116,12 +107,7 @@
     <Folder Include="Areas\Admin\Pages\IUsers\Permissions\" />
     <Folder Include="Areas\Admin\Pages\IUsers\Teams\" />
     <Folder Include="Areas\Admin\Pages\NewFolder\" />
-    <Folder Include="Areas\EmailJS\Pages\Users\" />
     <Folder Include="Areas\Management\Pages\SmsSettingPage\" />
-    <Folder Include="Areas\ThemePage\Pages\ICategory\" />
-    <Folder Include="Areas\Tools\Pages\Contact\" />
-    <Folder Include="Areas\Tools\Pages\Deliveries\" />
-    <Folder Include="Areas\Tools\Pages\Subscribers\" />
     <Folder Include="Pages\Shared\Components\Navigation\" />
     <Folder Include="Properties\PublishProfiles\" />
   </ItemGroup>
@@ -133,6 +119,21 @@
     <None Include="Areas\Admin\Pages\AC\NewUser.cshtml" />
     <None Include="Areas\Admin\Pages\Dashboard\Index.cshtml" />
     <None Include="Areas\Admin\Pages\Error.cshtml" />
+    <None Include="Areas\Admin\Pages\EvaluationPage\Add.cshtml" />
+    <None Include="Areas\Admin\Pages\EvaluationPage\Category\Add.cshtml" />
+    <None Include="Areas\Admin\Pages\EvaluationPage\Category\Delete.cshtml" />
+    <None Include="Areas\Admin\Pages\EvaluationPage\Category\Index.cshtml" />
+    <None Include="Areas\Admin\Pages\EvaluationPage\Category\Info.cshtml" />
+    <None Include="Areas\Admin\Pages\EvaluationPage\Category\Update.cshtml" />
+    <None Include="Areas\Admin\Pages\EvaluationPage\Delete.cshtml" />
+    <None Include="Areas\Admin\Pages\EvaluationPage\Index.cshtml" />
+    <None Include="Areas\Admin\Pages\EvaluationPage\Info.cshtml" />
+    <None Include="Areas\Admin\Pages\EvaluationPage\Update.cshtml" />
+    <None Include="Areas\Admin\Pages\EVP\Create.cshtml" />
+    <None Include="Areas\Admin\Pages\EVP\Delete.cshtml" />
+    <None Include="Areas\Admin\Pages\EVP\Details.cshtml" />
+    <None Include="Areas\Admin\Pages\EVP\Edit.cshtml" />
+    <None Include="Areas\Admin\Pages\EVP\Index.cshtml" />
     <None Include="Areas\Admin\Pages\IAttendance\AttendanceQuery.cshtml" />
     <None Include="Areas\Admin\Pages\IAttendance\Create.cshtml" />
     <None Include="Areas\Admin\Pages\IAttendance\Delete.cshtml" />
@@ -229,6 +230,20 @@
     <None Include="Areas\Admin\Pages\ITraining\Details.cshtml" />
     <None Include="Areas\Admin\Pages\ITraining\Edit.cshtml" />
     <None Include="Areas\Admin\Pages\ITraining\Index.cshtml" />
+    <None Include="Areas\Admin\Pages\TestQuestions\Add.cshtml" />
+    <None Include="Areas\Admin\Pages\TestQuestions\AddOption.cshtml" />
+    <None Include="Areas\Admin\Pages\TestQuestions\Delete.cshtml" />
+    <None Include="Areas\Admin\Pages\TestQuestions\DeleteOption.cshtml" />
+    <None Include="Areas\Admin\Pages\TestQuestions\Index.cshtml" />
+    <None Include="Areas\Admin\Pages\TestQuestions\Info.cshtml" />
+    <None Include="Areas\Admin\Pages\TestQuestions\Update.cshtml" />
+    <None Include="Areas\Admin\Pages\TestQuestions\UpdateOption.cshtml" />
+    <None Include="Areas\Admin\Pages\TimeTablePage\Create.cshtml" />
+    <None Include="Areas\Admin\Pages\TimeTablePage\Delete.cshtml" />
+    <None Include="Areas\Admin\Pages\TimeTablePage\Details.cshtml" />
+    <None Include="Areas\Admin\Pages\TimeTablePage\Edit.cshtml" />
+    <None Include="Areas\Admin\Pages\TimeTablePage\Index.cshtml" />
+    <None Include="Areas\Admin\Pages\TimeTablePage\Timetableview.cshtml" />
     <None Include="Areas\Admin\Pages\UserManagement\BarCodeGenerator.cshtml" />
     <None Include="Areas\Admin\Pages\UserManagement\Delete.cshtml" />
     <None Include="Areas\Admin\Pages\UserManagement\Details.cshtml" />
@@ -247,14 +262,6 @@
     <None Include="Areas\Admin\Pages\_ViewImports.cshtml" />
     <None Include="Areas\Admin\Pages\_ViewStart.cshtml" />
     <None Include="Areas\Content\Pages\Advance\Search.cshtml" />
-    <None Include="Areas\EmailJS\Pages\Error.cshtml" />
-    <None Include="Areas\EmailJS\Pages\_ValidationScriptsPartial.cshtml" />
-    <None Include="Areas\EmailJS\Pages\_ViewImports.cshtml" />
-    <None Include="Areas\EmailJS\Pages\_ViewStart.cshtml" />
-    <None Include="Areas\IPortfolio\Pages\Error.cshtml" />
-    <None Include="Areas\IPortfolio\Pages\_ValidationScriptsPartial.cshtml" />
-    <None Include="Areas\IPortfolio\Pages\_ViewImports.cshtml" />
-    <None Include="Areas\IPortfolio\Pages\_ViewStart.cshtml" />
     <None Include="Areas\MIS\Pages\Account\Awards.cshtml" />
     <None Include="Areas\MIS\Pages\Account\Certificate.cshtml" />
     <None Include="Areas\MIS\Pages\Account\Education.cshtml" />
@@ -266,7 +273,6 @@
     <None Include="Areas\MIS\Pages\Account\Reference.cshtml" />
     <None Include="Areas\MIS\Pages\Account\Skills.cshtml" />
     <None Include="Areas\MIS\Pages\Account\UpdateProfile.cshtml" />
-    <None Include="Areas\SMS\Pages\Error.cshtml" />
     <None Include="Areas\Staff\Pages\Dashboard\AllMeetings.cshtml" />
     <None Include="Areas\Staff\Pages\Dashboard\AttendanceInfo.cshtml" />
     <None Include="Areas\Staff\Pages\Dashboard\Details.cshtml" />
@@ -292,6 +298,7 @@
     <None Include="Pages\Shared\Components\Slider\Default.cshtml" />
     <None Include="Pages\Shared\Components\RoleData\Default.cshtml" />
     <None Include="Pages\Shared\Components\TestimonyHome\Default.cshtml" />
+    <None Include="Pages\Shared\Components\TimeTable\Default.cshtml" />
     <None Include="wwwroot\css\flaticon\fonts\Flaticon.svg" />
     <None Include="wwwroot\css\flaticon\fonts\Flaticon.woff2" />
     <None Include="wwwroot\css\flaticon\fonts\ionicons.svg" />

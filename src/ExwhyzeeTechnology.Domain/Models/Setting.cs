@@ -310,5 +310,7 @@ namespace ExwhyzeeTechnology.Domain.Models
 
         [Display(Name = "Career Footer Title")]
         public string? CareerFooterTitle { get; set; }
+
+        public string? ApplicationLetter {  get; set; }
     }
 }

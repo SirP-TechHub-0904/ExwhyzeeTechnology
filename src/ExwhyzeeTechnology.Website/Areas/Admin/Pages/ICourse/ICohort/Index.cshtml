@@ -1,0 +1,105 @@
+﻿@page
+@model ExwhyzeeTechnology.Website.Areas.Admin.Pages.ICourse.ICohort.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="card">
+    <div class="card-header">
+        <h3 class="card-title">COHORT ON COURSE (@Model.Course.Name)</h3>
+
+
+        <a asp-page="./Create" asp-route-id="@Model.Course.Id" class="btn bg-gradient-warning btn-sm" style="float:right;">Add New</a>
+
+    </div>
+    <!-- /.card-header -->
+    <div class="card-body">
+        <div class="table-responsive">
+            <table id="example1" class="table table-bordered table-striped">
+                <thead>
+                    <tr>
+                        <th>S/N</th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Cohort[0].Course)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Cohort[0].CohortNumber)
+                        </th>
+
+                        <th>
+                            @Html.DisplayNameFor(model => model.Cohort[0].StartDate)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Cohort[0].EndDate)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Cohort[0].Year)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Cohort[0].CourseStatus)
+                        </th>
+
+                        <th></th>
+                    </tr>
+                </thead>
+
+                @{
+                    int sn = 0;
+                }
+                <tbody>
+                    @foreach (var item in Model.Cohort.OrderBy(x=>x.StartDate))
+                    {
+                        <tr>
+                            <td>
+                                @{
+                                    sn++;
+                                }
+                                @sn
+                            </td>
+                            <td>
+                                <a asp-page="/ICourse/IParticipant/Index" asp-route-id="@item.Id">
+                                    @Html.DisplayFor(modelItem => item.Course.Name)
+
+                                </a>
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.CohortNumber)
+                            </td>
+                            <td>
+                                @item.StartDate.ToString("ddd dd MMM")
+                            </td>
+                            <td>
+                                @item.EndDate.ToString("ddd dd MMM")
+                            </td>
+                            <td>
+                                @item.Year.ToString("yyyy")
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.CourseStatus)
+                            </td>
+                            <td>
+                                <div class="btn-group">
+                                    <button type="button" class="btn btn-success">Action</button>
+
+                                    <div class="btn-group">
+                                        <button type="button" class="btn btn-success dropdown-toggle dropdown-icon" data-toggle="dropdown" aria-expanded="false">
+                                        </button>
+                                        <div class="dropdown-menu" style="">
+
+                                            <a class="dropdown-item" asp-page="./Edit" asp-route-id="@item.Id">Edit</a>
+                                            <a class="dropdown-item" asp-page="/ICourse/IParticipant/Index" asp-route-id="@item.Id">Participants</a>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </td>
+
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

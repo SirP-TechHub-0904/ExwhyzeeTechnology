@@ -14,7 +14,12 @@ IHost host = Host.CreateDefaultBuilder(args)
     })
     .ConfigureServices((hostContext, services) =>
     {
-       // services.AddTenantSupport(hostContext.Configuration);
+
+        // Register IHttpContextAccessor
+        services.AddHttpContextAccessor();
+
+
+        // services.AddTenantSupport(hostContext.Configuration);
         services.AddATenantSupport(hostContext.Configuration);
         services.AddEntityFrameworkSqlServer<DashboardDbContext>();
         services.AddHostedService<DbMigratorHostedService>();

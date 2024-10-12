@@ -1,0 +1,100 @@
+﻿@page
+@model ExwhyzeeTechnology.Website.Areas.Admin.Pages.ICourse.IParticipant.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="card">
+    <div class="card-header">
+        <h3 class="card-title">PARTICIPANTS ON COURSE (@Model.Cohort.Course.Name) (COHORT @Model.Cohort.CohortNumber)</h3>
+
+        <div class="col-md-12">
+            <button class="btn btn-primary">
+                Total  @Model.Participant.Where(x=>x.UserId != null).Count()
+            </button>
+            <button class="btn btn-primary">
+                Female  @Model.Participant.Where(x=>x.UserId != null).Count(x => x.User.Gender == ExwhyzeeTechnology.Domain.Enum.Enum.GenderStatus.Female)
+            </button>
+            <button class="btn btn-primary">
+                Male  @Model.Participant.Where(x=>x.UserId != null).Count(x => x.User.Gender == ExwhyzeeTechnology.Domain.Enum.Enum.GenderStatus.Male)
+            </button>
+
+        </div>
+    </div>
+
+    <!-- /.card-header -->
+    <div class="card-body">
+        <div class="table-responsive">
+            <table id="example1" class="table table-bordered table-striped">
+                <thead>
+                    <tr>
+                        <th>S/N</th>
+                        <th>
+                            NAME
+                        </th>
+                        <th>
+                           EMAIL
+                        </th>
+                        <th>
+                          PHONE
+                        </th>
+                       
+                        <th>
+                            @Html.DisplayNameFor(model => model.Participant[0].ParticipantStatus)
+                        </th>
+                        <th></th>
+                    </tr>
+                </thead>
+
+                @{
+                    int sn = 0;
+                }
+                <tbody>
+                    @foreach (var item in Model.Participant.Where(x=>x.UserId != null))
+                    {
+                        <tr>
+                            <td>
+                                @{
+                                    sn++;
+                                }
+                                @sn
+                            </td>
+                            <td>
+                                @item.User.FullnameX
+                            </td>
+                            <td>
+                                @item.User.Email
+                            </td>
+                            <td>
+                                @item.User.PhoneNumber
+                            </td>
+                           
+                            <td>
+                                @Html.DisplayFor(modelItem => item.ParticipantStatus)
+                            </td>
+                            <td>
+                                <div class="btn-group">
+                                    <button type="button" class="btn btn-success">Action</button>
+
+                                    <div class="btn-group">
+                                        <button type="button" class="btn btn-success dropdown-toggle dropdown-icon" data-toggle="dropdown" aria-expanded="false">
+                                        </button>
+                                        <div class="dropdown-menu" style="">
+
+                                            <a class="dropdown-item" asp-page="./Edit" asp-route-id="@item.Id">Edit</a>
+                                            <a class="dropdown-item" asp-page="/ICourse/IParticipant/Index" asp-route-id="@item.Id">Profile</a>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </td>
+
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

@@ -793,6 +793,14 @@
                                     @Html.DisplayFor(model => model.Setting.RibonPosition)
                                 </span>
                             </li>
+                            <li>
+                                <span style="font-weight: 900; margin-right: 30px;">
+                                    @Html.DisplayNameFor(model => model.Setting.ApplicationLetter)
+                                </span>
+                                <span>
+                                    @Html.Raw(Model.Setting.ApplicationLetter)
+                                </span>
+                            </li>
 
                         </ul>
                     </div>

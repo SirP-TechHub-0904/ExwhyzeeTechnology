@@ -1,0 +1,65 @@
+﻿@page
+@model ExwhyzeeTechnology.Website.Areas.Admin.Pages.ICourse.IParticipant.EditModel
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<div class="card card-default">
+    <div class="card-header">
+        <h3 class="card-title">UPDATE PARTICIPANT IN COURSE</h3>
+
+    </div>
+    <!-- /.card-header -->
+
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-12">
+                <form method="post">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <input type="hidden" asp-for="Participant.Id" />
+                    <div class="form-group">
+                        <label asp-for="Participant.UserId" class="control-label"></label>
+                        <select asp-for="Participant.UserId" class="form-control" asp-items="ViewBag.UserId"></select>
+                        <span asp-validation-for="Participant.UserId" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Participant.CohortId" class="control-label"></label>
+                        <select asp-for="Participant.CohortId" class="form-control" asp-items="ViewBag.CourseId"></select>
+                        <span asp-validation-for="Participant.CohortId" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Participant.IdNumber" class="control-label"></label>
+                        <input asp-for="Participant.IdNumber" class="form-control" />
+                        <span asp-validation-for="Participant.IdNumber" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Participant.SerialNumber" class="control-label"></label>
+                        <input asp-for="Participant.SerialNumber" class="form-control" />
+                        <span asp-validation-for="Participant.SerialNumber" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Participant.ParticipantStatus" class="control-label"></label>
+                        <select asp-for="Participant.ParticipantStatus" class="form-control"></select>
+                        <span asp-validation-for="Participant.ParticipantStatus" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" value="Submit" class="btn btn-primary" />
+                        <a asp-page="./Index" class="btn bg-gradient-warning btn-sm" style="float:right;">Back</a>
+
+                    </div>
+                </form>
+            </div>
+        </div>
+
+
+        <!-- /.row -->
+    </div>
+    <!-- /.card-body -->
+    <div class="card-footer">
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

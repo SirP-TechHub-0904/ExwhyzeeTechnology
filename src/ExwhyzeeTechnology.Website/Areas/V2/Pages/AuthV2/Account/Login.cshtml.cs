@@ -13,6 +13,8 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
 using ExwhyzeeTechnology.Domain.Models;
 using Microsoft.EntityFrameworkCore;
+using static ExwhyzeeTechnology.Domain.Enum.Enum;
+using ExwhyzeeTechnology.Application.Repository.NotifyRegister;
 
 namespace ExwhyzeeTechnology.Website.V2.Pages.Authv2.Account
 {
@@ -25,16 +27,19 @@ namespace ExwhyzeeTechnology.Website.V2.Pages.Authv2.Account
         private readonly SignInManager<Profile> _signInManager;
         private readonly ILogger<LoginModel> _logger;
         private readonly ExwhyzeeTechnology.Persistence.EF.SQL.DashboardDbContext _context;
+        private readonly IEmailSendService _email;
 
         public LoginModel(SignInManager<Profile> signInManager,
             ILogger<LoginModel> logger,
             UserManager<Profile> userManager,
-            Persistence.EF.SQL.DashboardDbContext context)
+            Persistence.EF.SQL.DashboardDbContext context,
+            IEmailSendService email)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _logger = logger;
             _context = context;
+            _email = email;
         }
 
         [BindProperty]
@@ -187,7 +192,19 @@ namespace ExwhyzeeTechnology.Website.V2.Pages.Authv2.Account
 
 
                     await _signInManager.SignInAsync(user, isPersistent: false);
+                    var userIp = HttpContext.Connection.RemoteIpAddress?.ToString();
+                    var userAgent = Request.Headers["User-Agent"].ToString();
 
+                    // Send email if a new device or browser is detected
+                    if (user.LastKnownIP != userIp || user.LastKnownUserAgent != userAgent)
+                    {
+
+                        var sendmailparticipants = await _email.SendEmailWithResult(user.FullnameX, user.Email, "", "", $"New Device Login Detected", $"We noticed a login from a new device or browser. If this wasn't you, please secure your account.");
+                         
+                       
+                        user.LastKnownIP = userIp;
+                        user.LastKnownUserAgent = userAgent;
+                    }
 
                     user.LastLogin = DateTime.UtcNow.AddHours(1).ToString();
                     await _userManager.UpdateAsync(user);

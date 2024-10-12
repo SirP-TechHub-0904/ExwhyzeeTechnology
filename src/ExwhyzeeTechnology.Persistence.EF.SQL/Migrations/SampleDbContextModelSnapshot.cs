@@ -17,10 +17,41 @@ namespace ExwhyzeeTechnology.Persistence.EF.SQL.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "6.0.32")
+                .HasAnnotation("ProductVersion", "6.0.33")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
+
+            modelBuilder.Entity("ExwhyzeeTechnology.Domain.Models.ActivityLog", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"), 1L, 1);
+
+                    b.Property<string>("Action")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Changes")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("DeviceInformation")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("EntityName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("Timestamp")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ActivityLogs");
+                });
 
             modelBuilder.Entity("ExwhyzeeTechnology.Domain.Models.AdditionalProfile", b =>
                 {
@@ -897,6 +928,412 @@ namespace ExwhyzeeTechnology.Persistence.EF.SQL.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("DashboardSettings");
+                });
+
+            modelBuilder.Entity("ExwhyzeeTechnology.Domain.Models.Data.Cohort", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"), 1L, 1);
+
+                    b.Property<string>("CohortCode")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CohortNumber")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<long?>("CourseId")
+                        .HasColumnType("bigint");
+
+                    b.Property<int>("CourseStatus")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("EndDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("StartDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Theme")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("Year")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CourseId");
+
+                    b.ToTable("Cohorts");
+                });
+
+            modelBuilder.Entity("ExwhyzeeTechnology.Domain.Models.Data.CohortAttendance", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"), 1L, 1);
+
+                    b.Property<int>("AccountType")
+                        .HasColumnType("int");
+
+                    b.Property<int>("AttendanceSignInStatus")
+                        .HasColumnType("int");
+
+                    b.Property<int>("AttendanceSignOutStatus")
+                        .HasColumnType("int");
+
+                    b.Property<long>("DialyActivityId")
+                        .HasColumnType("bigint");
+
+                    b.Property<long?>("ParticipantId")
+                        .HasColumnType("bigint");
+
+                    b.Property<int>("ParticipantId1")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("SignInSubmitted")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("SignOutSubmitted")
+                        .HasColumnType("bit");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("DialyActivityId");
+
+                    b.HasIndex("ParticipantId1");
+
+                    b.ToTable("CohortAttendances");
+                });
+
+            modelBuilder.Entity("ExwhyzeeTechnology.Domain.Models.Data.Course", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"), 1L, 1);
+
+                    b.Property<string>("Abbreviation")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Courses");
+                });
+
+            modelBuilder.Entity("ExwhyzeeTechnology.Domain.Models.Data.DialyActivity", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"), 1L, 1);
+
+                    b.Property<long>("CohortId")
+                        .HasColumnType("bigint");
+
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<TimeSpan>("FinishTime")
+                        .HasColumnType("time");
+
+                    b.Property<TimeSpan>("StartTime")
+                        .HasColumnType("time");
+
+                    b.Property<string>("Title")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CohortId");
+
+                    b.ToTable("DialyActivities");
+                });
+
+            modelBuilder.Entity("ExwhyzeeTechnology.Domain.Models.Data.DialyEvaluationQuestion", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"), 1L, 1);
+
+                    b.Property<long>("DialyActivityId")
+                        .HasColumnType("bigint");
+
+                    b.Property<int>("EvaluationAnswerType")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("IsModuleTopic")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Question")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("SortOrder")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("DialyActivityId");
+
+                    b.ToTable("DialyEvaluationQuestions");
+                });
+
+            modelBuilder.Entity("ExwhyzeeTechnology.Domain.Models.Data.DialyParticipantEvaluation", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"), 1L, 1);
+
+                    b.Property<string>("Answer")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("datetime2");
+
+                    b.Property<long>("DialyActivityId")
+                        .HasColumnType("bigint");
+
+                    b.Property<long>("DialyEvaluationQuestionId")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("ParticipantId")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("ParticipantId1")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("Submitted")
+                        .HasColumnType("bit");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("DialyActivityId");
+
+                    b.HasIndex("DialyEvaluationQuestionId");
+
+                    b.HasIndex("ParticipantId1");
+
+                    b.ToTable("DialyParticipantEvaluations");
+                });
+
+            modelBuilder.Entity("ExwhyzeeTechnology.Domain.Models.Data.EvaluationQuestion", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"), 1L, 1);
+
+                    b.Property<int>("EvaluationAnswerType")
+                        .HasColumnType("int");
+
+                    b.Property<long?>("EvaluationQuestionCategoryId")
+                        .HasColumnType("bigint");
+
+                    b.Property<bool>("Publish")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Question")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("SortOrder")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("EvaluationQuestionCategoryId");
+
+                    b.ToTable("EvaluationQuestions");
+                });
+
+            modelBuilder.Entity("ExwhyzeeTechnology.Domain.Models.Data.EvaluationQuestionCategory", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"), 1L, 1);
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("EvaluationQuestionCategories");
+                });
+
+            modelBuilder.Entity("ExwhyzeeTechnology.Domain.Models.Data.Participant", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<long?>("CohortId")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("IdNumber")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("ParticipantStatus")
+                        .HasColumnType("int");
+
+                    b.Property<int>("SerialNumber")
+                        .HasColumnType("int");
+
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CohortId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Participants");
+                });
+
+            modelBuilder.Entity("ExwhyzeeTechnology.Domain.Models.Data.TimeTable", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"), 1L, 1);
+
+                    b.Property<long?>("CohortId")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("Content")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("ContentStatus")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ContentType")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("EventDate")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("EventTime")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("EventType")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("IsLecture")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Module")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Note")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("SortOrder")
+                        .HasColumnType("int");
+
+                    b.Property<string>("SubTitle")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Title")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CohortId");
+
+                    b.ToTable("TimeTables");
+                });
+
+            modelBuilder.Entity("ExwhyzeeTechnology.Domain.Models.Data.TrainingTest", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"), 1L, 1);
+
+                    b.Property<long?>("CourseId")
+                        .HasColumnType("bigint");
+
+                    b.Property<bool>("Publish")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Question")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("SortOrder")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TrainingTestType")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("TrainingTests");
+                });
+
+            modelBuilder.Entity("ExwhyzeeTechnology.Domain.Models.Data.TrainingTestOption", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"), 1L, 1);
+
+                    b.Property<bool>("CorrectAnswer")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Option")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("SortOrder")
+                        .HasColumnType("int");
+
+                    b.Property<long?>("TrainingTestId")
+                        .HasColumnType("bigint");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("TrainingTestId");
+
+                    b.ToTable("TrainingTestOptions");
                 });
 
             modelBuilder.Entity("ExwhyzeeTechnology.Domain.Models.DataConfig", b =>
@@ -2313,6 +2750,12 @@ namespace ExwhyzeeTechnology.Persistence.EF.SQL.Migrations
                     b.Property<long?>("JobDesignationId")
                         .HasColumnType("bigint");
 
+                    b.Property<string>("LastKnownIP")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LastKnownUserAgent")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("LastLogin")
                         .HasColumnType("nvarchar(max)");
 
@@ -3324,6 +3767,9 @@ namespace ExwhyzeeTechnology.Persistence.EF.SQL.Migrations
                     b.Property<string>("AddressTwo")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("ApplicationLetter")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("ApplyTitle")
                         .HasColumnType("nvarchar(max)");
 
@@ -4185,6 +4631,9 @@ namespace ExwhyzeeTechnology.Persistence.EF.SQL.Migrations
                     b.Property<bool>("AcceptTerms")
                         .HasColumnType("bit");
 
+                    b.Property<int>("AdmissionStatus")
+                        .HasColumnType("int");
+
                     b.Property<string>("AreYouCurrentlyEmployedOrSelfEmployed")
                         .HasColumnType("nvarchar(max)");
 
@@ -4937,6 +5386,125 @@ namespace ExwhyzeeTechnology.Persistence.EF.SQL.Migrations
                     b.Navigation("DashboardData");
                 });
 
+            modelBuilder.Entity("ExwhyzeeTechnology.Domain.Models.Data.Cohort", b =>
+                {
+                    b.HasOne("ExwhyzeeTechnology.Domain.Models.Data.Course", "Course")
+                        .WithMany("Cohort")
+                        .HasForeignKey("CourseId");
+
+                    b.Navigation("Course");
+                });
+
+            modelBuilder.Entity("ExwhyzeeTechnology.Domain.Models.Data.CohortAttendance", b =>
+                {
+                    b.HasOne("ExwhyzeeTechnology.Domain.Models.Data.DialyActivity", "DialyActivity")
+                        .WithMany("CohortAttendance")
+                        .HasForeignKey("DialyActivityId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("ExwhyzeeTechnology.Domain.Models.Data.Participant", "Participant")
+                        .WithMany()
+                        .HasForeignKey("ParticipantId1")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("DialyActivity");
+
+                    b.Navigation("Participant");
+                });
+
+            modelBuilder.Entity("ExwhyzeeTechnology.Domain.Models.Data.DialyActivity", b =>
+                {
+                    b.HasOne("ExwhyzeeTechnology.Domain.Models.Data.Cohort", "Cohort")
+                        .WithMany()
+                        .HasForeignKey("CohortId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Cohort");
+                });
+
+            modelBuilder.Entity("ExwhyzeeTechnology.Domain.Models.Data.DialyEvaluationQuestion", b =>
+                {
+                    b.HasOne("ExwhyzeeTechnology.Domain.Models.Data.DialyActivity", "DialyActivity")
+                        .WithMany()
+                        .HasForeignKey("DialyActivityId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("DialyActivity");
+                });
+
+            modelBuilder.Entity("ExwhyzeeTechnology.Domain.Models.Data.DialyParticipantEvaluation", b =>
+                {
+                    b.HasOne("ExwhyzeeTechnology.Domain.Models.Data.DialyActivity", "DialyActivity")
+                        .WithMany()
+                        .HasForeignKey("DialyActivityId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("ExwhyzeeTechnology.Domain.Models.Data.DialyEvaluationQuestion", "DialyEvaluationQuestion")
+                        .WithMany()
+                        .HasForeignKey("DialyEvaluationQuestionId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("ExwhyzeeTechnology.Domain.Models.Data.Participant", "Participant")
+                        .WithMany()
+                        .HasForeignKey("ParticipantId1")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("DialyActivity");
+
+                    b.Navigation("DialyEvaluationQuestion");
+
+                    b.Navigation("Participant");
+                });
+
+            modelBuilder.Entity("ExwhyzeeTechnology.Domain.Models.Data.EvaluationQuestion", b =>
+                {
+                    b.HasOne("ExwhyzeeTechnology.Domain.Models.Data.EvaluationQuestionCategory", "EvaluationQuestionCategory")
+                        .WithMany()
+                        .HasForeignKey("EvaluationQuestionCategoryId");
+
+                    b.Navigation("EvaluationQuestionCategory");
+                });
+
+            modelBuilder.Entity("ExwhyzeeTechnology.Domain.Models.Data.Participant", b =>
+                {
+                    b.HasOne("ExwhyzeeTechnology.Domain.Models.Data.Cohort", "Cohort")
+                        .WithMany("Participants")
+                        .HasForeignKey("CohortId");
+
+                    b.HasOne("ExwhyzeeTechnology.Domain.Models.Profile", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId");
+
+                    b.Navigation("Cohort");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("ExwhyzeeTechnology.Domain.Models.Data.TimeTable", b =>
+                {
+                    b.HasOne("ExwhyzeeTechnology.Domain.Models.Data.Cohort", "Cohort")
+                        .WithMany()
+                        .HasForeignKey("CohortId");
+
+                    b.Navigation("Cohort");
+                });
+
+            modelBuilder.Entity("ExwhyzeeTechnology.Domain.Models.Data.TrainingTestOption", b =>
+                {
+                    b.HasOne("ExwhyzeeTechnology.Domain.Models.Data.TrainingTest", "TrainingTest")
+                        .WithMany("TrainingTestOptions")
+                        .HasForeignKey("TrainingTestId");
+
+                    b.Navigation("TrainingTest");
+                });
+
             modelBuilder.Entity("ExwhyzeeTechnology.Domain.Models.DialCode", b =>
                 {
                     b.HasOne("ExwhyzeeTechnology.Domain.Models.PriceSetting", "PriceSetting")
@@ -5592,6 +6160,26 @@ namespace ExwhyzeeTechnology.Persistence.EF.SQL.Migrations
             modelBuilder.Entity("ExwhyzeeTechnology.Domain.Models.DashboardData", b =>
                 {
                     b.Navigation("DashboardDataLists");
+                });
+
+            modelBuilder.Entity("ExwhyzeeTechnology.Domain.Models.Data.Cohort", b =>
+                {
+                    b.Navigation("Participants");
+                });
+
+            modelBuilder.Entity("ExwhyzeeTechnology.Domain.Models.Data.Course", b =>
+                {
+                    b.Navigation("Cohort");
+                });
+
+            modelBuilder.Entity("ExwhyzeeTechnology.Domain.Models.Data.DialyActivity", b =>
+                {
+                    b.Navigation("CohortAttendance");
+                });
+
+            modelBuilder.Entity("ExwhyzeeTechnology.Domain.Models.Data.TrainingTest", b =>
+                {
+                    b.Navigation("TrainingTestOptions");
                 });
 
             modelBuilder.Entity("ExwhyzeeTechnology.Domain.Models.ExpensesCategory", b =>
