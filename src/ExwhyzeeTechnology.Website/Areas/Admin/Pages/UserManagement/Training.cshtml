@@ -19,7 +19,21 @@
 
         </div>
     </div>
-    <!-- /.card-header -->
+    <div class="card-header">
+        
+        <div class="col-md-12">
+            <button class="btn btn-primary">
+                Total  @Model.Training.Count()
+            </button>
+            <button class="btn btn-primary">
+                Female  @Model.Training.Count(x => x.Profile.Gender == ExwhyzeeTechnology.Domain.Enum.Enum.GenderStatus.Female)
+            </button>
+            <button class="btn btn-primary">
+                Male  @Model.Training.Count(x => x.Profile.Gender == ExwhyzeeTechnology.Domain.Enum.Enum.GenderStatus.Male)
+            </button>
+
+        </div>
+    </div>
     <div class="card-body">
         <div class="table-responsive">
             <table id="example1" class="table table-bordered table-striped">
@@ -47,7 +61,7 @@
 
                 @{
                     int sn = 0;
-                     
+
                 }
                 <tbody>
                     @foreach (var item in Model.Training.OrderByDescending(x => x.Profile.Date))
@@ -61,7 +75,7 @@
                                 @sn
                             </td>
                             <td>
-                                @Html.DisplayFor(modelItem => item.Profile.Date.ToString("dd/MM/yyyy"))
+                                @item.Profile.Date.ToString("dd/MM/yyyy")
                             </td>
                             <td>
                                 <a asp-page="./ApplicationDetails" asp-route-id="@item.Profile.Id">
