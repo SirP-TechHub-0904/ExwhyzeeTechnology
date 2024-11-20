@@ -299,3 +299,13 @@
    at System.Net.Mail.SmtpClient.CheckHostAndPort()
    at System.Net.Mail.SmtpClient.Send(MailMessage message)
    at ExwhyzeeTechnology.Application.Repository.NotifyRegister.EmailSendService.SendEmailWithResult(String name, String to, String cc, String bcc, String subject, String body) in C:\Users\JURAY\source\repos\EXWHYZEETECHNOLOGIESLTD\ExwhyzeeTechnology\src\ExwhyzeeTechnology.Application\Repository\NotifyRegister\EmailSendService.cs:line 196
+23/10/2024 01:28:15 PM - log  cc emails Exwhyzee Technologies -  System.ArgumentException: The parameter 'addresses' cannot be an empty string. (Parameter 'addresses')
+   at System.Net.Mail.MailAddressCollection.Add(String addresses)
+   at ExwhyzeeTechnology.Application.Repository.NotifyRegister.EmailSendService.SendEmailWithResult(String name, String to, String cc, String bcc, String subject, String body) in C:\Users\JURAY\source\repos\EXWHYZEETECHNOLOGIESLTD\ExwhyzeeTechnology\src\ExwhyzeeTechnology.Application\Repository\NotifyRegister\EmailSendService.cs:line 164
+23/10/2024 01:28:15 PM - log  cc emails Exwhyzee Technologies -  System.ArgumentException: The parameter 'addresses' cannot be an empty string. (Parameter 'addresses')
+   at System.Net.Mail.MailAddressCollection.Add(String addresses)
+   at ExwhyzeeTechnology.Application.Repository.NotifyRegister.EmailSendService.SendEmailWithResult(String name, String to, String cc, String bcc, String subject, String body) in C:\Users\JURAY\source\repos\EXWHYZEETECHNOLOGIESLTD\ExwhyzeeTechnology\src\ExwhyzeeTechnology.Application\Repository\NotifyRegister\EmailSendService.cs:line 183
+23/10/2024 01:28:15 PM - log  Exwhyzee Technologies -  System.InvalidOperationException: The SMTP host was not specified.
+   at System.Net.Mail.SmtpClient.CheckHostAndPort()
+   at System.Net.Mail.SmtpClient.Send(MailMessage message)
+   at ExwhyzeeTechnology.Application.Repository.NotifyRegister.EmailSendService.SendEmailWithResult(String name, String to, String cc, String bcc, String subject, String body) in C:\Users\JURAY\source\repos\EXWHYZEETECHNOLOGIESLTD\ExwhyzeeTechnology\src\ExwhyzeeTechnology.Application\Repository\NotifyRegister\EmailSendService.cs:line 196

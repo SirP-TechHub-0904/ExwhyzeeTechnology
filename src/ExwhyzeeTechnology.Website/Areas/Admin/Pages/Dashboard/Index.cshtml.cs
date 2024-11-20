@@ -44,7 +44,7 @@ namespace ExwhyzeeTechnology.Website.Areas.Admin.Pages.Dashboard
         public int AllAdmitted { get; set; }
         public int MaleAdmitted { get; set; }
         public int FemaleAdmitted { get; set; }
-        public IList<CareerApplicationCountViewModel> AddmittedCount { get; set; }
+        public IList<CareerApplicationCountViewModel> AdmittedCount { get; set; }
         public async Task OnGetAsync()
         {
            var TrainingApplicationForm = _context.TrainingApplicationForms.Include(x=>x.CareerTrainingJobRole)
@@ -68,10 +68,11 @@ namespace ExwhyzeeTechnology.Website.Areas.Admin.Pages.Dashboard
             ///
             // Query the database to include Courses, Cohorts, and Participants (with User details)
             var list = _context.Participants
-                .Include(x=>x.User)
+                .Include(x => x.User)
+                .Include(x => x.Cohort)
+                .ThenInclude(c => c.Course)  // Ensure we load Course information through Cohort
                 .AsQueryable();
 
-           
             // Calculate the total admitted participants
             AllAdmitted = await list.CountAsync();
 
@@ -79,17 +80,20 @@ namespace ExwhyzeeTechnology.Website.Areas.Admin.Pages.Dashboard
             MaleAdmitted = await list.CountAsync(p => p.User.Gender == GenderStatus.Male);
 
             // Calculate the number of female admitted participants
-            FemaleAdmitted = await list.CountAsync(p => p.User.Gender == GenderStatus.Male);
+            FemaleAdmitted = await list.CountAsync(p => p.User.Gender == GenderStatus.Female);
 
-            // Group admitted participants by Cohort and Course and count the admissions
-            AddmittedCount = await _context.Courses
-                .GroupBy(p => new { p.Id, p.Name })
+            // Group admitted participants by Course and Cohort and count the admissions
+            AdmittedCount = await _context.Cohorts
+                .Include(c => c.Course)
+                .SelectMany(c => c.Participants)  // Access participants for each cohort
+                .GroupBy(p => new { p.Cohort.Course.Name, p.Cohort.CohortNumber })  // Group by Course Name and Cohort Number
                 .Select(g => new CareerApplicationCountViewModel
                 {
-                    CareerName = g.Key.Name,            // Grouped by Course Name 
-                    ApplicationCount = g.Count()        // Count the number of admitted participants per cohort
+                    CareerName = g.Key.Name + " - Cohort " + g.Key.CohortNumber,  // Display Course Name with Cohort Number
+                    ApplicationCount = g.Count()  // Count the number of admitted participants per cohort
                 })
                 .ToListAsync();
+
         }
     }
     public class CareerApplicationCountViewModel
