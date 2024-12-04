@@ -169,7 +169,7 @@ public class DashboardDbContext : IdentityDbContext<Profile, IdentityRole, strin
     public DbSet<TimeTable> TimeTables { get; set; }
     public DbSet<TrainingTest> TrainingTests { get; set; }
     public DbSet<TrainingTestOption> TrainingTestOptions { get; set; }
-
+    public DbSet<UserTest> UserTests { get; set; }
 
     private readonly IHttpContextAccessor _httpContextAccessor;
 

@@ -3,30 +3,31 @@
 
 @{
     ViewData["Title"] = "Index";
+    ViewData["TitleSub"] = $"PARTICIPANTS ON COURSE ({Model.Cohort.Course.Name}) (COHORT {Model.Cohort.CohortNumber})";
 }
 
 <div class="card">
     <div class="card-header">
         <h3 class="card-title">PARTICIPANTS ON COURSE (@Model.Cohort.Course.Name) (COHORT @Model.Cohort.CohortNumber)</h3>
+    </div>
 
-        <div class="col-md-12">
-            <button class="btn btn-primary">
-                Total  @Model.Participant.Where(x=>x.UserId != null).Count()
-            </button>
-            <button class="btn btn-primary">
-                Female  @Model.Participant.Where(x=>x.UserId != null).Count(x => x.User.Gender == ExwhyzeeTechnology.Domain.Enum.Enum.GenderStatus.Female)
-            </button>
-            <button class="btn btn-primary">
-                Male  @Model.Participant.Where(x=>x.UserId != null).Count(x => x.User.Gender == ExwhyzeeTechnology.Domain.Enum.Enum.GenderStatus.Male)
-            </button>
+    <div class="col-md-12">
+        <button class="btn btn-primary">
+            Total  @Model.Participant.Where(x => x.UserId != null).Count()
+        </button>
+        <button class="btn btn-primary">
+            Female  @Model.Participant.Where(x => x.UserId != null).Count(x => x.User.Gender == ExwhyzeeTechnology.Domain.Enum.Enum.GenderStatus.Female)
+        </button>
+        <button class="btn btn-primary">
+            Male  @Model.Participant.Where(x => x.UserId != null).Count(x => x.User.Gender == ExwhyzeeTechnology.Domain.Enum.Enum.GenderStatus.Male)
+        </button>
 
-        </div>
     </div>
 
     <!-- /.card-header -->
     <div class="card-body">
         <div class="table-responsive">
-            <table id="example1" class="table table-bordered table-striped">
+            <table id="" class="example-table table table-bordered table-striped">
                 <thead>
                     <tr>
                         <th>S/N</th>
@@ -34,16 +35,16 @@
                             NAME
                         </th>
                         <th>
-                           EMAIL
+                            EMAIL
                         </th>
                         <th>
-                          PHONE
+                            PHONE
                         </th>
-                       
+
                         <th>
                             @Html.DisplayNameFor(model => model.Participant[0].ParticipantStatus)
                         </th>
-                        <th></th>
+                        <th class="no-export"></th>
                     </tr>
                 </thead>
 
@@ -51,7 +52,7 @@
                     int sn = 0;
                 }
                 <tbody>
-                    @foreach (var item in Model.Participant.Where(x=>x.UserId != null))
+                    @foreach (var item in Model.Participant.Where(x => x.UserId != null).OrderBy(x => x.User.FullnameX))
                     {
                         <tr>
                             <td>
@@ -69,11 +70,11 @@
                             <td>
                                 @item.User.PhoneNumber
                             </td>
-                           
+
                             <td>
                                 @Html.DisplayFor(modelItem => item.ParticipantStatus)
                             </td>
-                            <td>
+                            <td class="no-export">
                                 <div class="btn-group">
                                     <button type="button" class="btn btn-success">Action</button>
 

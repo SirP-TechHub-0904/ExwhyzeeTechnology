@@ -19,7 +19,9 @@ namespace RazorWebUI.Areas.ITrainings.Pages.TestQuestions
 
         public async Task OnGetAsync()
         {
-            Datas = await _context.TrainingTests.ToListAsync();
+            Datas = await _context.TrainingTests
+                .Include(x=>x.TrainingTestOptions)
+                .ToListAsync();
 
         }
     }

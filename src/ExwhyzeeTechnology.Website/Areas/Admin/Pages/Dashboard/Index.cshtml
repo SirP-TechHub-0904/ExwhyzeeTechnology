@@ -13,6 +13,12 @@
     .col-lg-3 .small-box h3, .col-md-3 .small-box h3, .col-xl-3 .small-box h3 {
         font-size: 1.42rem;
     }
+    .text-truncate-2 {
+        white-space: nowrap; /* Prevent text from wrapping to the next line */
+        overflow: hidden; /* Hide overflowing content */
+        text-overflow: ellipsis; /* Display "..." at the end of the line when text overflows */
+        display: block; /* Ensures the element behaves as a block to apply ellipsis */
+    }
 
 </style>
 <div class="card">
@@ -81,7 +87,8 @@
                             <div class="inner">
                                 <h3>@item.ApplicationCount</h3>
 
-                                <p>@item.CareerName</p>
+                                <p class="text-truncate-2">@item.CareerName</p> <p>(Male: @item.MaleCount, Female: @item.FemaleCount, Non: @item.NoGenderCount)</p>
+
                             </div>
 
                         </div>
@@ -160,19 +167,14 @@
                         <!-- small box -->
                         <div class="small-box @color">
                             <div class="inner">
-                                <h3>@item.ApplicationCount</h3>
-
-                                <p>@item.CareerName</p>
-                            </div>
-
+                                <h3>@item.ApplicationCount</h3> 
+                                <p class="text-truncate-2">@item.CareerName</p>  <p>(Male: @item.MaleCount, Female: @item.FemaleCount, Non: @item.NoGenderCount)</p> 
+                            </div> 
                         </div>
                     </a>
-                </div>
-
+                </div> 
             }
-
-
-
+             
         </div>
     </div>
 

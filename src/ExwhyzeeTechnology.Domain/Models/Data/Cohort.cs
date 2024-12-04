@@ -31,6 +31,8 @@ namespace ExwhyzeeTechnology.Domain.Models.Data
         public CourseStatus CourseStatus { get; set; }
         public string Theme { get; set; } 
 
+
+
         public ICollection<Participant> Participants { get; set; }
          
     }

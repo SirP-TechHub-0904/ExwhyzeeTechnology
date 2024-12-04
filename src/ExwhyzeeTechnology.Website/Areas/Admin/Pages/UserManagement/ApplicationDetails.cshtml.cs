@@ -149,63 +149,63 @@ namespace ExwhyzeeTechnology.Website.Areas.Admin.Pages.UserManagement
 
              
             // Strip spaces and hypens
-            var verificationCode = OTP.Replace(" ", string.Empty).Replace("-", string.Empty);
+            //var verificationCode = OTP.Replace(" ", string.Empty).Replace("-", string.Empty);
 
-            var is2faTokenValid = await _userManager.VerifyTwoFactorTokenAsync(
-                user, _userManager.Options.Tokens.AuthenticatorTokenProvider, verificationCode);
+            //var is2faTokenValid = await _userManager.VerifyTwoFactorTokenAsync(
+            //    user, _userManager.Options.Tokens.AuthenticatorTokenProvider, verificationCode);
 
-            if (!is2faTokenValid || TrainingApplicationForm == null)
-            {
-                ModelState.AddModelError("Input.Code", "Verification code is invalid.");
-                Profile = await _userManager.FindByIdAsync(UserId);
+            //if (!is2faTokenValid || TrainingApplicationForm == null)
+            //{
+            //    ModelState.AddModelError("Input.Code", "Verification code is invalid.");
+            //    Profile = await _userManager.FindByIdAsync(UserId);
 
-                if (Profile == null)
-                {
-                    return NotFound();
-                }
+            //    if (Profile == null)
+            //    {
+            //        return NotFound();
+            //    }
                 
-                if (TrainingApplicationForm == null)
-                {
-                    TempData["error"] = "Unable to validate data";
-                    return RedirectToPage("./Training");
-                }
-                if (TrainingApplicationForm.CareerTrainingJobRoleId != null)
-                {
-                    F1 = true;
-                }
-                if (TrainingApplicationForm.HighestLevelOfEducation != null)
-                {
-                    F2 = true;
-                }
-                if (TrainingApplicationForm.ComputerLiteracy != null)
-                {
-                    F3 = true;
-                }
-                if (TrainingApplicationForm.WhyAreYouInterestedInThisDigitalSkill != null)
-                {
-                    F4 = true;
-                }
-                if (TrainingApplicationForm.DoYouHaveAnySpecialNeedsOrAccommodationsWeShouldBeAwareOf != null)
-                {
-                    F5 = true;
-                }
-                if (TrainingApplicationForm.AcceptTerms == true)
-                {
-                    F6 = true;
-                }
-                if (TrainingApplicationForm.Profile.State != null)
-                {
-                    F9 = true;
-                }
-                UserDatas = Profile;
-                AdditionalProfile = await _context.AdditionalProfiles.Where(x => x.ProfileId == UserDatas.Id).ToListAsync();
-                ProfileCategories = await _context.ProfileCategories
-                    .Include(x => x.ProfileCategoryLists).Where(x => x.ProfileId == UserDatas.Id).ToListAsync();
-                ViewData["CourseId"] = new SelectList(_context.Courses, "Id", "Name");
+            //    if (TrainingApplicationForm == null)
+            //    {
+            //        TempData["error"] = "Unable to validate data";
+            //        return RedirectToPage("./Training");
+            //    }
+            //    if (TrainingApplicationForm.CareerTrainingJobRoleId != null)
+            //    {
+            //        F1 = true;
+            //    }
+            //    if (TrainingApplicationForm.HighestLevelOfEducation != null)
+            //    {
+            //        F2 = true;
+            //    }
+            //    if (TrainingApplicationForm.ComputerLiteracy != null)
+            //    {
+            //        F3 = true;
+            //    }
+            //    if (TrainingApplicationForm.WhyAreYouInterestedInThisDigitalSkill != null)
+            //    {
+            //        F4 = true;
+            //    }
+            //    if (TrainingApplicationForm.DoYouHaveAnySpecialNeedsOrAccommodationsWeShouldBeAwareOf != null)
+            //    {
+            //        F5 = true;
+            //    }
+            //    if (TrainingApplicationForm.AcceptTerms == true)
+            //    {
+            //        F6 = true;
+            //    }
+            //    if (TrainingApplicationForm.Profile.State != null)
+            //    {
+            //        F9 = true;
+            //    }
+            //    UserDatas = Profile;
+            //    AdditionalProfile = await _context.AdditionalProfiles.Where(x => x.ProfileId == UserDatas.Id).ToListAsync();
+            //    ProfileCategories = await _context.ProfileCategories
+            //        .Include(x => x.ProfileCategoryLists).Where(x => x.ProfileId == UserDatas.Id).ToListAsync();
+            //    ViewData["CourseId"] = new SelectList(_context.Courses, "Id", "Name");
 
-                //Courses = new SelectList(await _context.Courses.ToListAsync(), "Id", "Name");
-                return Page();
-            }
+            //    //Courses = new SelectList(await _context.Courses.ToListAsync(), "Id", "Name");
+            //    return Page();
+            //}
 
             // Check if the participant already exists
             var checkadmission = await _context.Participants.FirstOrDefaultAsync(x => x.UserId == UserId);

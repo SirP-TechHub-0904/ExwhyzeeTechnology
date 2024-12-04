@@ -4,6 +4,7 @@ using ExwhyzeeTechnology.Persistence.EF.SQL;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ExwhyzeeTechnology.Persistence.EF.SQL.Migrations
 {
     [DbContext(typeof(DashboardDbContext))]
-    partial class SampleDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241204140437_userId-data-23l0")]
+    partial class userIddata23l0
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -1134,7 +1136,10 @@ namespace ExwhyzeeTechnology.Persistence.EF.SQL.Migrations
                     b.Property<long>("DialyEvaluationQuestionId")
                         .HasColumnType("bigint");
 
-                    b.Property<int?>("ParticipantId")
+                    b.Property<string>("ParticipantId")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("ParticipantId1")
                         .HasColumnType("int");
 
                     b.Property<bool>("Submitted")
@@ -1146,7 +1151,7 @@ namespace ExwhyzeeTechnology.Persistence.EF.SQL.Migrations
 
                     b.HasIndex("DialyEvaluationQuestionId");
 
-                    b.HasIndex("ParticipantId");
+                    b.HasIndex("ParticipantId1");
 
                     b.ToTable("DialyParticipantEvaluations");
                 });
@@ -1345,44 +1350,6 @@ namespace ExwhyzeeTechnology.Persistence.EF.SQL.Migrations
                     b.HasIndex("TrainingTestId");
 
                     b.ToTable("TrainingTestOptions");
-                });
-
-            modelBuilder.Entity("ExwhyzeeTechnology.Domain.Models.Data.UserTest", b =>
-                {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"), 1L, 1);
-
-                    b.Property<string>("Answer")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<long>("CohortId")
-                        .HasColumnType("bigint");
-
-                    b.Property<DateTime>("Date")
-                        .HasColumnType("datetime2");
-
-                    b.Property<bool>("Submitted")
-                        .HasColumnType("bit");
-
-                    b.Property<long>("TrainingTestId")
-                        .HasColumnType("bigint");
-
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CohortId");
-
-                    b.HasIndex("TrainingTestId");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("UserTests");
                 });
 
             modelBuilder.Entity("ExwhyzeeTechnology.Domain.Models.DataConfig", b =>
@@ -5505,7 +5472,9 @@ namespace ExwhyzeeTechnology.Persistence.EF.SQL.Migrations
 
                     b.HasOne("ExwhyzeeTechnology.Domain.Models.Data.Participant", "Participant")
                         .WithMany()
-                        .HasForeignKey("ParticipantId");
+                        .HasForeignKey("ParticipantId1")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("DialyActivity");
 
@@ -5554,31 +5523,6 @@ namespace ExwhyzeeTechnology.Persistence.EF.SQL.Migrations
                         .HasForeignKey("TrainingTestId");
 
                     b.Navigation("TrainingTest");
-                });
-
-            modelBuilder.Entity("ExwhyzeeTechnology.Domain.Models.Data.UserTest", b =>
-                {
-                    b.HasOne("ExwhyzeeTechnology.Domain.Models.Data.Cohort", "Cohort")
-                        .WithMany()
-                        .HasForeignKey("CohortId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("ExwhyzeeTechnology.Domain.Models.Data.TrainingTest", "TrainingTest")
-                        .WithMany()
-                        .HasForeignKey("TrainingTestId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("ExwhyzeeTechnology.Domain.Models.Profile", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId");
-
-                    b.Navigation("Cohort");
-
-                    b.Navigation("TrainingTest");
-
-                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("ExwhyzeeTechnology.Domain.Models.DialCode", b =>

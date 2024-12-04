@@ -11,9 +11,11 @@ namespace ExwhyzeeTechnology.Domain.Models.Data
     public class CohortAttendance
     {
         public long Id { get; set; }
-        [Display(Name = "User")]
-        public long? ParticipantId { get; set; }
-        public Participant Participant { get; set; }
+        public string? UserId { get; set; }
+        public Profile User { get; set; }
+
+        public int? CohortParticipantId { get; set; }
+        public Participant CohortParticipant { get; set; }
         [Display(Name = "SignIn Status")]
         public AttendanceSignInStatus AttendanceSignInStatus { get; set; }
         public bool SignInSubmitted { get; set; }

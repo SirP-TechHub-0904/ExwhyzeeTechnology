@@ -58,7 +58,7 @@
                                 @sn
                             </td>
                             <td>
-                                <a asp-page="/ICourse/IParticipant/Index" asp-route-id="@item.Id">
+                                <a asp-page="./Details" asp-route-id="@item.Id">
                                     @Html.DisplayFor(modelItem => item.Course.Name)
 
                                 </a>

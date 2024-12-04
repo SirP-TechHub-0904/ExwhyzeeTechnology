@@ -16,6 +16,22 @@ namespace ExwhyzeeTechnology.Domain.Models.Data
 
         [Display(Name = "Abbreviation")]
         public string Abbreviation { get; set; }
+
+
+        [Display(Name = "SignIn Start Time")]
+        public TimeSpan SignInStartTime { get; set; }
+        [Display(Name = "SignIn Stop Time")]
+        public TimeSpan SignInStopTime { get; set; }
+
+
+
+
+        [Display(Name = "SignOut Start Time")]
+        public TimeSpan SignOutStartTime { get; set; }
+        [Display(Name = "SignOut Stop Time")]
+        public TimeSpan SignOutStopTime { get; set; }
+
+
         public ICollection<Cohort> Cohort { get; set; }
     }
 }

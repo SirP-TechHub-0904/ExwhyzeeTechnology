@@ -5,6 +5,7 @@
     string title = ViewData["Title"]?.ToString();
     string uppercaseTitle = title?.ToUpper();
 
+
     // Check if the URL contains any of the specified substrings
     bool containsTimetable = Context.Request.Path.Value.Contains("accounttimetable", StringComparison.OrdinalIgnoreCase);
     bool containsTimetable2 = Context.Request.Path.Value.Contains("timetableview", StringComparison.OrdinalIgnoreCase);
@@ -13,8 +14,18 @@
     bool containsTimetable5 = Context.Request.Path.Value.Contains("Viewelectionresult", StringComparison.OrdinalIgnoreCase);
     bool showViewport = !(containsTimetable || containsTimetable2 || containsTimetable3 || containsTimetable4 || containsTimetable5);
 }
+@if (ViewData["TitleSub"] != null)
+{
+    <title id="page-title-j">@ViewData["TitleSub"]</title>
 
-<title id="page-title-j">@uppercaseTitle | DASHBOARD | @Model.CompanyName</title>
+
+}
+else
+{
+    <title id="page-title-j">@uppercaseTitle | DASHBOARD | @Model.CompanyName</title>
+
+}
+
 <link rel="shortcut icon" href="@Model.CompanyIconUrl" type="image/x-icon" />
 
 @if (showViewport)

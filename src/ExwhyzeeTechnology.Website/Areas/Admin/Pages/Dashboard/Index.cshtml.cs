@@ -60,7 +60,11 @@ namespace ExwhyzeeTechnology.Website.Areas.Admin.Pages.Dashboard
             .Select(g => new CareerApplicationCountViewModel
             {
                 CareerName = g.Key.Title ?? "NO CHOICE",  // Grouped by Career Name
-                ApplicationCount = g.Count()    // Count the number of applications for each career
+                ApplicationCount = g.Count(),    // Count the number of applications for each career
+                MaleCount = g.Count(x => x.Profile.Gender == Domain.Enum.Enum.GenderStatus.Male),
+                FemaleCount = g.Count(x => x.Profile.Gender == Domain.Enum.Enum.GenderStatus.Female),
+                NoGenderCount = g.Count(x => x.Profile.Gender == Domain.Enum.Enum.GenderStatus.None)
+
             })
             .ToListAsync();
 
@@ -90,7 +94,10 @@ namespace ExwhyzeeTechnology.Website.Areas.Admin.Pages.Dashboard
                 .Select(g => new CareerApplicationCountViewModel
                 {
                     CareerName = g.Key.Name + " - Cohort " + g.Key.CohortNumber,  // Display Course Name with Cohort Number
-                    ApplicationCount = g.Count()  // Count the number of admitted participants per cohort
+                    ApplicationCount = g.Count(),  // Count the number of admitted participants per cohort
+                    MaleCount = g.Count(p => p.User.Gender == GenderStatus.Male),
+                    FemaleCount = g.Count(p => p.User.Gender == GenderStatus.Female),
+                    NoGenderCount = g.Count(p => p.User.Gender == GenderStatus.None),
                 })
                 .ToListAsync();
 
@@ -100,5 +107,8 @@ namespace ExwhyzeeTechnology.Website.Areas.Admin.Pages.Dashboard
     {
         public string CareerName { get; set; }
         public int ApplicationCount { get; set; }
+        public int MaleCount { get; set; }  // Male count
+        public int FemaleCount { get; set; }  // Female count
+        public int NoGenderCount { get; set; }  // Female count
     }
 }

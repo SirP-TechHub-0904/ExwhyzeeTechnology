@@ -4,73 +4,133 @@
 @{
     ViewData["Title"] = "Details";
 }
+<style>
+    .input-group-sm > .custom-select, .input-group-sm > .form-control:not(textarea) {
+        height: auto;
+    }
 
-<div class="card card-default">
-    <div class="card-header">
-        <h3 class="card-title">DETAILS COHORT ON COURSE</h3>
+    .daiv {
+        box-shadow: 0px 11px 35px 0px #c5b5b4;
+        padding: 20px;
+    }
 
-    </div>
-    <!-- /.card-header -->
+    .secdaiv {
+        box-shadow: 0px 4px 5px 0px #c5b5b4;
+        padding: 10px;
+    }
 
-    <div class="card-body">
-        <div class="row">
-            <div class="col-md-12">
-                <dl class="row">
-                    <dt class="col-sm-2">
-                        @Html.DisplayNameFor(model => model.Cohort.Course)
-                    </dt>
-                    <dd class="col-sm-10">
-                        @Html.DisplayFor(model => model.Cohort.Course.Abbreviation)
-                    </dd>
-                    <dt class="col-sm-2">
-                        @Html.DisplayNameFor(model => model.Cohort.CohortNumber)
-                    </dt>
-                    <dd class="col-sm-10">
-                        @Html.DisplayFor(model => model.Cohort.CohortNumber)
-                    </dd>
-                    <dt class="col-sm-2">
-                        @Html.DisplayNameFor(model => model.Cohort.Description)
-                    </dt>
-                    <dd class="col-sm-10">
-                        @Html.DisplayFor(model => model.Cohort.Description)
-                    </dd>
-                    <dt class="col-sm-2">
-                        @Html.DisplayNameFor(model => model.Cohort.StartDate)
-                    </dt>
-                    <dd class="col-sm-10">
-                        @Html.DisplayFor(model => model.Cohort.StartDate)
-                    </dd>
-                    <dt class="col-sm-2">
-                        @Html.DisplayNameFor(model => model.Cohort.EndDate)
-                    </dt>
-                    <dd class="col-sm-10">
-                        @Html.DisplayFor(model => model.Cohort.EndDate)
-                    </dd>
-                    <dt class="col-sm-2">
-                        @Html.DisplayNameFor(model => model.Cohort.Year)
-                    </dt>
-                    <dd class="col-sm-10">
-                        @Html.DisplayFor(model => model.Cohort.Year)
-                    </dd>
-                    <dt class="col-sm-2">
-                        @Html.DisplayNameFor(model => model.Cohort.CourseStatus)
-                    </dt>
-                    <dd class="col-sm-10">
-                        @Html.DisplayFor(model => model.Cohort.CourseStatus)
-                    </dd>
-                    <dt class="col-sm-2">
-                        @Html.DisplayNameFor(model => model.Cohort.Theme)
-                    </dt>
-                    <dd class="col-sm-10">
-                        @Html.DisplayFor(model => model.Cohort.Theme)
-                    </dd>
-                </dl>
+    .m-border {
+        margin-bottom: 6px;
+    }
+</style>
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-header">
+                <h6 class="card-title">Cohort MANAGEMENT</h6>
+
+                <a asp-page="./Report" asp-route-id="@Model.Cohort.Id" class="btn bg-gradient-warning btn-sm" style="float:right;">Download Report</a>
+
             </div>
-        </div>
-        <!-- /.card-body -->
-        <div class="card-footer">
-            <a href="javascript:history.back()" class="btn bg-gradient-warning btn-sm">Back</a>
+            <div class="card-body">
+                <div class="row">
 
+                    <div class="col-md-4 m-border">
+                        <a asp-page="/ICourse/IParticipant/Index" asp-route-id="@Model.Cohort.Id" class="btn btn-primary" style="width:100%;">Participants (@Model.Cohort.Participants.Count())</a>
+                    </div>
+                    
+                    <div class="col-md-4 m-border">
+                        <a asp-page="/ICourse/IActivities/Index" asp-route-id="@Model.Cohort.Id" class="btn btn-info" style="width:100%;">Activities</a>
+                    </div>
+                    <div class="col-md-4 m-border">
+                        <a asp-page="/ICourse/ITest/Index" asp-route-id="@Model.Cohort.Id" class="btn btn-dark" style="width:100%;">Test Result</a>
+                    </div>
+                     
+                    <div class="col-md-4 m-border">
+                        <a asp-page="/Index" class="btn btn-primary" style="width:100%;">Physical/Digital Designs</a>
+                    </div>
+                    <div class="col-md-4 m-border">
+                        <a asp-page="/TimetablePage/Index" asp-route-id="@Model.Cohort.Id" class="btn btn-danger" style="width:100%;">TimeTable</a>
+                    </div>
+                    <div class="col-md-4 m-border">
+                        <a asp-page="/GalleryPage/Index" asp-route-id="@Model.Cohort.Id" class="btn btn-warning" style="width:100%;">Gallery</a>
+                    </div>
+                    
+
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <dl class="row">
+                                        <dt class="col-sm-2">
+                                            @Html.DisplayNameFor(model => model.Cohort.Course)
+                                        </dt>
+                                        <dd class="col-sm-10">
+                                            @Html.DisplayFor(model => model.Cohort.Course.Abbreviation)
+                                        </dd>
+                                        <dt class="col-sm-2">
+                                            @Html.DisplayNameFor(model => model.Cohort.CohortNumber)
+                                        </dt>
+                                        <dd class="col-sm-10">
+                                            @Html.DisplayFor(model => model.Cohort.CohortNumber)
+                                        </dd>
+                                        <dt class="col-sm-2">
+                                            @Html.DisplayNameFor(model => model.Cohort.Description)
+                                        </dt>
+                                        <dd class="col-sm-10">
+                                            @Html.DisplayFor(model => model.Cohort.Description)
+                                        </dd>
+                                        <dt class="col-sm-2">
+                                            @Html.DisplayNameFor(model => model.Cohort.StartDate)
+                                        </dt>
+                                        <dd class="col-sm-10">
+                                            @Html.DisplayFor(model => model.Cohort.StartDate)
+                                        </dd>
+                                        <dt class="col-sm-2">
+                                            @Html.DisplayNameFor(model => model.Cohort.EndDate)
+                                        </dt>
+                                        <dd class="col-sm-10">
+                                            @Html.DisplayFor(model => model.Cohort.EndDate)
+                                        </dd>
+                                        <dt class="col-sm-2">
+                                            @Html.DisplayNameFor(model => model.Cohort.Year)
+                                        </dt>
+                                        <dd class="col-sm-10">
+                                            @Html.DisplayFor(model => model.Cohort.Year)
+                                        </dd>
+                                        <dt class="col-sm-2">
+                                            @Html.DisplayNameFor(model => model.Cohort.CourseStatus)
+                                        </dt>
+                                        <dd class="col-sm-10">
+                                            @Html.DisplayFor(model => model.Cohort.CourseStatus)
+                                        </dd>
+                                        <dt class="col-sm-2">
+                                            @Html.DisplayNameFor(model => model.Cohort.Theme)
+                                        </dt>
+                                        <dd class="col-sm-10">
+                                            @Html.DisplayFor(model => model.Cohort.Theme)
+                                        </dd>
+                                    </dl>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card-footer">
+                <a href="javascript:history.back()" class="btn bg-gradient-warning btn-sm">Back</a>
+              
+                    <a asp-page="./Update" asp-route-id="@Model.Cohort.Id" class="btn btn-danger btn-sm">Update</a>
+                
+            </div>
         </div>
     </div>
 </div>
+ 

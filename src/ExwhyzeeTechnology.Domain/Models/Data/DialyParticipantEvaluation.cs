@@ -11,7 +11,7 @@ namespace ExwhyzeeTechnology.Domain.Models.Data
         public long Id { get; set; }
         public long DialyEvaluationQuestionId { get; set; }
         public DialyEvaluationQuestion DialyEvaluationQuestion { get; set; }
-        public string? ParticipantId { get; set; }
+        public int? ParticipantId { get; set; }
         public Participant Participant { get; set; }
         public long DialyActivityId { get; set; }
         public DialyActivity DialyActivity { get; set; }

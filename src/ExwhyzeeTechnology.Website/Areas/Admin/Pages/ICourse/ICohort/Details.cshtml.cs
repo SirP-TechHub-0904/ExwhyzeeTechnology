@@ -29,7 +29,9 @@ namespace ExwhyzeeTechnology.Website.Areas.Admin.Pages.ICourse.ICohort
             }
 
             Cohort = await _context.Cohorts
-                .Include(c => c.Course).FirstOrDefaultAsync(m => m.Id == id);
+                .Include(c => c.Course)
+                .Include(c => c.Participants)
+                .FirstOrDefaultAsync(m => m.Id == id);
 
             if (Cohort == null)
             {

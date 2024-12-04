@@ -1,0 +1,93 @@
+﻿@page
+@model ExwhyzeeTechnology.Website.Areas.Admin.Pages.ICourse.IEvaluation.IndexModel
+@{
+}
+
+<div class="card card-default">
+    <div class="card-header">
+        <h3 class="card-title text-uppercase">
+            DIALY EVALUATION
+        </h3>
+        <a asp-page="/ICourse/IActivities/ActivityDetails" asp-route-id="@Model.DialyActivity.Id" class="btn bg-gradient-warning btn-sm" style="float:right;">Bact to Activity</a>
+        @if (User.IsInRole("AdminEditor") || Model.Cohort.CourseStatus != ExwhyzeeTechnology.Domain.Enum.Enum.CourseStatus.Concluded)
+        {
+            <a asp-page="./EvaluationQuestion" asp-route-id="@Model.DialyActivity.Id" class="btn bg-gradient-danger btn-sm" style="float:right;">Evaluation Questions</a>
+        }
+    </div>
+    <!-- /.card-header -->
+    <div class="card-body">
+        <h3 class="text-uppercase">Cohort Information</h3>
+        <h3 class="card-title">
+            @Model.Cohort.Course.Name (@Model.Cohort.CohortCode) ( @Model.Cohort.StartDate.ToString("ddd dd MMM, yyyy") -
+            @Model.Cohort.EndDate.ToString("ddd dd MMM, yyyy"))
+        </h3>
+    </div>
+    <div class="card-body">
+        <h5 class="text-uppercase">Dialy Activity Information</h5>
+        <h5 class="">
+            Date:  @Model.DialyActivity.Date.ToString("dddd dd/MM/yyyy") (@Model.DialyActivity.StartTime - @Model.DialyActivity.FinishTime))
+            <br />Title: @Model.DialyActivity.Title
+        </h5>
+    </div>
+    <!-- /.card-header -->
+    <div class="card-body">
+        <div class="card-body">
+            <div class="table-responsive">
+                <table id="example1" class="table table-bordered table-striped">
+                    <thead>
+                        <tr>
+                            <th>S/N</th>
+                            <th>Name</th>
+                            <th>Gender</th>
+                           
+
+                            <th></th>
+
+                        </tr>
+                    </thead>
+
+                    @{
+                        int sn = 0;
+                    }
+                    <tbody>
+                        @foreach (var item in Model.DialyParticipantEvaluation)
+                        {
+                            <tr>
+
+                                <td>
+                                    @{
+                                        sn++;
+                                    }
+                                    @sn
+                                </td>
+                                <td>
+                                    @item.Participant.User.FullnameX
+
+
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Participant.User.Gender)
+                                </td>
+                             
+
+                                <td>
+                                    <a asp-page="/Account/EvaluationResult" class="btn btn-primary" asp-route-tid="@Model.Cohort.Id" asp-route-userId="@item.Participant.UserId" asp-route-did="@item.DialyActivityId">
+                                        View
+                                    </a>
+                                </td>
+
+
+
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -29,6 +29,28 @@
                         <span asp-validation-for="Course.Abbreviation" class="text-danger"></span>
                     </div>
                     <div class="form-group">
+                        <label asp-for="Course.SignInStartTime" class="control-label"></label>
+                        <input asp-for="Course.SignInStartTime" class="form-control" placeholder="00:00" type="time" />
+                        <span asp-validation-for="Course.SignInStartTime" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Course.SignInStopTime" class="control-label"></label>
+                        <input asp-for="Course.SignInStopTime" class="form-control" type="time" />
+                        <span asp-validation-for="Course.SignInStopTime" class="text-danger"></span>
+                    </div>
+
+
+                    <div class="form-group">
+                        <label asp-for="Course.SignOutStartTime" class="control-label"></label>
+                        <input asp-for="Course.SignOutStartTime" class="form-control" placeholder="00:00" type="time" />
+                        <span asp-validation-for="Course.SignOutStartTime" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Course.SignOutStopTime" class="control-label"></label>
+                        <input asp-for="Course.SignOutStopTime" class="form-control" type="time" />
+                        <span asp-validation-for="Course.SignOutStopTime" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
                         <input type="submit" value="Submit" class="btn btn-primary" />
                         <a asp-page="./Index" class="btn bg-gradient-warning btn-sm" style="float:right;">Back</a>
 
