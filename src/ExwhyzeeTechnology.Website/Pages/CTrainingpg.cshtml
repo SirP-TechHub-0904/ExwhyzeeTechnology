@@ -1,5 +1,6 @@
 ﻿@page
 @model ExwhyzeeTechnology.Website.Pages.CTrainingpgModel
+<a href="C:\Users\JURAY\source\repos\EXWHYZEETECHNOLOGIESLTD\ExwhyzeeTechnology\src\ExwhyzeeTechnology.Website\Pages\CTrainingpg.cshtml">C:\Users\JURAY\source\repos\EXWHYZEETECHNOLOGIESLTD\ExwhyzeeTechnology\src\ExwhyzeeTechnology.Website\Pages\CTrainingpg.cshtml</a>
 @using System.Text.RegularExpressions;
 
 @{
@@ -193,8 +194,8 @@
                                             </div>
                                         </div>
                                     </div>
-                                    
-                                   
+
+
                                     <div class="form-group">
                                         <label asp-for="Address" class="control-label">Current Contact Address</label>
                                         <input asp-for="Address" class="form-control" required="required" oninput="this.value = this.value.toUpperCase()" />
@@ -608,7 +609,7 @@
 
                         <div id="collapseSix" class="accordion-collapse collapse @collapseClassClose" aria-labelledby="headingSix" data-bs-parent="#accordion">
                             <div class="accordion-body">
-                                
+
                                 <form method="post" asp-page-handler="Close" enctype="multipart/form-data">
                                     <input type="hidden" asp-for="TrainingApplicationForm.Id" />
                                     <div class="form-group">
@@ -660,5 +661,5 @@
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
     }
 
-<script src="~/js/lga.js"></script>
+    <script src="~/js/lga.js"></script>
 }

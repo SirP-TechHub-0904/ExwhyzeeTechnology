@@ -1,0 +1,63 @@
+﻿@page
+@model ExwhyzeeTechnology.Website.Areas.Admin.Pages.ICourse.IAssignment.EditModel
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>Assignment</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Assignment.Id" />
+            <input type="hidden" asp-for="Assignment.DialyActivityId" value="@Model.DialyActivity.Id" />
+
+            <div class="form-group">
+                <label asp-for="Assignment.Title" class="control-label"></label>
+                <input asp-for="Assignment.Title" class="form-control" />
+                <span asp-validation-for="Assignment.Title" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Assignment.Question" class="control-label"></label>
+                <textarea asp-for="Assignment.Question" class="form-control summernote"></textarea>
+                <span asp-validation-for="Assignment.Question" class="text-danger"></span>
+            </div>
+            @if (!String.IsNullOrEmpty(Model.Assignment.FIleUrl)) { 
+            <div class="form-group">
+                <label asp-for="Assignment.Question" class="control-label">Previous File</label>
+               
+                <h6><a href="@Model.Assignment.FIleUrl">Open</a></h6>
+            </div>
+            }
+            <div class="form-group">
+                <label class="control-label">Upload file, image, doc etc</label><br />
+                <input type="file" class="control-label" asp-for="imagefile" />
+            </div>
+            <div class="form-group">
+                <label asp-for="Assignment.Date" class="control-label"></label>
+                <input asp-for="Assignment.Date" class="form-control" />
+                <span asp-validation-for="Assignment.Date" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Assignment.LastSubmissionDate" class="control-label">Last Submission Date</label>
+                <input asp-for="Assignment.LastSubmissionDate" class="form-control" />
+                <span asp-validation-for="Assignment.LastSubmissionDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="./Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -4,6 +4,7 @@ using ExwhyzeeTechnology.Persistence.EF.SQL;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ExwhyzeeTechnology.Persistence.EF.SQL.Migrations
 {
     [DbContext(typeof(DashboardDbContext))]
-    partial class SampleDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241205144034_assignent-0120")]
+    partial class assignent0120
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

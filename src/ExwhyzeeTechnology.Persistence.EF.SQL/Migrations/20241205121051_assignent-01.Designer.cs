@@ -4,6 +4,7 @@ using ExwhyzeeTechnology.Persistence.EF.SQL;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ExwhyzeeTechnology.Persistence.EF.SQL.Migrations
 {
     [DbContext(typeof(DashboardDbContext))]
-    partial class SampleDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241205121051_assignent-01")]
+    partial class assignent01
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -1292,7 +1294,7 @@ namespace ExwhyzeeTechnology.Persistence.EF.SQL.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("GroupAssignments");
+                    b.ToTable("GroupAssignment");
                 });
 
             modelBuilder.Entity("ExwhyzeeTechnology.Domain.Models.Data.Participant", b =>
@@ -1458,9 +1460,6 @@ namespace ExwhyzeeTechnology.Persistence.EF.SQL.Migrations
                     b.Property<long>("AssignmentId")
                         .HasColumnType("bigint");
 
-                    b.Property<DateTime>("DateSubmitted")
-                        .HasColumnType("datetime2");
-
                     b.Property<string>("FileKey")
                         .HasColumnType("nvarchar(max)");
 
@@ -1469,9 +1468,6 @@ namespace ExwhyzeeTechnology.Persistence.EF.SQL.Migrations
 
                     b.Property<long?>("GroupId")
                         .HasColumnType("bigint");
-
-                    b.Property<DateTime>("LastDateUpdated")
-                        .HasColumnType("datetime2");
 
                     b.Property<int>("ParticipantId")
                         .HasColumnType("int");
@@ -1484,7 +1480,7 @@ namespace ExwhyzeeTechnology.Persistence.EF.SQL.Migrations
 
                     b.HasIndex("ParticipantId");
 
-                    b.ToTable("UserAssignments");
+                    b.ToTable("UserAssignment");
                 });
 
             modelBuilder.Entity("ExwhyzeeTechnology.Domain.Models.Data.UserTest", b =>

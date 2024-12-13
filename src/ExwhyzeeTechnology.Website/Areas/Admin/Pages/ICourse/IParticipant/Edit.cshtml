@@ -18,29 +18,13 @@
                 <form method="post">
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                     <input type="hidden" asp-for="Participant.Id" />
-                    <div class="form-group">
-                        <label asp-for="Participant.UserId" class="control-label"></label>
-                        <select asp-for="Participant.UserId" class="form-control" asp-items="ViewBag.UserId"></select>
-                        <span asp-validation-for="Participant.UserId" class="text-danger"></span>
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="Participant.CohortId" class="control-label"></label>
-                        <select asp-for="Participant.CohortId" class="form-control" asp-items="ViewBag.CourseId"></select>
-                        <span asp-validation-for="Participant.CohortId" class="text-danger"></span>
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="Participant.IdNumber" class="control-label"></label>
-                        <input asp-for="Participant.IdNumber" class="form-control" />
-                        <span asp-validation-for="Participant.IdNumber" class="text-danger"></span>
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="Participant.SerialNumber" class="control-label"></label>
-                        <input asp-for="Participant.SerialNumber" class="form-control" />
-                        <span asp-validation-for="Participant.SerialNumber" class="text-danger"></span>
-                    </div>
+                    <input type="hidden" asp-for="Participant.UserId" />
+                  
+                  
+                    
                     <div class="form-group">
                         <label asp-for="Participant.ParticipantStatus" class="control-label"></label>
-                        <select asp-for="Participant.ParticipantStatus" class="form-control"></select>
+                        @Html.DropDownListFor(model => model.Participant.ParticipantStatus, new SelectList(Enum.GetValues(typeof(ExwhyzeeTechnology.Domain.Enum.Enum.ParticipantStatus))), new { @class = "form-control" })
                         <span asp-validation-for="Participant.ParticipantStatus" class="text-danger"></span>
                     </div>
                     <div class="form-group">

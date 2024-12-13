@@ -4,6 +4,7 @@ using ExwhyzeeTechnology.Persistence.EF.SQL;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ExwhyzeeTechnology.Persistence.EF.SQL.Migrations
 {
     [DbContext(typeof(DashboardDbContext))]
-    partial class SampleDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241205140107_assignent-012")]
+    partial class assignent012
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -1292,7 +1294,7 @@ namespace ExwhyzeeTechnology.Persistence.EF.SQL.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("GroupAssignments");
+                    b.ToTable("GroupAssignment");
                 });
 
             modelBuilder.Entity("ExwhyzeeTechnology.Domain.Models.Data.Participant", b =>

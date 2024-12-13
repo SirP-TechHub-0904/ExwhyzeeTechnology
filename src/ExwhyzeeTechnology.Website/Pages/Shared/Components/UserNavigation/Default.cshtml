@@ -78,7 +78,14 @@
 
     </ul>
 </li>
-
+<li class="nav-item">
+    <a asp-page="/UserManagement/Participants" asp-area="Admin" class="nav-link">
+        <i class="nav-icon fas fa-th"></i>
+        <p>
+            All Participants
+        </p>
+    </a>
+</li>
 @if (User.Identity.IsAuthenticated && User.IsInRole("Customer Care") || User.IsInRole("Admin") || User.IsInRole("mSuperAdmin"))
 {
     <li class="nav-item">
@@ -119,6 +126,14 @@
                             <i class="nav-icon fas fa-circle"></i>
                             <p>
                                 Training Application
+                            </p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a asp-page="/UserManagement/Yearbook" asp-area="Admin" class="nav-link">
+                            <i class="nav-icon fas fa-circle"></i>
+                            <p>
+                               Year Book
                             </p>
                         </a>
                     </li>
@@ -218,11 +233,11 @@
             <a asp-page="/TestQuestions/Index" asp-area="Admin" class="nav-link">
                 <i class="nav-icon fas fa-circle nav-icon"></i>
                 <p class="uppercase">
-                   Test Questions
+                    Test Questions
                 </p>
             </a>
         </li>
-       
+
 
     </ul>
 </li>

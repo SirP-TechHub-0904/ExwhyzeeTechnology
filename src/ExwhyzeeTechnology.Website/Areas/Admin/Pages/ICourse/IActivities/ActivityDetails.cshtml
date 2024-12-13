@@ -35,14 +35,22 @@
 
 
     <div class="row">
-        <div class="col-md-6">
-            <a asp-page="./Attendance" asp-route-id="@Model.Cohort.Id" asp-route-aid="@Model.DialyActivity.Id" class="btn btn-primary" style="width:100%;padding:30px;">Attendance</a>
+        <div class="col-md-4">
+            <a asp-page="./Attendance" asp-route-id="@Model.Cohort.Id" asp-route-aid="@Model.DialyActivity.Id" class="btn btn-primary" style="width:100%;padding:30px;margin:20px;">Attendance</a>
 
         </div>
-        <div class="col-md-6">
-            <a asp-page="/ICourse/IEvaluation/Index" asp-route-id="@Model.Cohort.Id" asp-route-aid="@Model.DialyActivity.Id" class="btn btn-warning" style="width: 100%; padding: 30px;">Evaluation</a>
+        <div class="col-md-4">
+            <a asp-page="/ICourse/IEvaluation/Index" asp-route-id="@Model.Cohort.Id" asp-route-aid="@Model.DialyActivity.Id" class="btn btn-warning" style="width: 100%; padding: 30px; margin: 20px;">Evaluation</a>
 
         </div>
+        <div class="col-md-4">
+            <a asp-page="/ICourse/IAssignment/Index" asp-route-id="@Model.DialyActivity.Id" class="btn btn-danger" style="width: 100%; padding: 30px; margin: 20px;">Assignment</a>
+
+        </div>
+        @*<div class="col-md-6">
+            <a asp-page="/ICourse/IProject/Index" asp-route-id="@Model.Cohort.Id" asp-route-aid="@Model.DialyActivity.Id" class="btn btn-success" style="width: 100%; padding: 30px; margin: 20px;">Projects</a>
+
+        </div>*@
     </div>
 
 

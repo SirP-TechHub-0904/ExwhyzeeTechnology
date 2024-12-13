@@ -6,7 +6,7 @@
 @{
     string title = $"PRETEST AND POSTTEST FOR {Model.Cohort.Course.Name} ({Model.Cohort.CohortNumber}) ON ({Model.Cohort.StartDate.ToString("dd MMM")} - {Model.Cohort.EndDate.ToString("dd MMM, yyyy")})";
 
-    ViewData["Title"] = title;
+    ViewData["TitleSub"] = title;
 }
 <style>
     @@media print {
@@ -87,7 +87,7 @@
                 <div class="">
 
                     <div class="table-responsive">
-                        <table class="table table-bordered table-striped" style="border-top:2px solid black;">
+                        <table class="example-table table table-bordered table-striped" style="border-top:2px solid black;">
 
                             <thead>
                                 <tr>

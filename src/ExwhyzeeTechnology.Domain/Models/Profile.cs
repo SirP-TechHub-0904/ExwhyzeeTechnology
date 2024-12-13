@@ -96,7 +96,8 @@ namespace ExwhyzeeTechnology.Domain.Models
 
         [Display(Name = "Marital Status")]
         public string? MaritalStatus { get; set; }
-
+        [Display(Name = "Employment Status")]
+        public string? EmploymentStatus { get; set; }
 
         [Display(Name = "Sponsor")]
         public string? Sponsor { get; set; }

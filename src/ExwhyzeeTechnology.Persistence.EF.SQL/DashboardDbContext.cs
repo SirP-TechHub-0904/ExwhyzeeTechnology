@@ -170,6 +170,10 @@ public class DashboardDbContext : IdentityDbContext<Profile, IdentityRole, strin
     public DbSet<TrainingTest> TrainingTests { get; set; }
     public DbSet<TrainingTestOption> TrainingTestOptions { get; set; }
     public DbSet<UserTest> UserTests { get; set; }
+    public DbSet<Assignment> Assignments { get; set; }
+    public DbSet<CohortProject> CohortProjects { get; set; }    
+    public DbSet<UserAssignment> UserAssignments { get; set; }    
+    public DbSet<GroupAssignment> GroupAssignments { get; set; }
 
     private readonly IHttpContextAccessor _httpContextAccessor;
 

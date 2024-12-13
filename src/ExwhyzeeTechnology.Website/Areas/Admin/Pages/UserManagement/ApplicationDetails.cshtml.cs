@@ -237,7 +237,7 @@ namespace ExwhyzeeTechnology.Website.Areas.Admin.Pages.UserManagement
                 };
 
                 // Generate registration number in format: course/cohort/01
-                newparticipant.IdNumber = $"{cohort.Course.Abbreviation}/{cohort.CohortCode}/{cohortSerialNumber:D2}";
+                newparticipant.IdNumber = $"EXWHYZEE/{cohort.Course.Abbreviation}/{cohort.CohortCode}/{cohortSerialNumber:D2}";
 
                 // Add new participant to the database
                 _context.Participants.Add(newparticipant);
@@ -245,7 +245,8 @@ namespace ExwhyzeeTechnology.Website.Areas.Admin.Pages.UserManagement
                 TrainingApplicationForm.AdmissionStatus = Domain.Enum.Enum.AdmissionStatus.Admitted;
                 _context.Attach(TrainingApplicationForm).State = EntityState.Modified;
                 await _context.SaveChangesAsync();
-
+                user.EmploymentStatus = TrainingApplicationForm.EmploymentStatus;
+                await _userManager.UpdateAsync(user);
                 // Redirect to a page, passing the new participant ID
                 return RedirectToPage("./AdmissionStatus", new { id = newparticipant.Id });
             }

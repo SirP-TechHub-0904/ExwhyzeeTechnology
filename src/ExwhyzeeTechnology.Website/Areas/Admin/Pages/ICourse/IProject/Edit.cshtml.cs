@@ -8,9 +8,8 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using ExwhyzeeTechnology.Domain.Models.Data;
 using ExwhyzeeTechnology.Persistence.EF.SQL;
-using DocumentFormat.OpenXml.Office2010.Excel;
 
-namespace ExwhyzeeTechnology.Website.Areas.Admin.Pages.ICourse.IParticipant
+namespace ExwhyzeeTechnology.Website.Areas.Admin.Pages.ICourse.IProject
 {
     public class EditModel : PageModel
     {
@@ -22,25 +21,25 @@ namespace ExwhyzeeTechnology.Website.Areas.Admin.Pages.ICourse.IParticipant
         }
 
         [BindProperty]
-        public Participant Participant { get; set; }
+        public CohortProject CohortProject { get; set; }
 
-        public async Task<IActionResult> OnGetAsync(int? id)
+        public async Task<IActionResult> OnGetAsync(long? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            Participant = await _context.Participants
-                .Include(p => p.Cohort)
-                .Include(p => p.User).FirstOrDefaultAsync(m => m.Id == id);
+            CohortProject = await _context.CohortProjects
+                .Include(c => c.Cohort)
+                .Include(c => c.User).FirstOrDefaultAsync(m => m.Id == id);
 
-            if (Participant == null)
+            if (CohortProject == null)
             {
                 return NotFound();
             }
-           ViewData["CourseId"] = new SelectList(_context.Courses, "Id", "Abbreviation");
-           ViewData["UserId"] = new SelectList(_context.Users, "Id", "Id");
+           ViewData["CohortId"] = new SelectList(_context.Cohorts, "Id", "CohortCode");
+           ViewData["UserId"] = new SelectList(_context.Users, "Id", "FullnameX");
             return Page();
         }
 
@@ -52,14 +51,8 @@ namespace ExwhyzeeTechnology.Website.Areas.Admin.Pages.ICourse.IParticipant
             {
                 return Page();
             }
-            var xParticipant = await _context.Participants
-            .Include(p => p.Cohort)
-               .Include(p => p.User).FirstOrDefaultAsync(m => m.Id == Participant.Id);
-            xParticipant.ParticipantStatus = Participant.ParticipantStatus;
-            //xParticipant.CohortId = Participant.CohortId;
-            //xParticipant.IdNumber = $"EXWHYZEE/{cohort.Course.Abbreviation}/{cohort.CohortCode}/{cohortSerialNumber:D2}";
 
-            _context.Attach(Participant).State = EntityState.Modified;
+            _context.Attach(CohortProject).State = EntityState.Modified;
 
             try
             {
@@ -67,7 +60,7 @@ namespace ExwhyzeeTechnology.Website.Areas.Admin.Pages.ICourse.IParticipant
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!ParticipantExists(Participant.Id))
+                if (!CohortProjectExists(CohortProject.Id))
                 {
                     return NotFound();
                 }
@@ -80,9 +73,9 @@ namespace ExwhyzeeTechnology.Website.Areas.Admin.Pages.ICourse.IParticipant
             return RedirectToPage("./Index");
         }
 
-        private bool ParticipantExists(int id)
+        private bool CohortProjectExists(long id)
         {
-            return _context.Participants.Any(e => e.Id == id);
+            return _context.CohortProjects.Any(e => e.Id == id);
         }
     }
 }

@@ -1,14 +1,16 @@
 ﻿@page
-@model ExwhyzeeTechnology.Website.Areas.Admin.Pages.ICourse.IParticipant.IndexModel
+@model ExwhyzeeTechnology.Website.Areas.Admin.Pages.UserManagement.ParticipantsModel
+@{
+}
 
 @{
     ViewData["Title"] = "Index";
-    ViewData["TitleSub"] = $"PARTICIPANTS ON COURSE ({Model.Cohort.Course.Name}) (COHORT {Model.Cohort.CohortNumber})";
+    ViewData["TitleSub"] = $"ALL PARTICIPANTS";
 }
 
 <div class="card">
     <div class="card-header">
-        <h3 class="card-title">PARTICIPANTS ON COURSE (@Model.Cohort.Course.Name) (COHORT @Model.Cohort.CohortNumber)</h3>
+        <h3 class="card-title">ALL PARTICIPANTS</h3>
     </div>
 
     <div class="col-md-12">
@@ -45,8 +47,10 @@
                             PHONE
                         </th>
                         <th>
-                            EMPLOYMENT STATUS
+                            GENDER
                         </th>
+                        <th>COURSE</th>
+                        <th>EMPLOYMENT STATUS</th>
                         <th>
                             @Html.DisplayNameFor(model => model.Participant[0].ParticipantStatus)
                         </th>
@@ -68,7 +72,7 @@
                                 @sn
                             </td>
                             <td>
-                                @item.User.FullnameX
+                                @item.User.FullnameX.ToUpper()
                             </td>
                             <td>
                                 @item.IdNumber
@@ -78,6 +82,12 @@
                             </td>
                             <td>
                                 @item.User.PhoneNumber
+                            </td>
+                            <td>
+                                @item.User.Gender
+                            </td>
+                            <td>
+                                @item.Cohort.Course.Name (@item.Cohort.CohortCode/@item.Cohort.CohortNumber)
                             </td>
                             <td>
                                 @item.User.EmploymentStatus
@@ -94,8 +104,7 @@
                                         </button>
                                         <div class="dropdown-menu" style="">
 
-                                            <a class="dropdown-item" asp-page="./Edit" asp-route-id="@item.Id">Edit</a>
-                                            <a class="dropdown-item" asp-page="/UserManagement/ApplicationDetails" asp-route-id="@item.UserId">Profile</a>
+                                            <a class="dropdown-item" asp-page="./UpdateParticipant" asp-route-id="@item.Id">Edit</a>
 
                                         </div>
                                     </div>

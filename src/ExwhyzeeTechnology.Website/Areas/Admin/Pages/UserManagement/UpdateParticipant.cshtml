@@ -1,0 +1,133 @@
+﻿@page
+@model ExwhyzeeTechnology.Website.Areas.Admin.Pages.UserManagement.UpdateParticipantModel
+@{
+}
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-header">
+                <h6 class="card-title">UPDATE PROFILE</h6>
+            </div>
+
+            <div class="card-body">
+                <div class="row">
+
+
+                    <div class="col-md-12">
+                        <div class="daiv" style="margin-bottom:20px;">
+                            @if (TempData["success"] != null)
+                            {
+                                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                    <strong>Success!</strong> @TempData["success"]
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                </div>
+                            }
+
+                            @if (TempData["error"] != null)
+                            {
+                                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                    <strong>Error!</strong> @TempData["error"]
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                </div>
+                            }
+                        <form method="post" enctype="multipart/form-data">
+                            <div class="form-group">
+                                <label class="control-label">REGISTRATION NUMBER</label>
+                                <input name="aaaa" value="@Model.ParticipantInfo.IdNumber" disabled="disabled" class="form-control" />
+                             </div>
+                            <input hidden="hidden" asp-for="Input.Id" />
+                            <input hidden="hidden" asp-for="ParticipantId" />
+                            <div class="form-group">
+                                <label asp-for="Input.FirstName" class="control-label"></label>
+                                <input asp-for="Input.FirstName" class="form-control" />
+                                <span asp-validation-for="Input.FirstName" class="text-danger"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label asp-for="Input.LastName" class="control-label"></label>
+                                <input asp-for="Input.LastName" class="form-control" />
+                                <span asp-validation-for="Input.LastName" class="text-danger"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label asp-for="Input.MiddleName" class="control-label"></label>
+                                <input asp-for="Input.MiddleName" class="form-control" />
+                                <span asp-validation-for="Input.MiddleName" class="text-danger"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label asp-for="Input.PhoneNumber" class="control-label"></label>
+                                <input asp-for="Input.PhoneNumber" class="form-control" />
+                                <span asp-validation-for="Input.PhoneNumber" class="text-danger"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label asp-for="Input.Email" class="control-label"></label>
+                                <input asp-for="Input.Email" class="form-control" />
+                                <span asp-validation-for="Input.Email" class="text-danger"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label asp-for="Input.NIN" class="control-label"></label>
+                                <input asp-for="Input.NIN" class="form-control" />
+                                <span asp-validation-for="Input.NIN" class="text-danger"></span>
+                            </div>
+
+
+                            <div class="form-group">
+                                <label asp-for="Input.Gender" class="control-label">Gender</label>
+                                @Html.DropDownListFor(model => model.Input.Gender,
+                                    new SelectList(Enum.GetValues(typeof(ExwhyzeeTechnology.Domain.Enum.Enum.GenderStatus))
+                                    .Cast<ExwhyzeeTechnology.Domain.Enum.Enum.GenderStatus>()
+                                    .Select(g => new { Value = (int)g, Text = g.ToString() }), "Value", "Text"),
+                                    "-- Select Gender --", new { @class = "form-control" })
+                                <span asp-validation-for="Input.Gender" class="text-danger"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label asp-for="Input.EmploymentStatus" class="control-label"></label>
+                                <select asp-for="Input.EmploymentStatus" class="form-control" required="required">
+                                    <option value="">Select your status</option>
+                                    <option value="Employed">Employed</option>
+                                    <option value="Self-Employed">Self-Employed</option>
+                                    <option value="Unemployed">Unemployed</option>
+                                    <option value="Student">Student</option>
+                                    <option value="Other">Other</option>
+                                </select>
+                                <span asp-validation-for="Input.EmploymentStatus" class="text-danger"></span>
+                            </div>
+
+
+
+                            <div class="form-group">
+                                <label class="control-label">Passport</label><br />
+                                <img src="@Model.Input.PassportFilePathUrl" style="max-height:200px;" />
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label">Upload/Change Passport</label><br />
+                                <input type="file" class="control-label" asp-for="imagefile" accept="image/*" />
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label">Change Course (@Model.ParticipantInfo.Cohort.Course.Name)</label>
+                                <select asp-for="NewCourseId" class="form-control" asp-items="ViewBag.CourseId">
+
+                                    <option value="">Change Course</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <input type="submit" value="Submit" class="btn btn-primary" />
+
+                            </div>
+                        </form>
+                        </div>
+                    </div>
+                     
+
+                     
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

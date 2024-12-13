@@ -1,0 +1,141 @@
+﻿@page
+@model ExwhyzeeTechnology.Website.Areas.Admin.Pages.ICourse.IAssignment.DetailsModel
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+ 
+<div class="card card-default">
+    <div class="card-header">
+        <h3 class="card-title text-uppercase">
+            ASSIGNMENT Details
+        </h3>
+        <a asp-page="/ICourse/IActivities/ActivityDetails" asp-route-id="@Model.DialyActivity.Id" class="btn bg-gradient-warning btn-sm" style="float:right;">Bact to Activity</a>
+        @if (User.IsInRole("AdminEditor") || Model.Cohort.CourseStatus != ExwhyzeeTechnology.Domain.Enum.Enum.CourseStatus.Concluded)
+        {
+            <a asp-page="./Create" asp-route-id="@Model.DialyActivity.Id" class="btn bg-gradient-danger btn-sm" style="float:right;">New</a>
+        }
+    </div>
+    <!-- /.card-header -->
+    <div class="card-body">
+        <h3 class="text-uppercase">Cohort Information</h3>
+        <h3 class="card-title">
+            @Model.Cohort.Course.Name (@Model.Cohort.CohortCode) ( @Model.Cohort.StartDate.ToString("ddd dd MMM, yyyy") -
+            @Model.Cohort.EndDate.ToString("ddd dd MMM, yyyy"))
+        </h3>
+    </div>
+    <div class="card-body">
+        <h5 class="text-uppercase">Dialy Activity Information</h5>
+        <h5 class="">
+            Date:  @Model.DialyActivity.Date.ToString("dddd dd/MM/yyyy") (@Model.DialyActivity.StartTime - @Model.DialyActivity.FinishTime))
+            <br />Title: @Model.DialyActivity.Title
+        </h5>
+    </div>
+    <!-- /.card-header -->
+    <div class="card-body">
+        <div class="card-body">
+            <div>
+              
+                <dl class="row">
+                    <dt class="col-sm-2">
+                        @Html.DisplayNameFor(model => model.Assignment.Title)
+                    </dt>
+                    <dd class="col-sm-10">
+                        @Html.DisplayFor(model => model.Assignment.Title)
+                    </dd>
+                    <dt class="col-sm-2">
+                        @Html.DisplayNameFor(model => model.Assignment.Question)
+                    </dt>
+                    <dd class="col-sm-10">
+                        @Html.Raw(Model.Assignment.Question)
+                    </dd>
+                    <dt class="col-sm-2">
+                        File
+                    </dt>
+                    <dd class="col-sm-10">
+                        <a href="@Model.Assignment.FIleUrl" class="btn btn-primary">Open</a>
+                    </dd>
+
+                    <dt class="col-sm-2">
+                        @Html.DisplayNameFor(model => model.Assignment.Date)
+                    </dt>
+                    <dd class="col-sm-10">
+                        @Html.DisplayFor(model => model.Assignment.Date)
+                    </dd>
+                    <dt class="col-sm-2">
+                        @Html.DisplayNameFor(model => model.Assignment.LastSubmissionDate)
+                    </dt>
+                    <dd class="col-sm-10">
+                        @Html.DisplayFor(model => model.Assignment.LastSubmissionDate)
+                    </dd>
+                    <dt class="col-sm-2">
+                       Total Submission
+                    </dt>
+                    <dd class="col-sm-10">
+                       @Model.Assignment.UserAssignments.Count()
+                    </dd>
+                </dl>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table id="example1" class="table table-bordered table-striped">
+                    <thead>
+                        <tr>
+                            <th>S/N</th>
+                            <th>Name</th>
+                            <th>Reg. No.</th>
+                            <th>Date Submitted</th>
+                            <th>Last Date Updatted</th>
+                           
+
+                        </tr>
+                    </thead>
+
+                    @{
+                        int sn = 0;
+                    }
+                    <tbody>
+                        @foreach (var item in Model.Assignment.UserAssignments)
+                        {
+                            <tr>
+
+                                <td>
+                                    @{
+                                        sn++;
+                                    }
+                                    @sn
+                                </td>
+                                <td>
+                                    <a asp-page="./Result" asp-route-id="@item.Id" asp-route-pId="@item.ParticipantId">
+                                        @item.Participant.User.FullnameX
+
+
+                                    </a>
+                                </td>
+                                <td>
+                                    @item.Participant.IdNumber
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.DateSubmitted)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.LastDateUpdated)
+                                </td>
+                                
+
+
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

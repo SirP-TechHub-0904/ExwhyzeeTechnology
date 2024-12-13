@@ -4,6 +4,7 @@ using ExwhyzeeTechnology.Persistence.EF.SQL;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ExwhyzeeTechnology.Persistence.EF.SQL.Migrations
 {
     [DbContext(typeof(DashboardDbContext))]
-    partial class SampleDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241205104424_update-emplyomentstatus")]
+    partial class updateemplyomentstatus
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -950,9 +952,6 @@ namespace ExwhyzeeTechnology.Persistence.EF.SQL.Migrations
                     b.Property<string>("FIleUrl")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<bool>("GroupAssignment")
-                        .HasColumnType("bit");
-
                     b.Property<DateTime>("LastSubmissionDate")
                         .HasColumnType("datetime2");
 
@@ -1278,23 +1277,6 @@ namespace ExwhyzeeTechnology.Persistence.EF.SQL.Migrations
                     b.ToTable("EvaluationQuestionCategories");
                 });
 
-            modelBuilder.Entity("ExwhyzeeTechnology.Domain.Models.Data.GroupAssignment", b =>
-                {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"), 1L, 1);
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("GroupAssignments");
-                });
-
             modelBuilder.Entity("ExwhyzeeTechnology.Domain.Models.Data.Participant", b =>
                 {
                     b.Property<int>("Id")
@@ -1442,49 +1424,6 @@ namespace ExwhyzeeTechnology.Persistence.EF.SQL.Migrations
                     b.HasIndex("TrainingTestId");
 
                     b.ToTable("TrainingTestOptions");
-                });
-
-            modelBuilder.Entity("ExwhyzeeTechnology.Domain.Models.Data.UserAssignment", b =>
-                {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"), 1L, 1);
-
-                    b.Property<string>("Answer")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<long>("AssignmentId")
-                        .HasColumnType("bigint");
-
-                    b.Property<DateTime>("DateSubmitted")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("FileKey")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("FileUrl")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<long?>("GroupId")
-                        .HasColumnType("bigint");
-
-                    b.Property<DateTime>("LastDateUpdated")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("ParticipantId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("AssignmentId");
-
-                    b.HasIndex("GroupId");
-
-                    b.HasIndex("ParticipantId");
-
-                    b.ToTable("UserAssignments");
                 });
 
             modelBuilder.Entity("ExwhyzeeTechnology.Domain.Models.Data.UserTest", b =>
@@ -5727,31 +5666,6 @@ namespace ExwhyzeeTechnology.Persistence.EF.SQL.Migrations
                     b.Navigation("TrainingTest");
                 });
 
-            modelBuilder.Entity("ExwhyzeeTechnology.Domain.Models.Data.UserAssignment", b =>
-                {
-                    b.HasOne("ExwhyzeeTechnology.Domain.Models.Data.Assignment", "Assignment")
-                        .WithMany("UserAssignments")
-                        .HasForeignKey("AssignmentId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("ExwhyzeeTechnology.Domain.Models.Data.GroupAssignment", "Group")
-                        .WithMany("UserAssignments")
-                        .HasForeignKey("GroupId");
-
-                    b.HasOne("ExwhyzeeTechnology.Domain.Models.Data.Participant", "Participant")
-                        .WithMany()
-                        .HasForeignKey("ParticipantId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Assignment");
-
-                    b.Navigation("Group");
-
-                    b.Navigation("Participant");
-                });
-
             modelBuilder.Entity("ExwhyzeeTechnology.Domain.Models.Data.UserTest", b =>
                 {
                     b.HasOne("ExwhyzeeTechnology.Domain.Models.Data.Cohort", "Cohort")
@@ -6434,11 +6348,6 @@ namespace ExwhyzeeTechnology.Persistence.EF.SQL.Migrations
                     b.Navigation("DashboardDataLists");
                 });
 
-            modelBuilder.Entity("ExwhyzeeTechnology.Domain.Models.Data.Assignment", b =>
-                {
-                    b.Navigation("UserAssignments");
-                });
-
             modelBuilder.Entity("ExwhyzeeTechnology.Domain.Models.Data.Cohort", b =>
                 {
                     b.Navigation("Participants");
@@ -6452,11 +6361,6 @@ namespace ExwhyzeeTechnology.Persistence.EF.SQL.Migrations
             modelBuilder.Entity("ExwhyzeeTechnology.Domain.Models.Data.DialyActivity", b =>
                 {
                     b.Navigation("CohortAttendance");
-                });
-
-            modelBuilder.Entity("ExwhyzeeTechnology.Domain.Models.Data.GroupAssignment", b =>
-                {
-                    b.Navigation("UserAssignments");
                 });
 
             modelBuilder.Entity("ExwhyzeeTechnology.Domain.Models.Data.TrainingTest", b =>
